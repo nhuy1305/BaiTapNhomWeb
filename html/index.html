@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bán rau online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #1b5e20;
+            --accent-color: #ff9800;
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+            --text-color: #444;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .top-bar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .contact-info span {
+            margin-right: 20px;
+        }
+
+        .auth-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 32px;
+        }
+
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            outline: none;
+        }
+
+        .search-bar button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            cursor: pointer;
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 24px;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        nav {
+            background-color: var(--primary-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .nav-links li a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .dropdown {
+            position: absolute;
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            min-width: 200px;
+            display: none;
+            z-index: 10;
+        }
+
+        .dropdown li a {
+            color: var(--dark-color);
+            padding: 12px 15px;
+        }
+
+        .dropdown li a:hover {
+            background-color: var(--light-color);
+        }
+
+        .nav-links li:hover .dropdown {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .sidebar {
+            width: 25%;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            align-self: flex-start;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            margin-bottom: 10px;
+        }
+
+        .category-list li a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+            transition: var(--transition);
+        }
+
+        .category-list li a:hover {
+            color: var(--primary-color);
+            padding-left: 10px;
+        }
+
+        .main-content {
+            width: 75%;
+        }
+
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .page-title {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .sort-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .sort-select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar,
+            .main-content {
+                width: 100%;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+
+            .nav-container {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+            }
+
+            .top-bar-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 12px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 180px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            margin-top: 10px;
+        }
+
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 6px;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .product-price {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .product-original-price {
+            text-decoration: line-through;
+            color: #999;
+            margin-left: 6px;
+            font-size: 14px;
+        }
+
+        .product-badge {
+            background: #f44336;
+            color: #fff;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 4px;
+        }
+
+        /* Featured Products */
+        .featured-section {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 20px;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+
+        .product-detail {
+            display: flex;
+            gap: 30px;
+        }
+
+        .product-detail-image {
+            width: 40%;
+        }
+
+        .product-detail-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+        }
+
+        .product-detail-info {
+            width: 60%;
+        }
+
+        .product-detail-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .product-detail-price {
+            font-size: 28px;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-detail-description {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .add-to-cart {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 992px) {
+            .product-detail {
+                flex-direction: column;
+            }
+
+            .product-detail-image,
+            .product-detail-info {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> Hotline: 0393058500</span>
+                <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
+            </div>
+            <div class="auth-links">
+                <a href="#"><i class="fas fa-user"></i> Đăng nhập</a>
+                <a href="#"><i class="fas fa-user-plus"></i> Đăng ký</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                Rau Sạch Như Ý
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <!-- <span class="cart-count">3</span> -->
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">TRANG CHỦ</a></li>
+                <li>
+                    <a href="khuyenmai.html">KHUYẾN MÃI <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="khuyenmai.html">Tất cả khuyến mãi</a></li>
+                        <li><a href="khuyenmai.html">Combo tiết kiệm</a></li>
+                        <li><a href="khuyenmai.html">Sản phẩm giảm giá</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="sanpham.html">SẢN PHẨM <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="sanpham.html">Tất cả sản phẩm</a></li>
+                        <li><a href="sanpham.html">Sản phẩm nổi bật</a></li>
+                        <li><a href="sanpham.html">Sản phẩm mới</a></li>
+                    </ul>
+                </li>
+                <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
+                <li><a href="tintuc.html">TIN TỨC</a></li>
+                <li><a href="lienhe.html">LIÊN HỆ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="sidebar">
+            <h3>DANH MỤC</h3>
+            <ul class="category-list">
+                <li><a href="rautuoi.html">Rau tươi - rau sạch - rau tốt</a></li>
+                <li><a href="cu.html">Các loại củ giá tốt</a></li>
+                <li><a href="giavi.html">Rau gia vị khi nấu ăn</a></li>
+                <li><a href="rauvuon.html">Rau trồng từ vườn giá tốt</a></li>
+                <li><a href="rauhoachat.html">Rau ngâm hóa chất giá rẻ</a></li>
+                <li><a href="hoaquavuon.html">Hoa quả tươi giá tốt</a></li>
+                <li><a href="hoaquahoachat.html">Hoa quả ngâm thuốc giá rẻ</a></li>
+                <li><a href="sanphamgiamgia.html">Các sản phẩm giảm giá hôm nay</a></li>
+                <li><a href="voucher.html">Voucher hấp dẫn trong ngày</a></li>
+                <li><a href="lienhechungtoi.html">Liên hệ với bọn tôi</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html">Trang chủ</a> > <a href="raucuqua.html">Rau - củ - quả</a>
+            </div>
+
+            <h1 class="page-title">Rau - củ - quả</h1>
+
+            <div class="sort-options">
+                <div>
+                    Hiển thị tất cả <strong id="product-count"></strong> sản phẩm
+                </div>
+                <div>
+                    <label for="sort">Sắp xếp: </label>
+                    <select id="sort" class="sort-select">
+                        <option value="default">Mặc định</option>
+                        <option value="price-asc">Giá tăng dần</option>
+                        <option value="price-desc">Giá giảm dần</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="product-grid" id="product-grid">
+
+                <div class="product-card" data-id="1">
+                    <div class="product-image">
+                        <img src="../img/caibe.jpg" alt="Cải bẹ">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Cải bẹ - 1 bó</div>
+                        <div class="product-price">
+                            45,000đ
+                            <span class="product-original-price">50,000đ</span>
+                            <span class="product-badge">Giảm 10%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="2">
+                    <div class="product-image">
+                        <img src="../img/rauma.jpg" alt="Rau má">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Rau má - 5 bó</div>
+                        <div class="product-price">
+                            25,500đ
+                            <span class="product-original-price">30,000đ</span>
+                            <span class="product-badge">Giảm 15%</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="3">
+                    <div class="product-image">
+                        <img src="../img/cucaitrang.jpg" alt="Củ cải trắng">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Củ cải trắng - theo kg</div>
+                        <div class="product-price">
+                            45,500đ
+                            <span class="product-original-price">65,000đ</span>
+                            <span class="product-badge">Giảm 30%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="4">
+                    <div class="product-image">
+                        <img src="../img/caixoan.jpg" alt="Cải xoăn">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Cải xoăn - 1 bó</div>
+                        <div class="product-price">
+                            49,000đ
+                            <span class="product-original-price">70,000đ</span>
+                            <span class="product-badge">Giảm 30%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sản phẩm 5 -->
+                <div class="product-card" data-id="5">
+                    <div class="product-image">
+                        <img src="../img/hanhla.jpg" alt="Hành lá">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Hành lá - 10 bó</div>
+                        <div class="product-price">
+                            72,000đ
+                            <span class="product-original-price">80,000đ</span>
+                            <span class="product-badge">Giảm 10%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="6">
+                    <div class="product-image">
+                        <img src="../img/Mongtoi.jpg" alt="Mong toi">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Mồng tơi - 2 bó</div>
+                        <div class="product-price">
+                            80,000đ
+                            <span class="product-original-price">100,000đ</span>
+                            <span class="product-badge">Giảm 20%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="7">
+                    <div class="product-image">
+                        <img src="../img/raumuong1.jpg" alt="Rau muống">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Rau muống - 1 bó</div>
+                        <div class="product-price">
+                            70,000đ
+                            <span class="product-original-price">100,000đ</span>
+                            <span class="product-badge">Giảm 30%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="8">
+                    <div class="product-image">
+                        <img src="../img/Caithia.jpg" alt="Cải thìa">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Cải thìa - 3 bó</div>
+                        <div class="product-price">
+                            25,000đ
+                            <span class="product-original-price">50,000đ</span>
+                            <span class="product-badge">Giảm 50%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="featured-section">
+                <h2 class="section-title">SẢN PHẨM NỔI BẬT</h2>
+                <div class="product-grid" id="featured-products">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CÔNG TY TRÁCH NHIỆM HỮU HẠN NHƯ Ý</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 154A Hà Huy Giáp, P.Thạnh Lộc, Q.12, TP. HCM</p>
+                    <p><i class="fas fa-phone"></i> 0393058500</p>
+                    <p><i class="fas fa-clock"></i> Thứ 2 - Chủ nhật: 6:00 - 17:00</p>
+                    <p><i class="fas fa-envelope"></i> Nhuy5201314@gmail.com</p>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>DANH MỤC SẢN PHẨM</h3>
+                <ul>
+                    <li><a href="rautuoi.html">Rau tươi - rau sạch - rau tốt</a></li>
+                    <li><a href="cu.html">Các loại củ giá tốt</a></li>
+                    <li><a href="giavi.html">Rau gia vị khi nấu ăn</a></li>
+                    <li><a href="rauvuon.html">Rau trồng từ vườn giá tốt</a></li>
+                    <li><a href="rauhoachat.html">Rau ngâm hóa chất giá rẻ</a></li>
+                    <li><a href="hoaquavuon.html">Hoa quả tươi giá tốt</a></li>
+                    <li><a href="hoaquahoachat.html">Hoa quả ngâm thuốc giá rẻ</a></li>
+                    <li><a href="sanphamgiamgia.html">Các sản phẩm giảm giá hôm nay</a></li>
+                    <li><a href="voucher.html">Voucher hấp dẫn trong ngày</a></li>
+                    <li><a href="lienhechungtoi.html">Liên hệ với bọn tôi</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+                <ul>
+                    <li><a href="cauhoi.html">Câu hỏi thường gặp</a></li>
+                    <li><a href="khachhang.html">Khách hàng thân thiết</a></li>
+                    <li><a href="doitra.html">Chính sách đổi trả hàng</a></li>
+                    <li><a href="giaohang.html">Chính sách giao hàng</a></li>
+                    <li><a href="congtacvien.html">Chính sách cho công tác viên</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>VỀ RAU SẠCH NHƯ Ý</h3>
+                <ul>
+                    <li><a href="gioithieu.html">Giới thiệu</a></li>
+                    <li><a href="tamnhin.html">Tầm nhìn và Sứ mệnh</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            2025 Rau Sạch Như Ý
+        </div>
+    </footer>
+
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="product-detail">
+                <div class="product-detail-image">
+                    <img id="modal-image" src="" alt="Product Image">
+                </div>
+                <div class="product-detail-info">
+                    <h2 id="modal-name" class="product-detail-name"></h2>
+                    <div id="modal-price" class="product-detail-price"></div>
+                    <p id="modal-description" class="product-detail-description"></p>
+                    <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('product-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const productCards = document.querySelectorAll('.product-card');
+
+
+            productCards.forEach(card => {
+                card.addEventListener('click', function () {
+                    const productId = this.getAttribute('data-id');
+                    document.getElementById('modal-name').textContent = this.querySelector('.product-name').textContent;
+                    document.getElementById('modal-price').innerHTML = this.querySelector('.product-price').innerHTML;
+                    document.getElementById('modal-image').src = this.querySelector('img').src;
+                    document.getElementById('modal-image').alt = this.querySelector('img').alt;
+
+                    document.getElementById('modal-description').textContent =
+                        "Sản phẩm hữu cơ chất lượng cao, được trồng theo phương pháp hữu cơ tự nhiên, không sử dụng thuốc trừ sâu và phân bón hóa học. An toàn cho sức khỏe và thân thiện với môi trường.";
+
+                    modal.style.display = 'flex';
+                });
+            });
+
+            closeModal.addEventListener('click', function () {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function (event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            const searchInput = document.querySelector('.search-bar input');
+            searchInput.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                const products = document.querySelectorAll('.product-card');
+
+                products.forEach(product => {
+                    const productName = product.querySelector('.product-name').textContent.toLowerCase();
+                    if (productName.includes(searchTerm)) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            });
+
+
+            const sortSelect = document.getElementById('sort');
+            sortSelect.addEventListener('change', function () {
+                console.log('Sắp xếp theo:', this.value);
+            });
+        });
+    </script>
+</body>
+
+</html>
