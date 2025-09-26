@@ -584,8 +584,7 @@
         <div class="top-bar-content">
             <div class="contact-info">
                 <span><i class="fas fa-phone"></i> Hotline: 0393058500</span>
-                <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến
-                    17h00</span>
+                <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
             </div>
             <div class="auth-links">
                 <a href="#"><i class="fas fa-user"></i> Đăng nhập</a>
@@ -606,6 +605,7 @@
             </div>
             <div class="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
             </div>
         </div>
     </header>
@@ -648,17 +648,15 @@
                 <li><a href="rauhoachat.html">Rau ngâm hóa chất giá rẻ</a></li>
                 <li><a href="hoaquavuon.html">Hoa quả tươi giá tốt</a></li>
                 <li><a href="hoaquahoachat.html">Hoa quả ngâm thuốc giá rẻ</a></li>
-                <li>
-                    <a href="sanphamgiamgia.html">Các sản phẩm giảm giá hôm nay</a>
-                </li>
+                <li><a href="sanphamgiamgia.html">Các sản phẩm giảm giá hôm nay</a></li>
                 <li><a href="voucher.html">Voucher hấp dẫn trong ngày</a></li>
-                <li><a href="lienhechungtoi.html">Liên hệ với bọn tôi</a></li>
+                <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
             </ul>
         </div>
 
         <div class="main-content">
             <div class="breadcrumb">
-                <a href="index.html">TRANG CHỦ</a> >
+                <a href="index.html">TRANG CHỦ</a> > 
                 <a href="raucuqua.html">TẤT CẢ SẢN PHẨM</a>
             </div>
 
@@ -666,7 +664,7 @@
 
             <div class="sort-options" id="tatcasanpham">
                 <div>
-                    Hiển thị tất cả <strong id="product-count"></strong> sản phẩm
+                    Hiển thị tất cả <strong id="product-count">36</strong> sản phẩm
                 </div>
                 <div>
                     <label for="sort">Sắp xếp: </label>
@@ -958,28 +956,27 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
 
             <div class="featured-section">
                 <h2 class="section-title">SẢN PHẨM NỔI BẬT</h2>
-                <div class="product-grid" id="featured-products"></div>
-
-                <div class="product-grid" id="product-grid">
-                    <div class="product-card" data-id="1">
+                <div class="product-grid" id="featured-products">
+                    <div class="product-card" data-id="21">
                         <div class="product-image">
                             <img src="./img/tuyetlienhoa.jpg" alt="tuyết liên hoa" />
                         </div>
                         <div class="product-info">
                             <div class="product-name">Tuyết liên hoa</div>
                             <div class="product-price">
-                                3,00,000,000đ
+                                300,000,000đ
                                 <span class="product-original-price">600,000,000đ</span>
                                 <span class="product-badge">Giảm 50%</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="product-card" data-id="2">
+                    <div class="product-card" data-id="22">
                         <div class="product-image">
                             <img src="./img/namrom.jpg" alt="Nấm rơm" />
                         </div>
@@ -993,7 +990,7 @@
                         </div>
                     </div>
 
-                    <div class="product-card" data-id="3">
+                    <div class="product-card" data-id="23">
                         <div class="product-image">
                             <img src="./img/khoaitay.jpg" alt="khoai tây" />
                         </div>
@@ -1007,7 +1004,7 @@
                         </div>
                     </div>
 
-                    <div class="product-card" data-id="4">
+                    <div class="product-card" data-id="24">
                         <div class="product-image">
                             <img src="./img/khoailang.jpg" alt="Khoai lang" />
                         </div>
@@ -1021,7 +1018,7 @@
                         </div>
                     </div>
 
-                    <div class="product-card" data-id="5">
+                    <div class="product-card" data-id="25">
                         <div class="product-image">
                             <img src="./img/mangtre.jpg" alt="Măng tre" />
                         </div>
@@ -1035,7 +1032,7 @@
                         </div>
                     </div>
 
-                    <div class="product-card" data-id="6">
+                    <div class="product-card" data-id="26">
                         <div class="product-image">
                             <img src="./img/nhadam.jpg" alt="Nha đam" />
                         </div>
@@ -1049,7 +1046,7 @@
                         </div>
                     </div>
 
-                    <div class="product-card" data-id="7">
+                    <div class="product-card" data-id="27">
                         <div class="product-image">
                             <img src="./img/cayot.jpg" alt="Cây ớt" />
                         </div>
@@ -1064,7 +1061,7 @@
                     </div>
 
 
-                    <div class="product-card" data-id="7">
+                    <div class="product-card" data-id="28">
                         <div class="product-image">
                             <img src="./img/daurong.jpg" alt="Đậu rồng" />
                         </div>
@@ -1077,13 +1074,182 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
 
+            <div class="featured-section">
+                <h2 class="section-title">SẢN PHẨM MỚI</h2>
+                <div class="product-grid" id="new-products">
+                    <div class="product-card" data-id="29">
+                    <div class="product-image">
+                        <img src="./img/cucaido.jpg" alt="Củ cải đỏ" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Củ cải đỏ</div>
+                        <div class="product-price">
+                            45,000đ
+                            <span class="product-original-price">50,000đ</span>
+                            <span class="product-badge">Mới</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="30">
+                    <div class="product-image">
+                        <img src="./img/cugung.jpg" alt="củ gừng" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Củ gừng</div>
+                        <div class="product-price">
+                            10,000đ
+                            <span class="product-original-price">20,000đ</span>
+                            <span class="product-badge">Mới</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="31">
+                    <div class="product-image">
+                        <img src="./img/bibau.jpg" alt="bí bầu" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Bí bầu</div>
+                        <div class="product-price">
+                            45,000đ
+                            <span class="product-original-price">45,000đ</span>
+                            <span class="product-badge">Mới</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="32">
+                    <div class="product-image">
+                        <img src="./img/hanhtay.jpg" alt="hành tây" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Hành tây</div>
+                        <div class="product-price">
+                            40,000đ
+                            <span class="product-original-price">80,000đ</span>
+                            <span class="product-badge">Mới</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="33">
+                    <div class="product-image">
+                        <img src="./img/caitim.jpg" alt="cải tím" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Cải tím</div>
+                        <div class="product-price">
+                            90,000đ
+                            <span class="product-original-price">100,000đ</span>
+                            <span class="product-badge">Mới</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="34">
+                    <div class="product-image">
+                        <img src="./img/xalach.jpg" alt="Xà lách" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Xà lách</div>
+                        <div class="product-price">
+                            37,000đ
+                            <span class="product-original-price">37,000đ</span>
+                            <span class="product-badge">Mới</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="35">
+                    <div class="product-image">
+                        <img src="./img/mangtre.jpg" alt="Măng tre" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Măng tre</div>
+                        <div class="product-price">
+                            30,000đ
+                            <span class="product-original-price">60,000đ</span>
+                            <span class="product-badge">Mới</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="36">
+                    <div class="product-image">
+                        <img src="./img/cusu.jpg" alt="củ su" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Củ su</div>
+                        <div class="product-price">
+                            63,000đ
+                            <span class="product-original-price">70,000đ</span>
+                            <span class="product-badge">Mới</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="37">
+                    <div class="product-image">
+                        <img src="./img/cutoi.jpg" alt="củ tỏi" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Củ tỏi</div>
+                        <div class="product-price">
+                            15,000đ
+                            <span class="product-original-price">15,000đ</span>
+                            <span class="product-badge">Mới</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="38">
+                    <div class="product-image">
+                        <img src="./img/bido.jpg" alt="bí đỏ non" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Bí đỏ non</div>
+                        <div class="product-price">
+                            49,000đ
+                            <span class="product-original-price">100,000đ</span>
+                            <span class="product-badge">Mới</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="39">
+                    <div class="product-image">
+                        <img src="./img/suhao.jpg" alt="su hào" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Su hào</div>
+                        <div class="product-price">
+                            25,000đ
+                            <span class="product-original-price">50,000đ</span>
+                            <span class="product-badge">Mới</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="40">
+                    <div class="product-image">
+                        <img src="./img/nhadam.jpg" alt="Nha đam" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Nha đam - 1kg</div>
+                        <div class="product-price">
+                            72,000đ
+                            <span class="product-original-price">80,000đ</span>
+                            <span class="product-badge">Mới</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
-    </div>
     </div>
 
     <footer>
@@ -1091,10 +1257,7 @@
             <div class="footer-section">
                 <h3>CÔNG TY RAU SẠCH NHƯ Ý</h3>
                 <div class="contact-info">
-                    <p>
-                        <i class="fas fa-map-marker-alt"></i> 154A Hà Huy Giáp, P.Thạnh
-                        Lộc, Q.12, TP. HCM
-                    </p>
+                    <p><i class="fas fa-map-marker-alt"></i> 154A Hà Huy Giáp, P.An Phú Đông, Q.12, TP. HCM</p>
                     <p><i class="fas fa-phone"></i> 0393058500</p>
                     <p><i class="fas fa-clock"></i> Thứ 2 - Chủ nhật: 6:00 - 17:00</p>
                     <p><i class="fas fa-envelope"></i> Nhuy5201314@gmail.com</p>
@@ -1117,11 +1280,9 @@
                     <li><a href="rauhoachat.html">Rau ngâm hóa chất giá rẻ</a></li>
                     <li><a href="hoaquavuon.html">Hoa quả tươi giá tốt</a></li>
                     <li><a href="hoaquahoachat.html">Hoa quả ngâm thuốc giá rẻ</a></li>
-                    <li>
-                        <a href="sanphamgiamgia.html">Các sản phẩm giảm giá hôm nay</a>
-                    </li>
+                    <li><a href="sanphamgiamgia.html">Các sản phẩm giảm giá hôm nay</a></li>
                     <li><a href="voucher.html">Voucher hấp dẫn trong ngày</a></li>
-                    <li><a href="lienhechungtoi.html">Liên hệ với bọn tôi</a></li>
+                    <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
                 </ul>
             </div>
 
@@ -1145,7 +1306,7 @@
             </div>
         </div>
 
-        <div class="copyright">2025 Rau Sạch Như Ý</div>
+        <div class="copyright">© 2025 Rau Sạch Như Ý</div>
     </footer>
 
     <div class="modal" id="product-modal">
@@ -1169,6 +1330,11 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            // Cập nhật số lượng sản phẩm
+            const productCount = document.querySelectorAll('.product-card').length;
+            document.getElementById('product-count').textContent = productCount;
+
+            // Modal functionality
             const modal = document.getElementById("product-modal");
             const closeModal = document.querySelector(".close-modal");
             const productCards = document.querySelectorAll(".product-card");
@@ -1186,7 +1352,7 @@
                         this.querySelector("img").alt;
 
                     document.getElementById("modal-description").textContent =
-                        "Sản phẩm chất lượng cao, ở nhà trồng được đấy, bà con cứ yên tâm sử dụng. An toàn cho sức khỏe tuyệt đối, tin tui đi, không có ngâm hóa chất đâu, toàn bộ đều đào lên khi đã đủ lớn";
+                        "Sản phẩm chất lượng cao, trồng tại vườn nhà. An toàn cho sức khỏe tuyệt đối, không sử dụng hóa chất. Thu hoạch khi đã đủ độ chín và kích thước phù hợp.";
 
                     modal.style.display = "flex";
                 });
@@ -1202,6 +1368,7 @@
                 }
             });
 
+            // Search functionality
             const searchInput = document.querySelector(".search-bar input");
             searchInput.addEventListener("input", function () {
                 const searchTerm = this.value.toLowerCase();
@@ -1219,10 +1386,31 @@
                 });
             });
 
+            // Sort functionality
             const sortSelect = document.getElementById("sort");
             sortSelect.addEventListener("change", function () {
-                console.log("Sắp xếp theo:", this.value);
+                sortProducts(this.value);
             });
+
+            function sortProducts(sortType) {
+                const productGrid = document.getElementById('product-grid');
+                const products = Array.from(productGrid.querySelectorAll('.product-card'));
+                
+                products.sort((a, b) => {
+                    const priceA = parseInt(a.querySelector('.product-price').textContent.replace(/\D/g, ''));
+                    const priceB = parseInt(b.querySelector('.product-price').textContent.replace(/\D/g, ''));
+                    
+                    if (sortType === 'price-asc') {
+                        return priceA - priceB;
+                    } else if (sortType === 'price-desc') {
+                        return priceB - priceA;
+                    }
+                    return 0;
+                });
+
+                // Xóa và thêm lại sản phẩm theo thứ tự mới
+                products.forEach(product => productGrid.appendChild(product));
+            }
         });
     </script>
 </body>
