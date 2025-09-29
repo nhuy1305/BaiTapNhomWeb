@@ -187,6 +187,8 @@
             display: block;
         }
 
+
+
         .container {
             max-width: 1200px;
             margin: 20px auto;
@@ -479,6 +481,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
+        /* Cart Modal */
         .modal {
             display: none;
             position: fixed;
@@ -512,46 +515,92 @@
             color: var(--dark-color);
         }
 
-        .product-detail {
+        .cart-item {
             display: flex;
-            gap: 30px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
         }
 
-        .product-detail-image {
-            width: 40%;
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+            flex: 1;
         }
 
-        .product-detail-image img {
-            width: 100%;
-            border-radius: var(--border-radius);
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
         }
 
-        .product-detail-info {
-            width: 60%;
+        .cart-item-details {
+            flex: 1;
         }
 
-        .product-detail-name {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: var(--primary-color);
+        .cart-item-name {
+            font-weight: bold;
+            margin-bottom: 5px;
         }
 
-        .product-detail-price {
-            font-size: 28px;
+        .cart-item-price {
             color: var(--accent-color);
             font-weight: bold;
-            margin-bottom: 15px;
         }
 
-        .product-detail-description {
-            margin-bottom: 20px;
-            line-height: 1.8;
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin: 0 15px;
         }
 
-        .add-to-cart {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background-color: var(--light-color);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .quantity-input {
+            width: 40px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+
+        .cart-item-remove {
+            color: #f44336;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+            border-top: 2px solid #eee;
+            margin-top: 10px;
+        }
+
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn {
             padding: 12px 25px;
             border-radius: var(--border-radius);
             font-size: 16px;
@@ -562,19 +611,89 @@
             gap: 10px;
         }
 
-        .add-to-cart:hover {
+        .btn-secondary {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            border: 1px solid #ddd;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
             background-color: var(--secondary-color);
         }
 
-        @media (max-width: 992px) {
-            .product-detail {
-                flex-direction: column;
-            }
+        /* Login/Register Form */
+        .auth-form {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
 
-            .product-detail-image,
-            .product-detail-info {
-                width: 100%;
-            }
+        .auth-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        .form-link {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .form-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Chỉnh sửa nút Thêm vào giỏ */
+        .add-to-cart {
+            padding: 8px 15px !important;
+            font-size: 14px !important;
+            margin-top: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Đảm bảo nút không bị ảnh hưởng bởi hover của product-card */
+        .add-to-cart:hover {
+            transform: none !important;
         }
     </style>
 </head>
@@ -587,8 +706,8 @@
                 <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
             </div>
             <div class="auth-links">
-                <a href="#"><i class="fas fa-user"></i> Đăng nhập</a>
-                <a href="#"><i class="fas fa-user-plus"></i> Đăng ký</a>
+                <a href="dangnhap.html"><i class="fas fa-user"></i> Đăng nhập</a>
+                <a href="dangky.html"><i class="fas fa-user-plus"></i> Đăng ký</a>
             </div>
         </div>
     </div>
@@ -603,8 +722,9 @@
                 <input type="text" placeholder="Tìm kiếm sản phẩm..." />
                 <button><i class="fas fa-search"></i></button>
             </div>
-            <div class="cart-icon">
+            <div class="cart-icon" id="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cart-count">0</span>
             </div>
         </div>
     </header>
@@ -636,6 +756,9 @@
         </div>
     </nav>
 
+
+
+
     <div class="container">
         <div class="sidebar">
             <h3>DANH MỤC</h3>
@@ -655,7 +778,7 @@
 
         <div class="main-content">
             <div class="breadcrumb">
-                <a href="index.html">TRANG CHỦ</a> > 
+                <a href="index.html">TRANG CHỦ</a> >
                 <a href="raucuqua.html">TẤT CẢ SẢN PHẨM</a>
             </div>
 
@@ -748,7 +871,7 @@
 
                 <div class="product-card" data-id="6">
                     <div class="product-image">
-                        <img src="./img/Mongtoi.jpg" alt="Mong toi" />
+                        <img src="./img/Mongtoi.jpg" alt="Mồng tơi" />
                     </div>
                     <div class="product-info">
                         <div class="product-name">Mồng tơi - 2 bó</div>
@@ -793,7 +916,7 @@
                         <img src="./img/khoqua.jpg" alt="Khổ qua" />
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Khổ - 1 kg</div>
+                        <div class="product-name">Khổ qua- 1 kg</div>
                         <div class="product-price">
                             15,000đ
                             <span class="product-original-price">30,000đ</span>
@@ -955,7 +1078,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
             <div class="featured-section">
@@ -1080,172 +1203,172 @@
                 <h2 class="section-title">SẢN PHẨM MỚI</h2>
                 <div class="product-grid" id="new-products">
                     <div class="product-card" data-id="29">
-                    <div class="product-image">
-                        <img src="./img/cucaido.jpg" alt="Củ cải đỏ" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Củ cải đỏ</div>
-                        <div class="product-price">
-                            45,000đ
-                            <span class="product-original-price">50,000đ</span>
-                            <span class="product-badge">Mới</span>
+                        <div class="product-image">
+                            <img src="./img/cucaido.jpg" alt="Củ cải đỏ" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Củ cải đỏ</div>
+                            <div class="product-price">
+                                45,000đ
+                                <span class="product-original-price">50,000đ</span>
+                                <span class="product-badge">Mới</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="product-card" data-id="30">
-                    <div class="product-image">
-                        <img src="./img/cugung.jpg" alt="củ gừng" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Củ gừng</div>
-                        <div class="product-price">
-                            10,000đ
-                            <span class="product-original-price">20,000đ</span>
-                            <span class="product-badge">Mới</span>
+                    <div class="product-card" data-id="30">
+                        <div class="product-image">
+                            <img src="./img/cugung.jpg" alt="củ gừng" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Củ gừng</div>
+                            <div class="product-price">
+                                10,000đ
+                                <span class="product-original-price">20,000đ</span>
+                                <span class="product-badge">Mới</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="product-card" data-id="31">
-                    <div class="product-image">
-                        <img src="./img/bibau.jpg" alt="bí bầu" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Bí bầu</div>
-                        <div class="product-price">
-                            45,000đ
-                            <span class="product-original-price">45,000đ</span>
-                            <span class="product-badge">Mới</span>
+                    <div class="product-card" data-id="31">
+                        <div class="product-image">
+                            <img src="./img/bibau.jpg" alt="bí bầu" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Bí bầu</div>
+                            <div class="product-price">
+                                45,000đ
+                                <span class="product-original-price">45,000đ</span>
+                                <span class="product-badge">Mới</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="product-card" data-id="32">
-                    <div class="product-image">
-                        <img src="./img/hanhtay.jpg" alt="hành tây" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Hành tây</div>
-                        <div class="product-price">
-                            40,000đ
-                            <span class="product-original-price">80,000đ</span>
-                            <span class="product-badge">Mới</span>
+                    <div class="product-card" data-id="32">
+                        <div class="product-image">
+                            <img src="./img/hanhtay.jpg" alt="hành tây" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Hành tây</div>
+                            <div class="product-price">
+                                40,000đ
+                                <span class="product-original-price">80,000đ</span>
+                                <span class="product-badge">Mới</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="product-card" data-id="33">
-                    <div class="product-image">
-                        <img src="./img/caitim.jpg" alt="cải tím" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Cải tím</div>
-                        <div class="product-price">
-                            90,000đ
-                            <span class="product-original-price">100,000đ</span>
-                            <span class="product-badge">Mới</span>
+                    <div class="product-card" data-id="33">
+                        <div class="product-image">
+                            <img src="./img/caitim.jpg" alt="cải tím" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Cải tím</div>
+                            <div class="product-price">
+                                90,000đ
+                                <span class="product-original-price">100,000đ</span>
+                                <span class="product-badge">Mới</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="product-card" data-id="34">
-                    <div class="product-image">
-                        <img src="./img/xalach.jpg" alt="Xà lách" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Xà lách</div>
-                        <div class="product-price">
-                            37,000đ
-                            <span class="product-original-price">37,000đ</span>
-                            <span class="product-badge">Mới</span>
+                    <div class="product-card" data-id="34">
+                        <div class="product-image">
+                            <img src="./img/xalach.jpg" alt="Xà lách" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Xà lách</div>
+                            <div class="product-price">
+                                37,000đ
+                                <span class="product-original-price">37,000đ</span>
+                                <span class="product-badge">Mới</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="product-card" data-id="35">
-                    <div class="product-image">
-                        <img src="./img/mangtre.jpg" alt="Măng tre" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Măng tre</div>
-                        <div class="product-price">
-                            30,000đ
-                            <span class="product-original-price">60,000đ</span>
-                            <span class="product-badge">Mới</span>
+                    <div class="product-card" data-id="35">
+                        <div class="product-image">
+                            <img src="./img/mangtre.jpg" alt="Măng tre" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Măng tre</div>
+                            <div class="product-price">
+                                30,000đ
+                                <span class="product-original-price">60,000đ</span>
+                                <span class="product-badge">Mới</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="product-card" data-id="36">
-                    <div class="product-image">
-                        <img src="./img/cusu.jpg" alt="củ su" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Củ su</div>
-                        <div class="product-price">
-                            63,000đ
-                            <span class="product-original-price">70,000đ</span>
-                            <span class="product-badge">Mới</span>
+                    <div class="product-card" data-id="36">
+                        <div class="product-image">
+                            <img src="./img/cusu.jpg" alt="củ su" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Củ su</div>
+                            <div class="product-price">
+                                63,000đ
+                                <span class="product-original-price">70,000đ</span>
+                                <span class="product-badge">Mới</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="product-card" data-id="37">
-                    <div class="product-image">
-                        <img src="./img/cutoi.jpg" alt="củ tỏi" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Củ tỏi</div>
-                        <div class="product-price">
-                            15,000đ
-                            <span class="product-original-price">15,000đ</span>
-                            <span class="product-badge">Mới</span>
+                    <div class="product-card" data-id="37">
+                        <div class="product-image">
+                            <img src="./img/cutoi.jpg" alt="củ tỏi" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Củ tỏi</div>
+                            <div class="product-price">
+                                15,000đ
+                                <span class="product-original-price">15,000đ</span>
+                                <span class="product-badge">Mới</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="product-card" data-id="38">
-                    <div class="product-image">
-                        <img src="./img/bido.jpg" alt="bí đỏ non" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Bí đỏ non</div>
-                        <div class="product-price">
-                            49,000đ
-                            <span class="product-original-price">100,000đ</span>
-                            <span class="product-badge">Mới</span>
+                    <div class="product-card" data-id="38">
+                        <div class="product-image">
+                            <img src="./img/bido.jpg" alt="bí đỏ non" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Bí đỏ non</div>
+                            <div class="product-price">
+                                49,000đ
+                                <span class="product-original-price">100,000đ</span>
+                                <span class="product-badge">Mới</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="product-card" data-id="39">
-                    <div class="product-image">
-                        <img src="./img/suhao.jpg" alt="su hào" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Su hào</div>
-                        <div class="product-price">
-                            25,000đ
-                            <span class="product-original-price">50,000đ</span>
-                            <span class="product-badge">Mới</span>
+                    <div class="product-card" data-id="39">
+                        <div class="product-image">
+                            <img src="./img/suhao.jpg" alt="su hào" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Su hào</div>
+                            <div class="product-price">
+                                25,000đ
+                                <span class="product-original-price">50,000đ</span>
+                                <span class="product-badge">Mới</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="product-card" data-id="40">
-                    <div class="product-image">
-                        <img src="./img/nhadam.jpg" alt="Nha đam" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Nha đam - 1kg</div>
-                        <div class="product-price">
-                            72,000đ
-                            <span class="product-original-price">80,000đ</span>
-                            <span class="product-badge">Mới</span>
+                    <div class="product-card" data-id="40">
+                        <div class="product-image">
+                            <img src="./img/nhadam.jpg" alt="Nha đam" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Nha đam - 1kg</div>
+                            <div class="product-price">
+                                72,000đ
+                                <span class="product-original-price">80,000đ</span>
+                                <span class="product-badge">Mới</span>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -1308,63 +1431,247 @@
         <div class="copyright">© 2025 Rau Sạch Như Ý</div>
     </footer>
 
-    <div class="modal" id="product-modal">
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="product-detail">
-                <div class="product-detail-image">
-                    <img id="modal-image" src="" alt="Product Image" />
-                </div>
-                <div class="product-detail-info">
-                    <h2 id="modal-name" class="product-detail-name"></h2>
-                    <div id="modal-price" class="product-detail-price"></div>
-                    <p id="modal-description" class="product-detail-description"></p>
-                    <button class="add-to-cart">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
-                    </button>
-                </div>
+            <h2>Giỏ hàng của bạn</h2>
+            <div id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-total">
+                <span>Tổng cộng:</span>
+                <span id="cart-total-price">0đ</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn btn-secondary" id="continue-shopping">Tiếp tục mua hàng</button>
+                <button class="btn btn-primary" id="checkout">Thanh toán</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Giỏ hàng
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartIcon = document.getElementById('cart-icon');
+        const cartModal = document.getElementById('cart-modal');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+        const cartCount = document.getElementById('cart-count');
+        const closeModal = document.querySelector('.close-modal');
+        const continueShopping = document.getElementById('continue-shopping');
+        const checkoutBtn = document.getElementById('checkout');
+
+        // Cập nhật số lượng sản phẩm trong giỏ hàng
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+
+        // Hiển thị giỏ hàng
+        function displayCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Giỏ hàng của bạn đang trống</p>';
+                cartTotalPrice.textContent = '0đ';
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-info">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">${formatPrice(item.price)}</div>
+                        </div>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn decrease" data-index="${index}">-</button>
+                        <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-index="${index}">
+                        <button class="quantity-btn increase" data-index="${index}">+</button>
+                    </div>
+                    <div class="cart-item-total">${formatPrice(itemTotal)}</div>
+                    <div class="cart-item-remove" data-index="${index}">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+
+            cartTotalPrice.textContent = formatPrice(total);
+
+            // Thêm sự kiện cho các nút
+            document.querySelectorAll('.decrease').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    decreaseQuantity(index);
+                });
+            });
+
+            document.querySelectorAll('.increase').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    increaseQuantity(index);
+                });
+            });
+
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', function () {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    updateQuantity(index, parseInt(this.value));
+                });
+            });
+
+            document.querySelectorAll('.cart-item-remove').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    removeFromCart(index);
+                });
+            });
+        }
+
+        // Định dạng giá
+        function formatPrice(price) {
+            return price.toLocaleString('vi-VN') + 'đ';
+        }
+
+        // Thêm vào giỏ hàng
+        function addToCart(productId, name, price, image) {
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            displayCart();
+        }
+
+        // Giảm số lượng
+        function decreaseQuantity(index) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                displayCart();
+            }
+        }
+
+        // Tăng số lượng
+        function increaseQuantity(index) {
+            cart[index].quantity += 1;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            displayCart();
+        }
+
+        // Cập nhật số lượng
+        function updateQuantity(index, quantity) {
+            if (quantity > 0) {
+                cart[index].quantity = quantity;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                displayCart();
+            }
+        }
+
+        // Xóa khỏi giỏ hàng
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            displayCart();
+        }
+
+        // Sự kiện khi trang được tải
         document.addEventListener("DOMContentLoaded", function () {
             // Cập nhật số lượng sản phẩm
             const productCount = document.querySelectorAll('.product-card').length;
             document.getElementById('product-count').textContent = productCount;
 
-            // Modal functionality
-            const modal = document.getElementById("product-modal");
-            const closeModal = document.querySelector(".close-modal");
-            const productCards = document.querySelectorAll(".product-card");
+            // Hiển thị giỏ hàng và cập nhật số lượng
+            updateCartCount();
+            displayCart();
 
-            productCards.forEach((card) => {
-                card.addEventListener("click", function () {
-                    const productId = this.getAttribute("data-id");
-                    document.getElementById("modal-name").textContent =
-                        this.querySelector(".product-name").textContent;
-                    document.getElementById("modal-price").innerHTML =
-                        this.querySelector(".product-price").innerHTML;
-                    document.getElementById("modal-image").src =
-                        this.querySelector("img").src;
-                    document.getElementById("modal-image").alt =
-                        this.querySelector("img").alt;
-
-                    document.getElementById("modal-description").textContent =
-                        "Sản phẩm chất lượng cao, trồng tại vườn nhà. An toàn cho sức khỏe tuyệt đối, không sử dụng hóa chất. Thu hoạch khi đã đủ độ chín và kích thước phù hợp.";
-
-                    modal.style.display = "flex";
-                });
+            // Mở modal giỏ hàng
+            cartIcon.addEventListener('click', function () {
+                cartModal.style.display = 'flex';
             });
 
-            closeModal.addEventListener("click", function () {
-                modal.style.display = "none";
+            // Đóng modal
+            closeModal.addEventListener('click', function () {
+                cartModal.style.display = 'none';
             });
 
-            window.addEventListener("click", function (event) {
-                if (event.target === modal) {
-                    modal.style.display = "none";
+            continueShopping.addEventListener('click', function () {
+                cartModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function (event) {
+                if (event.target === cartModal) {
+                    cartModal.style.display = 'none';
                 }
+            });
+
+            // Thanh toán
+            checkoutBtn.addEventListener('click', function () {
+                if (cart.length === 0) {
+                    alert('Giỏ hàng của bạn đang trống!');
+                    return;
+                }
+                alert('Đã thanh toán thành công!');
+            });
+
+            // Thêm sản phẩm vào giỏ hàng
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach((card) => {
+                card.addEventListener('click', function (e) {
+                    // Chỉ chuyển hướng nếu không click vào nút thêm vào giỏ
+                    if (!e.target.closest('.add-to-cart')) {
+                        const productId = this.getAttribute('data-id');
+                        const productName = this.querySelector('.product-name').textContent;
+                        const productPrice = parseInt(this.querySelector('.product-price').textContent.replace(/\D/g, ''));
+                        const productImage = this.querySelector('img').src;
+
+                        // Chuyển hướng đến trang chi tiết sản phẩm
+                        window.location.href = `chitietsanpham.html?id=${productId}&name=${encodeURIComponent(productName)}&price=${productPrice}&image=${encodeURIComponent(productImage)}`;
+                    }
+                });
+
+                // Thêm nút thêm vào giỏ hàng
+                const addToCartBtn = document.createElement('button');
+                addToCartBtn.className = 'add-to-cart btn btn-primary';
+                addToCartBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Thêm vào giỏ';
+
+                addToCartBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const productId = card.getAttribute('data-id');
+                    const productName = card.querySelector('.product-name').textContent;
+                    const productPrice = parseInt(card.querySelector('.product-price').textContent.replace(/\D/g, ''));
+                    const productImage = card.querySelector('img').src;
+
+                    addToCart(productId, productName, productPrice, productImage);
+                    alert('Đã thêm sản phẩm vào giỏ hàng!');
+                });
+
+                card.querySelector('.product-info').appendChild(addToCartBtn);
             });
 
             // Search functionality
@@ -1394,11 +1701,11 @@
             function sortProducts(sortType) {
                 const productGrid = document.getElementById('product-grid');
                 const products = Array.from(productGrid.querySelectorAll('.product-card'));
-                
+
                 products.sort((a, b) => {
                     const priceA = parseInt(a.querySelector('.product-price').textContent.replace(/\D/g, ''));
                     const priceB = parseInt(b.querySelector('.product-price').textContent.replace(/\D/g, ''));
-                    
+
                     if (sortType === 'price-asc') {
                         return priceA - priceB;
                     } else if (sortType === 'price-desc') {
