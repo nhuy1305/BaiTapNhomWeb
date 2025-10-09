@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tầm nhìn và Sứ mệnh - Rau Sạch Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./css/main.css">
+    <style>
+        .vision-mission-content {
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .vision-section, .mission-section, .values-section {
+            margin-bottom: 40px;
+        }
+        
+        .vision-section h2, .mission-section h2, .values-section h2 {
+            color: #2e7d32;
+            border-bottom: 2px solid #4caf50;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .vision-icon, .mission-icon {
+            font-size: 50px;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .value-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .value-icon {
+            font-size: 40px;
+            color: #4caf50;
+            margin-bottom: 15px;
+        }
+        
+        .value-card h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        li{
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> Hotline: 0393058500</span>
+                <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
+            </div>
+            <div class="auth-links">
+                <a href="dangnhap.html"><i class="fas fa-user"></i>Đăng nhập</a>
+                <a href="dangky.html"><i class="fas fa-user-plus"></i>Đăng ký</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                Rau Sạch Online
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="cart-icon" id="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">TRANG CHỦ</a></li>
+                <li>
+                    <a href="khuyenmai.html">KHUYẾN MÃI <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="khuyenmai.html">Tất cả khuyến mãi</a></li>
+                        <li><a href="khuyenmai.html">Combo tiết kiệm</a></li>
+                        <li><a href="khuyenmai.html">Sản phẩm giảm giá</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">SẢN PHẨM <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="#tatcasanpham">Tất cả sản phẩm</a></li>
+                        <li><a href="sanphamnoibat.html">Sản phẩm nổi bật</a></li>
+                        <li><a href="sanphammoi.html">Sản phẩm mới</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
+                <li><a href="tintuc.html">TIN TỨC</a></li>
+                <li><a href="lienhe.html">LIÊN HỆ</a></li>
+
+                <li>
+                    <a href="#">VỀ CHÚNG TÔI <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="tamnhinvasumenh.html">Tầm nhìn và sứ mệnh</a></li>
+                        <li><a href="lichsuhinhthanh.html">Lịch sử hình thành</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="sidebar">
+            <h3>DANH MỤC</h3>
+            <ul class="category-list">
+                <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
+                <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
+                <li><a href="giavi.html">Rau gia vị </a></li>
+                <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
+                <li><a href="rauhoachat.html">Rau sạch an toàn – giá hợp lý</a></li>
+                <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
+                <li><a href="hoaquahoachat.html">Hoa quả thường – siêu tiết kiệm</a></li>
+                <li><a href="sanphamgiamgia.html">Sản phẩm giảm giá cực hot</a></li>
+                <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
+                <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html">TRANG CHỦ</a> >
+                <a href="vechungtoi.html">VỀ CHÚNG TÔI</a> >
+                <span>TẦM NHÌN VÀ SỨ MỆNH</span>
+            </div>
+
+            <h1 class="page-title">TẦM NHÌN VÀ SỨ MỆNH</h1>
+
+            <div class="vision-mission-content">
+                <div class="vision-section">
+                    <div class="vision-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h2>TẦM NHÌN</h2>
+                    <p>Rau Sạch Online hướng tới trở thành hệ thống cung cấp rau củ quả sạch hàng đầu Việt Nam, được tin tưởng và lựa chọn bởi hàng triệu gia đình Việt. Chúng tôi không ngừng đổi mới, áp dụng công nghệ tiên tiến để mang đến trải nghiệm mua sắm tốt nhất cho khách hàng.</p>
+                    <p>Đến năm 2030, chúng tôi phấn đấu mở rộng hệ thống đến 63 tỉnh thành trên cả nước, góp phần thay đổi thói quen mua sắm thực phẩm của người dân Việt Nam, hướng tới một cộng đồng khỏe mạnh và phát triển bền vững.</p>
+                </div>
+                
+                <div class="mission-section">
+                    <div class="mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h2>SỨ MỆNH</h2>
+                    <p>Sứ mệnh của Rau Sạch Online là cung cấp các sản phẩm rau củ quả tươi ngon, an toàn với giá cả hợp lý, đem đến bữa ăn dinh dưỡng và lành mạnh cho mọi gia đình Việt.</p>
+                    <p>Chúng tôi cam kết:</p>
+                    <ul>
+                        <li>Kết nối trực tiếp với các nông trại uy tín để đảm bảo nguồn gốc xuất xứ rõ ràng</li>
+                        <li>Áp dụng quy trình kiểm soát chất lượng nghiêm ngặt từ khâu sản xuất đến tay người tiêu dùng</li>
+                        <li>Phát triển hệ thống phân phối hiện đại, đảm bảo sản phẩm luôn tươi ngon</li>
+                        <li>Mang đến trải nghiệm mua sắm tiện lợi, tiết kiệm thời gian cho khách hàng</li>
+                        <li>Hỗ trợ và phát triển cộng đồng nông dân sản xuất theo hướng bền vững</li>
+                    </ul>
+                </div>
+                
+                <div class="values-section">
+                    <h2>GIÁ TRỊ CỐT LÕI</h2>
+                    <p>Những giá trị cốt lõi định hướng mọi hoạt động của Rau Sạch Online:</p>
+                    
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3>CHẤT LƯỢNG</h3>
+                            <p>Đặt chất lượng và an toàn thực phẩm lên hàng đầu trong mọi sản phẩm và dịch vụ</p>
+                        </div>
+
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3>TRUNG THỰC</h3>
+                            <p>Minh bạch trong mọi giao dịch, trung thực về nguồn gốc và chất lượng sản phẩm</p>
+                        </div>
+
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>ĐỔI MỚI</h3>
+                            <p>Không ngừng cải tiến để mang đến giải pháp tốt hơn cho khách hàng</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CÔNG TY RAU SẠCH ONLINE</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 154A Hà Huy Giáp, P.An Phú Đông, Q.12, TP. HCM</p>
+                    <p><i class="fas fa-phone"></i> 0393058500</p>
+                    <p><i class="fas fa-clock"></i> Thứ 2 - Chủ nhật: 6:00 - 17:00</p>
+                    <p><i class="fas fa-envelope"></i> Nhuy5201314@gmail.com</p>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>DANH MỤC SẢN PHẨM</h3>
+                <ul>
+                    <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
+                    <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
+                    <li><a href="giavi.html">Rau gia vị </a></li>
+                    <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
+                    <li><a href="rauhoachat.html">Rau sạch an toàn – giá hợp lý</a></li>
+                    <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
+                    <li><a href="hoaquahoachat.html">Hoa quả thường – siêu tiết kiệm</a></li>
+                    <li><a href="sanphamgiamgia.html">Sản phẩm giảm giá cực hot</a></li>
+                    <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
+                    <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+                <ul>
+                    <li><a href="cauhoi.html">Câu hỏi thường gặp</a></li>
+                    <li><a href="doitra.html">Chính sách đổi trả hàng</a></li>
+                    <li><a href="giaohang.html">Chính sách giao hàng</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>VỀ RAU SẠCH ONLINE</h3>
+                <ul>
+                    <li><a href="gioithieu.html">Giới thiệu</a></li>
+                    <li><a href="tamnhinvasumenh.html">Tầm nhìn và Sứ mệnh</a></li>
+                    <li><a href="lichsuhinhthanh.html">Lịch sử hình thành</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">2025 Rau Sạch Online</div>
+    </footer>
+
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Giỏ hàng của bạn</h2>
+            <div id="cart-items">
+            </div>
+            <div class="cart-total">
+                <span>Tổng cộng:</span>
+                <span id="cart-total-price">0đ</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn btn-secondary" id="continue-shopping">Tiếp tục mua hàng</button>
+                <button class="btn btn-primary" id="checkout">Thanh toán</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script/main.js"></script>
+</body>
+
+</html>
