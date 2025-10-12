@@ -240,3 +240,13 @@ document.addEventListener("DOMContentLoaded", function () {
     cartModal.style.display = "flex";
   });
 });
+
+
+document.getElementById('checkout').addEventListener('click', function() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (isLoggedIn) {
+        window.location.href = 'checkout.html';
+    } else {
+        window.location.href = 'dangnhap.html';
+    }
+});
