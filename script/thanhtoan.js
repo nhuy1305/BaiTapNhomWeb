@@ -1,4 +1,3 @@
-// Kiểm tra và tải giỏ hàng
 document.addEventListener('DOMContentLoaded', () => {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const loginLink = document.getElementById('loginLink');
@@ -6,16 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
         loginLink.style.display = 'block';
     } else {
         loginLink.style.display = 'none';
-        // Tự động điền thông tin nếu đã đăng nhập (tùy chọn, dựa trên localStorage)
-        const userPhone = localStorage.getItem('userPhone') || '';
-        const userEmail = localStorage.getItem('userEmail') || '';
-        const userAddress = localStorage.getItem('userAddress') || '';
-       document.getElementById('fullname').value = localStorage.getItem('userFullname') || '';
-        document.getElementById('name').value = userPhone;
-        document.getElementById('address').value = userAddress;
+        document.getElementById('fullname').value = localStorage.getItem('userFullname') || '';
+        document.getElementById('name').value = localStorage.getItem('userPhone') || '';
+        document.getElementById('address').value = localStorage.getItem('userAddress') || '';
     }
 
-    // Tải giỏ hàng từ localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const orderItems = document.getElementById('order-items');
     cart.forEach(item => {
@@ -29,11 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
         orderItems.appendChild(itemDiv);
     });
 
-    // Tính tổng tiền
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
     document.getElementById('total').textContent = subtotal.toLocaleString() + 'đ';
-// Xử lý ràng buộc và lỗi
+
     const inputs = {
         fullname: document.getElementById('fullname'),
         name: document.getElementById('name'),
@@ -47,8 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function validateInputs() {
         let isValid = true;
-
-        // Validation cho Họ tên (ít nhất 2 từ)
         const fullname = inputs.fullname.value.trim();
         if (!fullname || fullname.split(/\s+/).filter(word => word.length > 0).length < 2) {
             inputs.fullname.classList.add('error-border');
@@ -60,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
             errors.fullname.style.visibility = 'hidden';
         }
 
-        // Validation cho Số điện thoại (10 số, bắt đầu bằng 0)
         const phone = inputs.name.value.trim();
         const phoneRegex = /^0\d{9}$/;
         if (!phone || !phoneRegex.test(phone)) {
@@ -73,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
             errors.name.style.visibility = 'hidden';
         }
 
-        // Validation cho Địa chỉ (không được để trống)
         if (!inputs.address.value.trim()) {
             inputs.address.classList.add('error-border');
             errors.address.textContent = 'Vui lòng nhập địa chỉ';
@@ -96,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Xử lý phương thức thanh toán
     const bankRadio = document.getElementById('bank');
     const generateQRButton = document.getElementById('generateQR');
     const qrSection = document.getElementById('qrSection');
@@ -110,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
         qrSection.style.display = 'block';
     });
 
-    // Đặt hàng
     document.getElementById('placeOrder').addEventListener('click', function() {
         if (validateInputs()) {
             const fullname = document.getElementById('fullname').value;
