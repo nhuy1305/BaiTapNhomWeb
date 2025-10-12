@@ -250,3 +250,18 @@ document.getElementById('checkout').addEventListener('click', function() {
         window.location.href = 'dangnhap.html';
     }
 });
+
+document.getElementById('add-to-cart').addEventListener('click', function() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const product = {
+        name: document.getElementById('product-name').textContent,
+        price: parseInt(document.getElementById('product-price').textContent.replace(/[^0-9]/g, '')),
+        quantity: 1,
+        image: document.getElementById('product-image').src
+    };
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Đã thêm vào giỏ!');
+    // Cập nhật số lượng giỏ hàng (cart-count)
+    document.getElementById('cart-count').textContent = cart.length;
+});
