@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thanh toán - Rau Sạch Online</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="../css/thanhtoan.css"> 
+    <link rel="stylesheet" href="../BaiTapNhomWeb-26503bbc176fa6245266a56147ef5bbcce5b3116/css/thanhtoan.css">
 </head>
 <body>
     <div class="top-bar">
@@ -73,38 +73,48 @@
     </nav>
 
     <div class="container">
-        <div class="checkout-container">
-            <div class="checkout-column info-column">
-                <h2>Thông tin nhận hàng</h2>
+        <div class="breadcrumb">
+            <a href="index.html">TRANG CHỦ</a> > <span>Thanh toán</span>
+        </div>
+        <div class="thanhtoan-container">
+            <div class="thanhtoan-column info-column">
+                <h2>Thông tin nhận hàng <span class="required">*</span></h2>
                 <div class="form-group">
-                    <label for="name">Số điện thoại</label>
+                    <label for="fullname">Họ tên <span class="required">*</span></label>
+                    <input type="text" id="fullname" name="fullname">
+                    <span class="error" id="fullname-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="name">Số điện thoại <span class="required">*</span></label>
                     <input type="text" id="name" name="name">
+                    <span class="error" id="name-error"></span>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email">
-                </div>
-                <div class="form-group">
-                    <label for="address">Địa chỉ</label>
+                    <label for="address">Địa chỉ <span class="required">*</span></label>
                     <input type="text" id="address" name="address">
+                    <span class="error" id="address-error"></span>
                 </div>
                 <a href="dangnhap.html" class="login-link" id="loginLink">Đăng nhập để tự động điền</a>
             </div>
 
-            <div class="checkout-column payment-column">
-                <h2>Phương thức thanh toán</h2>
+            <div class="thanhtoan-column payment-column">
+                <h2>Phương thức thanh toán <span class="required">*</span></h2>
                 <div class="payment-option">
                     <input type="radio" id="cod" name="payment" value="cod" checked>
                     <label for="cod">Thanh toán khi giao hàng (COD)</label>
                 </div>
-                <div class="payment-option qr" id="qrSection" style="display: none;">
+                <div class="payment-option">
+                    <input type="radio" id="bank" name="payment" value="bank">
+                    <label for="bank">Chuyển khoản</label>
+                </div>
+                <div class="qr" id="qrSection" style="display: none;">
                     <p>Mã QR thanh toán:</p>
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Order123" alt="QR Code" id="qrCode">
                 </div>
-                <button class="btn btn-primary" id="generateQR">Tạo mã QR</button>
+                <button class="btn btn-primary" id="generateQR" style="display: none;">Tạo mã QR</button>
             </div>
 
-            <div class="checkout-column order-column">
+            <div class="thanhtoan-column order-column">
                 <h2>Đơn hàng</h2>
                 <div id="order-items" class="order-items"></div>
                 <div class="form-group">
@@ -192,45 +202,6 @@
         </div>
     </div>
 
-    <script>
-        // Kiểm tra trạng thái đăng nhập
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        const loginLink = document.getElementById('loginLink');
-        if (!isLoggedIn) {
-            window.location.href = 'dangnhap.html';
-        }
-
-        // Giả lập dữ liệu giỏ hàng từ localStorage 
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const orderItems = document.getElementById('order-items');
-        cart.forEach(item => {
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'order-item';
-            itemDiv.innerHTML = `
-                <img src="${item.image || 'https://via.placeholder.com/50'}" alt="${item.name}">
-                <span>${item.name} x${item.quantity}</span>
-                <span>${(item.price * item.quantity).toLocaleString()}đ</span>
-            `;
-            orderItems.appendChild(itemDiv);
-        });
-
-        // Tính tổng tiền
-        const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
-        document.getElementById('total').textContent = subtotal.toLocaleString() + 'đ';
-
-        // Tạo mã QR
-        document.getElementById('generateQR').addEventListener('click', function() {
-            const qrSection = document.getElementById('qrSection');
-            qrSection.style.display = 'block';
-        });
-
-        // Đặt hàng
-        document.getElementById('placeOrder').addEventListener('click', function() {
-            alert('Đặt hàng thành công!');
-            window.location.href = 'order-details.html';
-        });
-
-    </script>
+    <script src="./script/thanhtoan.js"></script>
 </body>
 </html>
