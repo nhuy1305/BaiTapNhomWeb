@@ -5,35 +5,38 @@ document.addEventListener('DOMContentLoaded', () => {
         loginLink.style.display = 'block';
     } else {
         loginLink.style.display = 'none';
-        const userPhone = localStorage.getItem('userPhone') || '';
-        const userEmail = localStorage.getItem('userEmail') || '';
-        const userAddress = localStorage.getItem('userAddress') || '';
         document.getElementById('fullname').value = localStorage.getItem('userFullname') || '';
-        document.getElementById('name').value = userPhone;
-        document.getElementById('address').value = userAddress;
+        document.getElementById('name').value = localStorage.getItem('userPhone') || '';
+        document.getElementById('address').value = localStorage.getItem('userAddress') || '';
     }
 
+    // Load cart từ localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    // Merge duplicate items trước khi hiển thị (phòng hờ cart cũ bị lỗi)
-    cart = mergeDuplicateItems(cart);
-
     const orderItems = document.getElementById('order-items');
-    cart.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'order-item';
-        itemDiv.innerHTML = `
-            <img src="${item.image || 'https://via.placeholder.com/50'}" alt="${item.name}">
-            <span>${item.name} x${item.quantity}</span>
-            <span>${(item.price * item.quantity).toLocaleString()}đ</span>
-        `;
-        orderItems.appendChild(itemDiv);
-    });
 
-    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    // Clear cart nếu rỗng hoặc test, chỉ giữ 1 sản phẩm mẫu nếu chưa có
+    if (cart.length === 0) {
+        cart = [{ name: "Cải kale (Xanh) Organic 300gr", price: 35000, quantity: 1, image: "https://via.placeholder.com/50" }]; // 1 sản phẩm mẫu như cũ
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Hiển thị chỉ 1 sản phẩm đầu tiên (fix duplication)
+    const firstItem = cart[0]; // Chỉ lấy sản phẩm đầu tiên
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'order-item';
+    itemDiv.innerHTML = `
+        <img src="${firstItem.image || 'https://via.placeholder.com/50'}" alt="${firstItem.name}">
+        <span>${firstItem.name} x${firstItem.quantity}</span>
+        <span>${(firstItem.price * firstItem.quantity).toLocaleString()}đ</span>
+    `;
+    orderItems.appendChild(itemDiv);
+
+    // Tính tổng tiền (chỉ từ 1 sản phẩm)
+    const subtotal = firstItem.price * firstItem.quantity;
     document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
     document.getElementById('total').textContent = subtotal.toLocaleString() + 'đ';
 
-    // Xử lý ràng buộc và lỗi
+    // Validation
     const inputs = {
         fullname: document.getElementById('fullname'),
         name: document.getElementById('name'),
@@ -48,11 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function validateInputs() {
         let isValid = true;
 
-        // Validation cho Họ tên (ít nhất 2 từ)
+        // Họ tên (ít nhất 2 từ)
         const fullname = inputs.fullname.value.trim();
         if (!fullname || fullname.split(/\s+/).filter(word => word.length > 0).length < 2) {
             inputs.fullname.classList.add('error-border');
-            errors.fullname.textContent = 'Vui lòng nhập họ tên với ít nhất 2 từ';
+            errors.fullname.textContent = !fullname ? 'Vui lòng nhập họ tên' : 'Vui lòng nhập họ tên với ít nhất 2 từ';
             errors.fullname.style.visibility = 'visible';
             isValid = false;
         } else {
@@ -60,12 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
             errors.fullname.style.visibility = 'hidden';
         }
 
-        // Validation cho Số điện thoại (10 số, bắt đầu bằng 0)
+        // Số điện thoại (10 số, bắt đầu bằng 0)
         const phone = inputs.name.value.trim();
         const phoneRegex = /^0\d{9}$/;
         if (!phone || !phoneRegex.test(phone)) {
             inputs.name.classList.add('error-border');
-            errors.name.textContent = 'Vui lòng nhập số điện thoại 10 số bắt đầu bằng 0';
+            errors.name.textContent = !phone ? 'Vui lòng nhập số điện thoại' : 'Vui lòng nhập số điện thoại 10 số bắt đầu bằng 0';
             errors.name.style.visibility = 'visible';
             isValid = false;
         } else {
@@ -73,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             errors.name.style.visibility = 'hidden';
         }
 
-        // Validation cho Địa chỉ (không được để trống)
+        // Địa chỉ (không để trống)
         if (!inputs.address.value.trim()) {
             inputs.address.classList.add('error-border');
             errors.address.textContent = 'Vui lòng nhập địa chỉ';
@@ -87,53 +90,43 @@ document.addEventListener('DOMContentLoaded', () => {
         return isValid;
     }
 
+    // Realtime validation
     Object.values(inputs).forEach(input => {
-        input.addEventListener('input', () => {
-            if (input.value.trim()) {
-                input.classList.remove('error-border');
-                errors[input.id].style.visibility = 'hidden';
-            }
-        });
+        input.addEventListener('input', validateInputs);
     });
 
-    // Xử lý phương thức thanh toán
+    // Phương thức thanh toán
     const bankRadio = document.getElementById('bank');
     const generateQRButton = document.getElementById('generateQR');
     const qrSection = document.getElementById('qrSection');
 
-    bankRadio.addEventListener('change', () => {
-        generateQRButton.style.display = bankRadio.checked ? 'block' : 'none';
-        qrSection.style.display = 'none';
-    });
+    if (bankRadio) {
+        bankRadio.addEventListener('change', () => {
+            generateQRButton.style.display = bankRadio.checked ? 'block' : 'none';
+            qrSection.style.display = 'none';
+        });
+    }
 
-    generateQRButton.addEventListener('click', () => {
-        qrSection.style.display = 'block';
-    });
+    if (generateQRButton) {
+        generateQRButton.addEventListener('click', () => {
+            qrSection.style.display = 'block';
+        });
+    }
 
     // Đặt hàng
-    document.getElementById('placeOrder').addEventListener('click', function() {
-        if (validateInputs()) {
-            const fullname = document.getElementById('fullname').value;
-            const name = document.getElementById('name').value;
-            const address = document.getElementById('address').value;
-            localStorage.setItem('userFullname', fullname);
-            localStorage.setItem('userPhone', name);
-            localStorage.setItem('userAddress', address);
-            alert('Đặt hàng thành công!');
-            window.location.href = 'chitiethoadon.html';
-        }
-    });
+    const placeOrderButton = document.getElementById('placeOrder');
+    if (placeOrderButton) {
+        placeOrderButton.addEventListener('click', function() {
+            if (validateInputs()) {
+                const fullname = document.getElementById('fullname').value;
+                const name = document.getElementById('name').value;
+                const address = document.getElementById('address').value;
+                localStorage.setItem('userFullname', fullname);
+                localStorage.setItem('userPhone', name);
+                localStorage.setItem('userAddress', address);
+                alert('Đặt hàng thành công!');
+                window.location.href = 'chitiethoadon.html';
+            }
+        });
+    }
 });
-
-// Hàm mới: Merge duplicate items dựa trên id
-function mergeDuplicateItems(cart) {
-    const merged = {};
-    cart.forEach(item => {
-        if (merged[item.id]) {
-            merged[item.id].quantity += parseInt(item.quantity) || 1;
-        } else {
-            merged[item.id] = { ...item, quantity: parseInt(item.quantity) || 1 };
-        }
-    });
-    return Object.values(merged);
-}
