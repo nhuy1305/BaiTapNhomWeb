@@ -1,152 +1,63 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    const loginLink = document.getElementById('loginLink');
-    if (!isLoggedIn) {
-        loginLink.style.display = 'block';
-    } else {
-        loginLink.style.display = 'none';
-        document.getElementById('fullname').value = localStorage.getItem('userFullname') || '';
-        document.getElementById('name').value = localStorage.getItem('userPhone') || '';
-        document.getElementById('address').value = localStorage.getItem('userAddress') || '';
-    }
-
-    // Load cart từ localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const orderItems = document.getElementById('order-items');
-
-    // Gộp các sản phẩm trùng lặp
-    const uniqueCart = [];
-    const seenIds = new Set();
+document.addEventListener("DOMContentLoaded", () => {
+  // Gộp sản phẩm trùng lặp
+  function mergeDuplicateItems(cart) {
+    const merged = {};
     cart.forEach(item => {
-        if (!seenIds.has(item.id)) {
-            seenIds.add(item.id);
-            uniqueCart.push(item);
-        } else {
-            const existing = uniqueCart.find(i => i.id === item.id);
-            if (existing) existing.quantity = (existing.quantity || 0) + (item.quantity || 1);
-        }
+      if (merged[item.id]) {
+        merged[item.id].quantity += parseInt(item.quantity) || 1;
+      } else {
+        merged[item.id] = { ...item, quantity: parseInt(item.quantity) || 1 };
+      }
     });
+    return Object.values(merged);
+  }
 
-    // Hiển thị tất cả sản phẩm
-    orderItems.innerHTML = ''; // Xóa nội dung cũ
-    let subtotal = 0;
-    uniqueCart.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'order-item';
-        itemDiv.innerHTML = `
-            <img src="${item.image || 'https://via.placeholder.com/50'}" alt="${item.name}">
-            <span>${item.name} x${item.quantity || 1}</span>
-            <span>${(item.price * (item.quantity || 1)).toLocaleString()}đ</span>
-        `;
-        orderItems.appendChild(itemDiv);
-        subtotal += item.price * (item.quantity || 1);
-    });
+  const placeOrderBtn = document.getElementById("placeOrder");
 
-    // Nếu cart rỗng, thêm 1 sản phẩm mẫu
-    if (uniqueCart.length === 0) {
-        const defaultItem = { name: "Cải kale (Xanh) Organic 300gr", price: 35000, quantity: 1, image: "https://via.placeholder.com/50" };
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'order-item';
-        itemDiv.innerHTML = `
-            <img src="${defaultItem.image}" alt="${defaultItem.name}">
-            <span>${defaultItem.name} x${defaultItem.quantity}</span>
-            <span>${(defaultItem.price * defaultItem.quantity).toLocaleString()}đ</span>
-        `;
-        orderItems.appendChild(itemDiv);
-        subtotal = defaultItem.price * defaultItem.quantity;
+  placeOrderBtn?.addEventListener("click", () => {
+    const fullname = document.getElementById("fullname")?.value.trim();
+    const phone = document.getElementById("name")?.value.trim();
+    const email = document.getElementById("email")?.value.trim();
+    const address = document.getElementById("address")?.value.trim();
+
+    // Kiểm tra thông tin bắt buộc
+    if (!fullname || !phone || !address) {
+      alert("Vui lòng nhập đầy đủ thông tin nhận hàng!");
+      return;
     }
 
-    // Cập nhật tổng tiền
-    const shipping = 0; // Có thể thay bằng phí vận chuyển thực tế
-    document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
-    document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
-    document.getElementById('total').textContent = (subtotal + shipping).toLocaleString() + 'đ';
-
-    // Validation
-    const inputs = {
-        fullname: document.getElementById('fullname'),
-        name: document.getElementById('name'),
-        address: document.getElementById('address')
-    };
-    const errors = {
-        fullname: document.getElementById('fullname-error'),
-        name: document.getElementById('name-error'),
-        address: document.getElementById('address-error')
-    };
-
-    function validateInputs() {
-        let isValid = true;
-        const fullname = inputs.fullname.value.trim();
-        if (!fullname || fullname.split(/\s+/).filter(word => word.length > 0).length < 2) {
-            inputs.fullname.classList.add('error-border');
-            errors.fullname.textContent = !fullname ? 'Vui lòng nhập họ tên' : 'Vui lòng nhập họ tên với ít nhất 2 từ';
-            errors.fullname.style.visibility = 'visible';
-            isValid = false;
-        } else {
-            inputs.fullname.classList.remove('error-border');
-            errors.fullname.style.visibility = 'hidden';
-        }
-
-        const phone = inputs.name.value.trim();
-        const phoneRegex = /^0\d{9}$/;
-        if (!phone || !phoneRegex.test(phone)) {
-            inputs.name.classList.add('error-border');
-            errors.name.textContent = !phone ? 'Vui lòng nhập số điện thoại' : 'Vui lòng nhập số điện thoại 10 số bắt đầu bằng 0';
-            errors.name.style.visibility = 'visible';
-            isValid = false;
-        } else {
-            inputs.name.classList.remove('error-border');
-            errors.name.style.visibility = 'hidden';
-        }
-
-        if (!inputs.address.value.trim()) {
-            inputs.address.classList.add('error-border');
-            errors.address.textContent = 'Vui lòng nhập địa chỉ';
-            errors.address.style.visibility = 'visible';
-            isValid = false;
-        } else {
-            inputs.address.classList.remove('error-border');
-            errors.address.style.visibility = 'hidden';
-        }
-
-        return isValid;
+    // Lấy giỏ hàng
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (cart.length === 0) {
+      alert("Giỏ hàng của bạn đang trống!");
+      return;
     }
 
-    // Realtime validation
-    Object.values(inputs).forEach(input => {
-        input.addEventListener('input', validateInputs);
-    });
+    // Gộp sản phẩm trùng
+    cart = mergeDuplicateItems(cart);
+    localStorage.setItem("cart", JSON.stringify(cart));
 
-    // Phương thức thanh toán
-    const bankRadio = document.getElementById('bank');
-    const generateQRButton = document.getElementById('generateQR');
-    const qrSection = document.getElementById('qrSection');
-    if (bankRadio) {
-        bankRadio.addEventListener('change', () => {
-            generateQRButton.style.display = bankRadio.checked ? 'block' : 'none';
-            qrSection.style.display = 'none';
-        });
-    }
-    if (generateQRButton) {
-        generateQRButton.addEventListener('click', () => {
-            qrSection.style.display = 'block';
-        });
+    // Lưu thông tin khách hàng
+    localStorage.setItem("userPhone", phone);
+    localStorage.setItem("userEmail", email || "Không có");
+    localStorage.setItem("userAddress", address);
+
+    // Tính tổng tiền và lưu lại để hiển thị trong trang chitiethoadon
+    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const shipping = 0; // có thể thay đổi nếu cần
+    const total = subtotal + shipping;
+
+    localStorage.setItem("orderSubtotal", subtotal);
+    localStorage.setItem("orderTotal", total);
+
+    // Hiện thông báo (chỉ 1 lần / phiên)
+    if (!sessionStorage.getItem("orderCreated")) {
+      alert("Đơn hàng được tạo thành công!");
+      sessionStorage.setItem("orderCreated", "true");
     }
 
-    // Đặt hàng (chỉ cần 1 lần nhấn)
-    const placeOrderButton = document.getElementById('placeOrder');
-    if (placeOrderButton) {
-        placeOrderButton.addEventListener('click', function() {
-            if (validateInputs()) {
-                const fullname = document.getElementById('fullname').value;
-                const name = document.getElementById('name').value;
-                const address = document.getElementById('address').value;
-                localStorage.setItem('userFullname', fullname);
-                localStorage.setItem('userPhone', name);
-                localStorage.setItem('userAddress', address);
-                alert('Đặt hàng thành công!'); // Hiển thị thông báo
-                window.location.href = 'chitiethoadon.html'; // Chuyển hướng ngay lập tức
-            }
-        });
-    }
+    // Chuyển sang trang chi tiết hóa đơn
+    window.location.href = "chitiethoadon.html";
+  });
 });
+
