@@ -20,32 +20,42 @@ document.addEventListener('DOMContentLoaded', () => {
     cart.forEach(item => {
         if (!seenIds.has(item.id)) {
             seenIds.add(item.id);
-            uniqueCart.push(item);
+            uniqueCart.push({ ...item, quantity: item.quantity || 1 });
         } else {
             // Nếu đã tồn tại, tăng quantity cho item đã có
             const existing = uniqueCart.find(i => i.id === item.id);
-            if (existing) existing.quantity += item.quantity || 1;
+            if (existing) existing.quantity += (item.quantity || 1);
         }
     });
 
     // Hiển thị sản phẩm (chỉ 1 lần cho mỗi id)
     orderItems.innerHTML = ''; // Xóa nội dung cũ
     let subtotal = 0;
+    
     uniqueCart.forEach(item => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'order-item';
+        const itemTotal = item.price * (item.quantity || 1);
         itemDiv.innerHTML = `
             <img src="${item.image || 'https://via.placeholder.com/50'}" alt="${item.name}">
             <span>${item.name} x${item.quantity || 1}</span>
-            <span>${(item.price * (item.quantity || 1)).toLocaleString()}đ</span>
+            <span>${itemTotal.toLocaleString()}đ</span>
         `;
         orderItems.appendChild(itemDiv);
-        subtotal += item.price * (item.quantity || 1);
+        subtotal += itemTotal;
     });
 
     // Nếu cart rỗng, thêm 1 sản phẩm mẫu
     if (uniqueCart.length === 0) {
-        const defaultItem = { name: "Cải kale (Xanh) Organic 300gr", price: 35000, quantity: 1, image: "https://via.placeholder.com/50" };
+        const defaultItem = { 
+            id: 'default-1',
+            name: "Cải kale (Xanh) Organic 300gr", 
+            price: 35000, 
+            quantity: 1, 
+            image: "https://via.placeholder.com/50" 
+        };
+        uniqueCart.push(defaultItem);
+        
         const itemDiv = document.createElement('div');
         itemDiv.className = 'order-item';
         itemDiv.innerHTML = `
@@ -59,16 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Tính phí vận chuyển
     const shipping = 0; // Có thể thay đổi logic phí ship tùy theo yêu cầu
+    const total = subtotal + shipping;
     
-    // Cập nhật tổng tiền
+    // Cập nhật hiển thị tổng tiền
     document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
     document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
-    document.getElementById('total').textContent = (subtotal + shipping).toLocaleString() + 'đ';
+    document.getElementById('total').textContent = total.toLocaleString() + 'đ';
 
-    // LƯU THÔNG TIN GIÁ VÀO LOCALSTORAGE ĐỂ ĐỒNG BỘ VỚI CHITIETHOADON
-    localStorage.setItem('orderSubtotal', subtotal);
-    localStorage.setItem('orderShipping', shipping);
-    localStorage.setItem('orderTotal', subtotal + shipping);
+    // DEBUG: Log để kiểm tra
+    console.log('=== THANHTOAN.JS DEBUG ===');
+    console.log('Subtotal:', subtotal);
+    console.log('Shipping:', shipping);
+    console.log('Total:', total);
+    console.log('Unique Cart:', uniqueCart);
 
     // Validation (giữ nguyên logic cũ)
     const inputs = {
@@ -146,12 +159,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 const fullname = document.getElementById('fullname').value;
                 const name = document.getElementById('name').value;
                 const address = document.getElementById('address').value;
+                
+                // Lưu thông tin khách hàng
                 localStorage.setItem('userFullname', fullname);
                 localStorage.setItem('userPhone', name);
                 localStorage.setItem('userAddress', address);
                 
                 // LƯU CART ĐÃ MERGE VÀO LOCALSTORAGE
                 localStorage.setItem('cart', JSON.stringify(uniqueCart));
+                
+                // LƯU THÔNG TIN GIÁ VÀO LOCALSTORAGE
+                localStorage.setItem('orderSubtotal', subtotal.toString());
+                localStorage.setItem('orderShipping', shipping.toString());
+                localStorage.setItem('orderTotal', total.toString());
+                
+                // DEBUG: Log trước khi chuyển trang
+                console.log('=== BEFORE REDIRECT ===');
+                console.log('Saved Subtotal:', localStorage.getItem('orderSubtotal'));
+                console.log('Saved Shipping:', localStorage.getItem('orderShipping'));
+                console.log('Saved Total:', localStorage.getItem('orderTotal'));
+                console.log('Saved Cart:', localStorage.getItem('cart'));
                 
                 alert('Đơn hàng được tạo thành công!');
                 window.location.href = 'chitiethoadon.html';
