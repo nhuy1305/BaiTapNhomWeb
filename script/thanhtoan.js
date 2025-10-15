@@ -1,123 +1,149 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // === Hàm gộp sản phẩm trùng lặp ===
-  function mergeDuplicateItems(cart) {
-    const merged = {};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const loginLink = document.getElementById('loginLink');
+    if (!isLoggedIn) {
+        loginLink.style.display = 'block';
+    } else {
+        loginLink.style.display = 'none';
+        document.getElementById('fullname').value = localStorage.getItem('userFullname') || '';
+        document.getElementById('name').value = localStorage.getItem('userPhone') || '';
+        document.getElementById('address').value = localStorage.getItem('userAddress') || '';
+    }
+
+    // Load cart từ localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const orderItems = document.getElementById('order-items');
+
+    // Xử lý duplication: Gộp các sản phẩm có cùng id
+    const uniqueCart = [];
+    const seenIds = new Set();
     cart.forEach(item => {
-      if (merged[item.id]) {
-        merged[item.id].quantity += parseInt(item.quantity) || 1;
-      } else {
-        merged[item.id] = { ...item, quantity: parseInt(item.quantity) || 1 };
-      }
+        if (!seenIds.has(item.id)) {
+            seenIds.add(item.id);
+            uniqueCart.push(item);
+        } else {
+            // Nếu đã tồn tại, tăng quantity cho item đã có
+            const existing = uniqueCart.find(i => i.id === item.id);
+            if (existing) existing.quantity += item.quantity || 1;
+        }
     });
-    return Object.values(merged);
-  }
 
-  // === Hàm hiển thị giỏ hàng trong trang THANHTOAN ===
-  function renderCart() {
-    const cartContainer = document.querySelector(".cart-items");
-    const subtotalElement = document.getElementById("subtotal");
-    const totalElement = document.getElementById("total");
+    // Hiển thị sản phẩm (chỉ 1 lần cho mỗi id)
+    orderItems.innerHTML = ''; // Xóa nội dung cũ
+    let subtotal = 0;
+    uniqueCart.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'order-item';
+        itemDiv.innerHTML = `
+            <img src="${item.image || 'https://via.placeholder.com/50'}" alt="${item.name}">
+            <span>${item.name} x${item.quantity || 1}</span>
+            <span>${(item.price * (item.quantity || 1)).toLocaleString()}đ</span>
+        `;
+        orderItems.appendChild(itemDiv);
+        subtotal += item.price * (item.quantity || 1);
+    });
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart = mergeDuplicateItems(cart);
-
-    if (!cartContainer) return;
-
-    if (cart.length === 0) {
-      cartContainer.innerHTML = "<p>Giỏ hàng của bạn trống.</p>";
-      subtotalElement.textContent = "0đ";
-      totalElement.textContent = "0đ";
-      return;
+    // Nếu cart rỗng, thêm 1 sản phẩm mẫu
+    if (uniqueCart.length === 0) {
+        const defaultItem = { name: "Cải kale (Xanh) Organic 300gr", price: 35000, quantity: 1, image: "https://via.placeholder.com/50" };
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'order-item';
+        itemDiv.innerHTML = `
+            <img src="${defaultItem.image}" alt="${defaultItem.name}">
+            <span>${defaultItem.name} x${defaultItem.quantity}</span>
+            <span>${(defaultItem.price * defaultItem.quantity).toLocaleString()}đ</span>
+        `;
+        orderItems.appendChild(itemDiv);
+        subtotal = defaultItem.price * defaultItem.quantity;
     }
 
-    cartContainer.innerHTML = cart
-      .map(
-        item => `
-        <div class="cart-item">
-          <img src="${item.image}" alt="${item.name}" class="cart-item-img">
-          <div class="cart-item-info">
-            <p>${item.name}</p>
-            <p>SL: ${item.quantity}</p>
-            <p>Giá: ${item.price.toLocaleString()}đ</p>
-          </div>
-        </div>
-      `
-      )
-      .join("");
+    // Cập nhật tổng tiền
+    document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
+    document.getElementById('total').textContent = subtotal.toLocaleString() + 'đ';
 
-    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const shipping = 0;
-    const total = subtotal + shipping;
+    // Validation (giữ nguyên logic cũ)
+    const inputs = {
+        fullname: document.getElementById('fullname'),
+        name: document.getElementById('name'),
+        address: document.getElementById('address')
+    };
+    const errors = {
+        fullname: document.getElementById('fullname-error'),
+        name: document.getElementById('name-error'),
+        address: document.getElementById('address-error')
+    };
 
-    subtotalElement.textContent = `${subtotal.toLocaleString()}đ`;
-    totalElement.textContent = `${total.toLocaleString()}đ`;
+    function validateInputs() {
+        let isValid = true;
+        const fullname = inputs.fullname.value.trim();
+        if (!fullname || fullname.split(/\s+/).filter(word => word.length > 0).length < 2) {
+            inputs.fullname.classList.add('error-border');
+            errors.fullname.textContent = !fullname ? 'Vui lòng nhập họ tên' : 'Vui lòng nhập họ tên với ít nhất 2 từ';
+            errors.fullname.style.visibility = 'visible';
+            isValid = false;
+        } else {
+            inputs.fullname.classList.remove('error-border');
+            errors.fullname.style.visibility = 'hidden';
+        }
 
-    localStorage.setItem("orderSubtotal", subtotal);
-    localStorage.setItem("orderTotal", total);
-  }
+        const phone = inputs.name.value.trim();
+        const phoneRegex = /^0\d{9}$/;
+        if (!phone || !phoneRegex.test(phone)) {
+            inputs.name.classList.add('error-border');
+            errors.name.textContent = !phone ? 'Vui lòng nhập số điện thoại' : 'Vui lòng nhập số điện thoại 10 số bắt đầu bằng 0';
+            errors.name.style.visibility = 'visible';
+            isValid = false;
+        } else {
+            inputs.name.classList.remove('error-border');
+            errors.name.style.visibility = 'hidden';
+        }
 
-  // === Hàm tạo mã QR ===
-  function generateQRCode(total) {
-    const qrContainer = document.getElementById("qrCode");
-    if (!qrContainer) return;
+        if (!inputs.address.value.trim()) {
+            inputs.address.classList.add('error-border');
+            errors.address.textContent = 'Vui lòng nhập địa chỉ';
+            errors.address.style.visibility = 'visible';
+            isValid = false;
+        } else {
+            inputs.address.classList.remove('error-border');
+            errors.address.style.visibility = 'hidden';
+        }
 
-    const bankInfo = `Thanh toán đơn hàng tổng: ${total.toLocaleString()}đ`;
-    const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(
-      bankInfo
-    )}`;
-
-    qrContainer.innerHTML = `<img src="${qrURL}" alt="QR thanh toán">`;
-  }
-
-  // === Khi người dùng nhấn ĐẶT HÀNG ===
-  const placeOrderBtn = document.getElementById("placeOrder");
-
-  placeOrderBtn?.addEventListener("click", () => {
-    const fullname = document.getElementById("fullname")?.value.trim();
-    const phone = document.getElementById("name")?.value.trim();
-    const email = document.getElementById("email")?.value.trim();
-    const address = document.getElementById("address")?.value.trim();
-
-    if (!fullname || !phone || !address) {
-      alert("Vui lòng nhập đầy đủ thông tin nhận hàng!");
-      return;
+        return isValid;
     }
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) {
-      alert("Giỏ hàng của bạn đang trống!");
-      return;
+    Object.values(inputs).forEach(input => {
+        input.addEventListener('input', validateInputs);
+    });
+
+    const bankRadio = document.getElementById('bank');
+    const generateQRButton = document.getElementById('generateQR');
+    const qrSection = document.getElementById('qrSection');
+    if (bankRadio) {
+        bankRadio.addEventListener('change', () => {
+            generateQRButton.style.display = bankRadio.checked ? 'block' : 'none';
+            qrSection.style.display = 'none';
+        });
+    }
+    if (generateQRButton) {
+        generateQRButton.addEventListener('click', () => {
+            qrSection.style.display = 'block';
+        });
     }
 
-    cart = mergeDuplicateItems(cart);
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    // Lưu thông tin khách hàng
-    localStorage.setItem("userPhone", phone);
-    localStorage.setItem("userEmail", email || "Chưa có thông tin");
-    localStorage.setItem("userAddress", address);
-
-    // Tính tổng tiền
-    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const total = subtotal;
-    localStorage.setItem("orderSubtotal", subtotal);
-    localStorage.setItem("orderTotal", total);
-
-    // Hiện thông báo (1 lần)
-    if (!sessionStorage.getItem("orderCreated")) {
-      alert("Đơn hàng được tạo thành công!");
-      sessionStorage.setItem("orderCreated", "true");
+    const placeOrderButton = document.getElementById('placeOrder');
+    if (placeOrderButton) {
+        placeOrderButton.addEventListener('click', function() {
+            if (validateInputs()) {
+                const fullname = document.getElementById('fullname').value;
+                const name = document.getElementById('name').value;
+                const address = document.getElementById('address').value;
+                localStorage.setItem('userFullname', fullname);
+                localStorage.setItem('userPhone', name);
+                localStorage.setItem('userAddress', address);
+                alert('Đặt hàng thành công!');
+                window.location.href = 'chitiethoadon.html';
+            }
+        });
     }
-
-    // Chuyển sang chi tiết hóa đơn
-    window.location.href = "chitiethoadon.html";
-  });
-
-  // Gọi render khi load trang
-  renderCart();
-
-  // Hiển thị QR
-  const total = parseFloat(localStorage.getItem("orderTotal")) || 0;
-  generateQRCode(total);
 });
-
