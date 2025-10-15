@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
     // Merge duplicate items trước khi hiển thị (phòng hờ cart cũ bị lỗi)
     cart = mergeDuplicateItems(cart);
 
@@ -34,7 +33,82 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
     document.getElementById('total').textContent = subtotal.toLocaleString() + 'đ';
 
-    // ... (giữ nguyên phần validation, payment, placeOrder như cũ)
+    // Xử lý ràng buộc và lỗi
+    const inputs = {
+        fullname: document.getElementById('fullname'),
+        name: document.getElementById('name'),
+        address: document.getElementById('address')
+    };
+    const errors = {
+        fullname: document.getElementById('fullname-error'),
+        name: document.getElementById('name-error'),
+        address: document.getElementById('address-error')
+    };
+
+    function validateInputs() {
+        let isValid = true;
+
+        // Validation cho Họ tên (ít nhất 2 từ)
+        const fullname = inputs.fullname.value.trim();
+        if (!fullname || fullname.split(/\s+/).filter(word => word.length > 0).length < 2) {
+            inputs.fullname.classList.add('error-border');
+            errors.fullname.textContent = 'Vui lòng nhập họ tên với ít nhất 2 từ';
+            errors.fullname.style.visibility = 'visible';
+            isValid = false;
+        } else {
+            inputs.fullname.classList.remove('error-border');
+            errors.fullname.style.visibility = 'hidden';
+        }
+
+        // Validation cho Số điện thoại (10 số, bắt đầu bằng 0)
+        const phone = inputs.name.value.trim();
+        const phoneRegex = /^0\d{9}$/;
+        if (!phone || !phoneRegex.test(phone)) {
+            inputs.name.classList.add('error-border');
+            errors.name.textContent = 'Vui lòng nhập số điện thoại 10 số bắt đầu bằng 0';
+            errors.name.style.visibility = 'visible';
+            isValid = false;
+        } else {
+            inputs.name.classList.remove('error-border');
+            errors.name.style.visibility = 'hidden';
+        }
+
+        // Validation cho Địa chỉ (không được để trống)
+        if (!inputs.address.value.trim()) {
+            inputs.address.classList.add('error-border');
+            errors.address.textContent = 'Vui lòng nhập địa chỉ';
+            errors.address.style.visibility = 'visible';
+            isValid = false;
+        } else {
+            inputs.address.classList.remove('error-border');
+            errors.address.style.visibility = 'hidden';
+        }
+
+        return isValid;
+    }
+
+    Object.values(inputs).forEach(input => {
+        input.addEventListener('input', () => {
+            if (input.value.trim()) {
+                input.classList.remove('error-border');
+                errors[input.id].style.visibility = 'hidden';
+            }
+        });
+    });
+
+    // Xử lý phương thức thanh toán
+    const bankRadio = document.getElementById('bank');
+    const generateQRButton = document.getElementById('generateQR');
+    const qrSection = document.getElementById('qrSection');
+
+    bankRadio.addEventListener('change', () => {
+        generateQRButton.style.display = bankRadio.checked ? 'block' : 'none';
+        qrSection.style.display = 'none';
+    });
+
+    generateQRButton.addEventListener('click', () => {
+        qrSection.style.display = 'block';
+    });
 
     // Đặt hàng
     document.getElementById('placeOrder').addEventListener('click', function() {
