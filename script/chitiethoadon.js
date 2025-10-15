@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Lấy thông tin từ localStorage
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const orderPhone = localStorage.getItem('userPhone') || 'Chưa có thông tin';
     const orderEmail = localStorage.getItem('userEmail') || 'Chưa có thông tin';
     const orderAddress = localStorage.getItem('userAddress') || 'Chưa có thông tin';
+
+    // Merge duplicate items trước khi hiển thị
+    cart = mergeDuplicateItems(cart);
 
     // Hiển thị thông tin khách hàng
     document.getElementById('order-phone').textContent = orderPhone;
@@ -45,3 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('cart');
     document.getElementById('cart-count').textContent = '0';
 });
+
+// Hàm merge duplicate items (tương tự thanhtoan.js)
+function mergeDuplicateItems(cart) {
+    const merged = {};
+    cart.forEach(item => {
+        if (merged[item.id]) {
+            merged[item.id].quantity += parseInt(item.quantity) || 1;
+        } else {
+            merged[item.id] = { ...item, quantity: parseInt(item.quantity) || 1 };
+        }
+    });
+    return Object.values(merged);
+}
