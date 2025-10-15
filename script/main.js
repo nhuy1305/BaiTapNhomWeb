@@ -148,18 +148,15 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.target === cartModal) cartModal.style.display = "none";
   });
 
-  checkoutBtn?.addEventListener("click", () => {
+checkoutBtn?.addEventListener("click", () => {
     if (cart.length === 0) {
-      alert("Giỏ hàng của bạn đang trống!");
+        alert("Giỏ hàng của bạn đang trống!");
     } else {
-      alert("Chưa làm chức năng thanh toán!");
-      cart = [];
-      localStorage.removeItem("cart");
-      updateCartCount();
-      displayCart();
+        // Lưu giỏ hàng vào localStorage và chuyển hướng
+        localStorage.setItem("cart", JSON.stringify(cart));
+        window.location.href = "thanhtoan.html";
     }
-  });
-
+});
 
   const productCards = document.querySelectorAll(".product-card");
   productCards.forEach((card) => {
