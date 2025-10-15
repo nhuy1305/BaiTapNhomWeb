@@ -8,68 +8,82 @@
   <link rel="stylesheet" href="./css/main.css">
   <style>
     body {
+      height: 100%;
+      margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: #f5f9f6;
       color: #333;
       margin: 0;
       padding: 0;
+
     }
 
-  nav ul {
-    display: flex;
-    gap: 20px;
-    padding: 15px;
-    background-color: #c8e6c9;
-    list-style: none;
-    justify-content: center;
-  }
+    .wrapper {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
 
-  nav ul li a {
-    text-decoration: none;
-    color: #2e7d32;
-    font-weight: bold;
-  }
+    nav ul {
+      display: flex;
+      gap: 20px;
+      padding: 15px;
+      background-color: #c8e6c9;
+      list-style: none;
+      justify-content: center;
+    }
 
-  nav ul li a:hover {
-    color: #1b5e20;
-  }
+    nav ul li a {
+      text-decoration: none;
+      color: #2e7d32;
+      font-weight: bold;
+    }
 
-  section {
-    padding: 30px;
-    max-width: 900px;
-    margin: auto;
-  }
+    nav ul li a:hover {
+      color: #1b5e20;
+    }
+    main.content {
+      flex: 1;
 
-  section h2 {
-    font-size: 28px;
-    color: #2e7d32;
-    border-bottom: 2px solid #c8e6c9;
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-  }
+    }
 
-  section p {
-    font-size: 16px;
-    margin-bottom: 15px;
-  }
+    section {
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
 
-  section ul {
-    list-style: none;
-    padding-left: 0;
-  }
+    section h2 {
+      font-size: 28px;
+      color: #2e7d32;
+      border-bottom: 2px solid #c8e6c9;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
 
-  section ul li {
-    background: #e8f5e9;
-    margin-bottom: 8px;
-    padding: 10px;
-    border-left: 5px solid #66bb6a;
-    border-radius: 4px;
-  }
-  
-</style>
+    section p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    section ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    section ul li {
+      background: #e8f5e9;
+      margin-bottom: 8px;
+      padding: 10px;
+      border-left: 5px solid #66bb6a;
+      border-radius: 4px;
+    }
+    
+  </style>
 </head>
 <body>
-  <div class="top-bar">
+  <div class="wrapper">
+    <div class="top-bar">
     <div class="top-bar-content">
       <div class="contact-info">
         <span><i class="fas fa-phone"></i> Hotline: 0393058500</span>
@@ -152,7 +166,7 @@
                 <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
             </ul>
   </div> 
-  <main>
+  <main class="content">
     <section id="lien-he">
       <h2>Liên Hệ Với Chúng Tôi</h2>
       <p>Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn. Nếu bạn có bất kỳ câu hỏi nào về sản phẩm, đơn hàng, hoặc muốn hợp tác, đừng ngần ngại liên hệ với chúng tôi qua các kênh sau:</p>
@@ -220,5 +234,6 @@
 
         <div class="copyright">2025 Rau Sạch Online</div>
     </footer>
+  </div>
 </body>
 </html>
