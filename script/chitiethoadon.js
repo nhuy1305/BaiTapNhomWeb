@@ -26,10 +26,29 @@ document.addEventListener('DOMContentLoaded', () => {
         orderItemList.appendChild(row);
     });
     
-    // LẤY GIÁ TỪ LOCALSTORAGE (ĐỒNG BỘ VỚI TRANG THANHTOAN)
-    const subtotal = parseInt(localStorage.getItem('orderSubtotal')) || cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const shipping = parseInt(localStorage.getItem('orderShipping')) || 0;
-    const total = parseInt(localStorage.getItem('orderTotal')) || (subtotal + shipping);
+    // LẤY GIÁ TỪ LOCALSTORAGE - SỬA ĐỂ ĐẢM BẢO LẤY ĐÚNG GIÁ TRỊ
+    let subtotal = localStorage.getItem('orderSubtotal');
+    let shipping = localStorage.getItem('orderShipping');
+    let total = localStorage.getItem('orderTotal');
+    
+    // Nếu không có trong localStorage, tính lại
+    if (!subtotal || subtotal === 'null' || subtotal === '0') {
+        subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    } else {
+        subtotal = parseInt(subtotal);
+    }
+    
+    if (!shipping || shipping === 'null') {
+        shipping = 0;
+    } else {
+        shipping = parseInt(shipping);
+    }
+    
+    if (!total || total === 'null' || total === '0') {
+        total = subtotal + shipping;
+    } else {
+        total = parseInt(total);
+    }
     
     // Hiển thị giá tiền
     document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
@@ -52,7 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('orderSubtotal');
     localStorage.removeItem('orderShipping');
     localStorage.removeItem('orderTotal');
-    document.getElementById('cart-count').textContent = '0';
+    
+    // Cập nhật cart count nếu có element
+    const cartCountElement = document.getElementById('cart-count');
+    if (cartCountElement) {
+        cartCountElement.textContent = '0';
+    }
 });
 
 // Hàm merge duplicate items (tương tự thanhtoan.js)
