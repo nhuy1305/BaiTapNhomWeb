@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Gộp sản phẩm trùng lặp
+  const cartList = document.getElementById("cart-items");
+  const subtotalElem = document.getElementById("subtotal");
+  const shippingElem = document.getElementById("shipping");
+  const totalElem = document.getElementById("total");
+  const placeOrderBtn = document.getElementById("placeOrder");
+
+  // Hàm gộp sản phẩm trùng
   function mergeDuplicateItems(cart) {
     const merged = {};
     cart.forEach(item => {
@@ -12,43 +18,72 @@ document.addEventListener("DOMContentLoaded", () => {
     return Object.values(merged);
   }
 
-  const placeOrderBtn = document.getElementById("placeOrder");
+  // Hiển thị giỏ hàng
+  function renderCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = mergeDuplicateItems(cart);
+    localStorage.setItem("cart", JSON.stringify(cart));
 
+    cartList.innerHTML = "";
+    let subtotal = 0;
+
+    cart.forEach(item => {
+      const li = document.createElement("li");
+      li.classList.add("cart-item");
+      const itemTotal = item.price * item.quantity;
+      subtotal += itemTotal;
+
+      li.innerHTML = `
+        <div class="item-info">
+          <img src="${item.image || "https://via.placeholder.com/50"}" alt="${item.name}">
+          <span>${item.name}</span>
+        </div>
+        <div class="item-price">
+          <span>${item.quantity} x ${item.price.toLocaleString()}đ</span>
+          <span>= ${(itemTotal).toLocaleString()}đ</span>
+        </div>
+      `;
+      cartList.appendChild(li);
+    });
+
+    const shipping = 0;
+    const total = subtotal + shipping;
+
+    subtotalElem.textContent = subtotal.toLocaleString() + "đ";
+    shippingElem.textContent = shipping.toLocaleString() + "đ";
+    totalElem.textContent = total.toLocaleString() + "đ";
+
+    // Lưu để dùng cho trang chi tiết hóa đơn
+    localStorage.setItem("orderSubtotal", subtotal);
+    localStorage.setItem("orderTotal", total);
+  }
+
+  renderCart();
+
+  // Sự kiện đặt hàng
   placeOrderBtn?.addEventListener("click", () => {
     const fullname = document.getElementById("fullname")?.value.trim();
     const phone = document.getElementById("name")?.value.trim();
     const email = document.getElementById("email")?.value.trim();
     const address = document.getElementById("address")?.value.trim();
 
-    // Kiểm tra thông tin bắt buộc
     if (!fullname || !phone || !address) {
       alert("Vui lòng nhập đầy đủ thông tin nhận hàng!");
       return;
     }
 
-    // Lấy giỏ hàng
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     if (cart.length === 0) {
       alert("Giỏ hàng của bạn đang trống!");
       return;
     }
 
-    // Gộp sản phẩm trùng
     cart = mergeDuplicateItems(cart);
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    // Lưu thông tin khách hàng
     localStorage.setItem("userPhone", phone);
     localStorage.setItem("userEmail", email || "Không có");
     localStorage.setItem("userAddress", address);
-
-    // Tính tổng tiền và lưu lại để hiển thị trong trang chitiethoadon
-    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const shipping = 0; // có thể thay đổi nếu cần
-    const total = subtotal + shipping;
-
-    localStorage.setItem("orderSubtotal", subtotal);
-    localStorage.setItem("orderTotal", total);
 
     // Hiện thông báo (chỉ 1 lần / phiên)
     if (!sessionStorage.getItem("orderCreated")) {
@@ -60,4 +95,3 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "chitiethoadon.html";
   });
 });
-
