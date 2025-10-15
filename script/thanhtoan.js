@@ -112,10 +112,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return isValid;
     }
 
+    // Realtime validation
     Object.values(inputs).forEach(input => {
         input.addEventListener('input', validateInputs);
     });
 
+    // Phương thức thanh toán
     const bankRadio = document.getElementById('bank');
     const generateQRButton = document.getElementById('generateQR');
     const qrSection = document.getElementById('qrSection');
@@ -131,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Đặt hàng (chỉ cần 1 lần nhấn)
     const placeOrderButton = document.getElementById('placeOrder');
     if (placeOrderButton) {
         placeOrderButton.addEventListener('click', function() {
@@ -141,8 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('userFullname', fullname);
                 localStorage.setItem('userPhone', name);
                 localStorage.setItem('userAddress', address);
-                alert('Đặt hàng thành công!');
-                window.location.href = 'chitiethoadon.html';
+                alert('Đặt hàng thành công!'); // Hiển thị thông báo
+                window.location.href = 'chitiethoadon.html'; // Chuyển hướng ngay lập tức
             }
         });
     }
