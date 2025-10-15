@@ -4,12 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const orderPhone = localStorage.getItem('userPhone') || 'Chưa có thông tin';
     const orderEmail = localStorage.getItem('userEmail') || 'Chưa có thông tin';
     const orderAddress = localStorage.getItem('userAddress') || 'Chưa có thông tin';
+    
     // Merge duplicate items trước khi hiển thị
     cart = mergeDuplicateItems(cart);
+    
     // Hiển thị thông tin khách hàng
     document.getElementById('order-phone').textContent = orderPhone;
     document.getElementById('order-email').textContent = orderEmail;
     document.getElementById('order-address').textContent = orderAddress;
+    
     // Hiển thị danh sách sản phẩm
     const orderItemList = document.getElementById('order-item-list');
     cart.forEach(item => {
@@ -22,12 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         orderItemList.appendChild(row);
     });
-    // Tính tổng tiền
-    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    
+    // LẤY GIÁ TỪ LOCALSTORAGE (ĐỒNG BỘ VỚI TRANG THANHTOAN)
+    const subtotal = parseInt(localStorage.getItem('orderSubtotal')) || cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const shipping = parseInt(localStorage.getItem('orderShipping')) || 0;
+    const total = parseInt(localStorage.getItem('orderTotal')) || (subtotal + shipping);
+    
+    // Hiển thị giá tiền
     document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
-    const shipping = 0; // Có thể thay bằng phí vận chuyển thực tế
     document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
-    document.getElementById('total').textContent = (subtotal + shipping).toLocaleString() + 'đ';
+    document.getElementById('total').textContent = total.toLocaleString() + 'đ';
+    
     // Thiết lập ngày đặt hàng
     const orderDate = new Date().toLocaleString('vi-VN', {
         day: '2-digit',
@@ -38,10 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
         hour12: false
     });
     document.getElementById('order-date').textContent = orderDate;
-    // Xóa giỏ hàng sau khi hiển thị
+    
+    // Xóa giỏ hàng và thông tin giá sau khi hiển thị
     localStorage.removeItem('cart');
+    localStorage.removeItem('orderSubtotal');
+    localStorage.removeItem('orderShipping');
+    localStorage.removeItem('orderTotal');
     document.getElementById('cart-count').textContent = '0';
 });
+
 // Hàm merge duplicate items (tương tự thanhtoan.js)
 function mergeDuplicateItems(cart) {
     const merged = {};
