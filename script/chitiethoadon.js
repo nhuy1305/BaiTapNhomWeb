@@ -1,41 +1,56 @@
-
-document.addEventListener("DOMContentLoaded", () => {
-  const phone = localStorage.getItem("userPhone") || "Không có";
-  const email = localStorage.getItem("userEmail") || "Không có";
-  const address = localStorage.getItem("userAddress") || "Không có";
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  document.getElementById("cusPhone").textContent = phone;
-  document.getElementById("cusEmail").textContent = email;
-  document.getElementById("cusAddress").textContent = address;
-
-  const tbody = document.getElementById("orderItems");
-  const totalElement = document.getElementById("orderTotal");
-
-  if (!tbody || !totalElement) return;
-
-  if (cart.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4">Không có sản phẩm</td></tr>`;
-    totalElement.textContent = "0đ";
-    return;
-  }
-
-  tbody.innerHTML = cart
-    .map(
-      item => `
-      <tr>
-        <td style="display:flex;align-items:center;gap:10px;">
-          <img src="${item.image}" alt="${item.name}" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">
-          ${item.name}
-        </td>
-        <td>${item.quantity}</td>
-        <td>${item.price.toLocaleString()}đ</td>
-        <td>${(item.price * item.quantity).toLocaleString()}đ</td>
-      </tr>
-    `
-    )
-    .join("");
-
-  const total = parseFloat(localStorage.getItem("orderTotal")) || 0;
-  totalElement.textContent = `${total.toLocaleString()}đ`;
+document.addEventListener('DOMContentLoaded', () => {
+    // Lấy thông tin từ localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const orderPhone = localStorage.getItem('userPhone') || 'Chưa có thông tin';
+    const orderEmail = localStorage.getItem('userEmail') || 'Chưa có thông tin';
+    const orderAddress = localStorage.getItem('userAddress') || 'Chưa có thông tin';
+    // Merge duplicate items trước khi hiển thị
+    cart = mergeDuplicateItems(cart);
+    // Hiển thị thông tin khách hàng
+    document.getElementById('order-phone').textContent = orderPhone;
+    document.getElementById('order-email').textContent = orderEmail;
+    document.getElementById('order-address').textContent = orderAddress;
+    // Hiển thị danh sách sản phẩm
+    const orderItemList = document.getElementById('order-item-list');
+    cart.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><img src="${item.image || 'https://via.placeholder.com/50'}" alt="${item.name}"> ${item.name}</td>
+            <td>${item.quantity}</td>
+            <td>${item.price.toLocaleString()}đ</td>
+            <td>${(item.price * item.quantity).toLocaleString()}đ</td>
+        `;
+        orderItemList.appendChild(row);
+    });
+    // Tính tổng tiền
+    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
+    const shipping = 0; // Có thể thay bằng phí vận chuyển thực tế
+    document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
+    document.getElementById('total').textContent = (subtotal + shipping).toLocaleString() + 'đ';
+    // Thiết lập ngày đặt hàng
+    const orderDate = new Date().toLocaleString('vi-VN', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    });
+    document.getElementById('order-date').textContent = orderDate;
+    // Xóa giỏ hàng sau khi hiển thị
+    localStorage.removeItem('cart');
+    document.getElementById('cart-count').textContent = '0';
 });
+// Hàm merge duplicate items (tương tự thanhtoan.js)
+function mergeDuplicateItems(cart) {
+    const merged = {};
+    cart.forEach(item => {
+        if (merged[item.id]) {
+            merged[item.id].quantity += parseInt(item.quantity) || 1;
+        } else {
+            merged[item.id] = { ...item, quantity: parseInt(item.quantity) || 1 };
+        }
+    });
+    return Object.values(merged);
+}
