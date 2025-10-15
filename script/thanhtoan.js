@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const totalElem = document.getElementById("total");
   const placeOrderBtn = document.getElementById("placeOrder");
 
-  // Hàm gộp sản phẩm trùng
   function mergeDuplicateItems(cart) {
     const merged = {};
     cart.forEach(item => {
@@ -18,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return Object.values(merged);
   }
 
-  // Hiển thị giỏ hàng
   function renderCart() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart = mergeDuplicateItems(cart);
@@ -34,13 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
       subtotal += itemTotal;
 
       li.innerHTML = `
-        <div class="item-info">
-          <img src="${item.image || "https://via.placeholder.com/50"}" alt="${item.name}">
+        <div class="item-info" style="display:flex; align-items:center; gap:10px;">
+          <img src="${item.image || "https://via.placeholder.com/60"}" 
+               alt="${item.name}" 
+               style="width:60px;height:60px;object-fit:cover;border-radius:8px;">
           <span>${item.name}</span>
         </div>
-        <div class="item-price">
-          <span>${item.quantity} x ${item.price.toLocaleString()}đ</span>
-          <span>= ${(itemTotal).toLocaleString()}đ</span>
+        <div class="item-price" style="text-align:right;">
+          <span>${item.quantity} x ${item.price.toLocaleString()}đ</span><br>
+          <strong>${(itemTotal).toLocaleString()}đ</strong>
         </div>
       `;
       cartList.appendChild(li);
@@ -53,14 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
     shippingElem.textContent = shipping.toLocaleString() + "đ";
     totalElem.textContent = total.toLocaleString() + "đ";
 
-    // Lưu để dùng cho trang chi tiết hóa đơn
     localStorage.setItem("orderSubtotal", subtotal);
     localStorage.setItem("orderTotal", total);
   }
 
   renderCart();
 
-  // Sự kiện đặt hàng
   placeOrderBtn?.addEventListener("click", () => {
     const fullname = document.getElementById("fullname")?.value.trim();
     const phone = document.getElementById("name")?.value.trim();
@@ -82,16 +80,15 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("cart", JSON.stringify(cart));
 
     localStorage.setItem("userPhone", phone);
-    localStorage.setItem("userEmail", email || "Không có");
+    localStorage.setItem("userEmail", email || "Không có thông tin");
     localStorage.setItem("userAddress", address);
 
-    // Hiện thông báo (chỉ 1 lần / phiên)
     if (!sessionStorage.getItem("orderCreated")) {
       alert("Đơn hàng được tạo thành công!");
       sessionStorage.setItem("orderCreated", "true");
     }
 
-    // Chuyển sang trang chi tiết hóa đơn
     window.location.href = "chitiethoadon.html";
   });
 });
+
