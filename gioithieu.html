@@ -1,45 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>gioithieu</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="./css/main.css">
-  <style>
-    .content{
-      padding: 30px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
-    }
-    .content ul {
-      display: flex;
-      gap: 20px;
-      padding: 15px;
-      background-color: #c8e6c9;
-      list-style: none;
-      justify-content: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./css/main.css">
+    <title>gioithieu</title>
+    <style>
+        .vision-mission-content {
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .vision-section, .mission-section, .values-section {
+            margin-bottom: 40px;
+        }
+        
+        .vision-section h2, .mission-section h2, .values-section h2 {
+            color: #2e7d32;
+            border-bottom: 2px solid #4caf50;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .vision-icon, .mission-icon {
+            font-size: 50px;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .value-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .value-icon {
+            font-size: 40px;
+            color: #4caf50;
+            margin-bottom: 15px;
+        }
+        
+        .value-card h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
 
-    .content ul li a {
-      text-decoration: none;
-      color: #2e7d32;
-      font-weight: bold;
-    }
-
-    .content ul li a:hover {
-      color: #1b5e20;
-    }
-
-    #gioi-thieu {
+        li{
+            list-style: none;
+        }
+         #gioi-thieu {
       padding: 30px;
       max-width: 900px;
       margin: auto;
     }
 
-    #gioi-thieu h2 {
+    #gioi-thieu h1 {
       font-size: 28px;
       color: #2e7d32;
       border-bottom: 2px solid #c8e6c9;
@@ -70,7 +103,7 @@
       margin: auto;
     }
 
-    #su-menh h2 {
+    #su-menh h1 {
       font-size: 28px;
       color: #2e7d32;
       border-bottom: 2px solid #c8e6c9;
@@ -95,10 +128,8 @@
       border-left: 5px solid #66bb6a;
       border-radius: 4px;
     }
-
-  </style>
+    </style>
 </head>
-
 <body>
     <div class="top-bar">
         <div class="top-bar-content">
@@ -183,31 +214,45 @@
                 <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
             </ul>
         </div>
-  <main class="content">
-      <h1>Rau Sạch Online</h1>
-    <section id="gioi-thieu">
-      <h2>Giới Thiệu Về Rau Sạch Online</h2>
-      <p>Rau Sạch Online là dự án nhóm chuyên cung cấp các loại rau củ quả tươi ngon, an toàn và có nguồn gốc rõ ràng. Chúng tôi kết nối trực tiếp với các nông trại đạt chuẩn VietGAP và hữu cơ để mang đến sản phẩm chất lượng nhất cho người tiêu dùng.</p>
-      <ul>
-        <li>🌱 100% rau sạch, không thuốc trừ sâu</li>
-        <li>🚚 Giao hàng nhanh trong ngày tại TP.HCM</li>
-        <li>🧑‍🌾 Hỗ trợ nông dân địa phương, phát triển nông nghiệp bền vững</li>
-        <li>📦 Đóng gói thân thiện môi trường, dễ phân hủy</li>
-      <li>💬 Tư vấn dinh dưỡng miễn phí từ chuyên gia</li>
-      </ul>
-    </section>
-    <section id="su-menh">
-      <h2>Sứ Mệnh Của Chúng Tôi</h2>
-      <p>Chúng tôi tin rằng một bữa ăn ngon bắt đầu từ những nguyên liệu tươi sạch và an toàn. Sứ mệnh của Rau Sạch Online là mang đến cho khách hàng trải nghiệm mua sắm rau củ quả tiện lợi, nhanh chóng và đảm bảo chất lượng. Chúng tôi cam kết:</p>
-      <ul>
-        <li>🌿 Cung cấp sản phẩm đạt chuẩn an toàn thực phẩm</li>
-        <li>🤝 Xây dựng mối quan hệ bền vững với nông dân và khách hàng</li>
-        <li>🌍 Góp phần bảo vệ môi trường thông qua các hoạt động xanh</li>
-        <li>📚 Nâng cao nhận thức cộng đồng về dinh dưỡng và lối sống lành mạnh</li>
-      </ul>
-    </section>
-  </main>
-  <footer>
+    </div>
+     <div class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html">TRANG CHỦ</a> >
+                <a href="gioithieu.html">GIỚI THIỆU</a>
+            </div>
+
+            <div class="vision-mission-content">
+                <div class="vision-section">
+                    <div class="vision-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div id="gioi-thieu">
+                        <h1>Giới Thiệu Về Rau Sạch Online</h1>
+                        <p>Chúng tôi tin rằng một bữa ăn ngon bắt đầu từ những nguyên liệu tươi sạch và an toàn. Sứ mệnh của Rau Sạch Online là mang đến cho khách hàng trải nghiệm mua sắm rau củ quả tiện lợi, nhanh chóng và đảm bảo chất lượng. Chúng tôi cam kết:</p>
+                        <ul>
+                            <li>🌿 Cung cấp sản phẩm đạt chuẩn an toàn thực phẩm</li>
+                            <li>🤝 Xây dựng mối quan hệ bền vững với nông dân và khách hàng</li>
+                            <li>🌍 Góp phần bảo vệ môi trường thông qua các hoạt động xanh</li>
+                            <li>📚 Nâng cao nhận thức cộng đồng về dinh dưỡng và lối sống lành mạnh</li>
+                        </ul>
+                    </div>
+                
+                <div class="mission-section">
+                    <div class="mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <div id="su-menh">
+                        <h1>Sứ Mệnh Của Chúng Tôi</h1>
+                        <p>Chúng tôi tin rằng một bữa ăn ngon bắt đầu từ những nguyên liệu tươi sạch và an toàn. Sứ mệnh của Rau Sạch Online là mang đến cho khách hàng trải nghiệm mua sắm rau củ quả tiện lợi, nhanh chóng và đảm bảo chất lượng. Chúng tôi cam kết:</p>
+                        <ul>
+                            <li>🌿 Cung cấp sản phẩm đạt chuẩn an toàn thực phẩm</li>
+                            <li>🤝 Xây dựng mối quan hệ bền vững với nông dân và khách hàng</li>
+                            <li>🌍 Góp phần bảo vệ môi trường thông qua các hoạt động xanh</li>
+                            <li>📚 Nâng cao nhận thức cộng đồng về dinh dưỡng và lối sống lành mạnh</li>
+                        </ul>
+                    </div>
+                </div>
+    <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>CÔNG TY RAU SẠCH ONLINE</h3>
@@ -280,5 +325,6 @@
         </div>
     </div>
   </div>
+                
 </body>
 </html>
