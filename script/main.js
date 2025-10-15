@@ -1,5 +1,4 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
 const cartIcon = document.getElementById("cart-icon");
 const cartModal = document.getElementById("cart-modal");
 const cartItems = document.getElementById("cart-items");
@@ -18,19 +17,28 @@ function displayCart() {
   if (!cartItems || !cartTotalPrice) return;
   cartItems.innerHTML = "";
   let total = 0;
-
   if (cart.length === 0) {
     cartItems.innerHTML = "<p>Giỏ hàng của bạn đang trống</p>";
     cartTotalPrice.textContent = "0đ";
     return;
   }
-
-  cart.forEach((item, index) => {
+  // Gộp sản phẩm trùng id
+  const uniqueCart = [];
+  const seenIds = new Set();
+  cart.forEach(item => {
+    if (!seenIds.has(item.id)) {
+      seenIds.add(item.id);
+      uniqueCart.push(item);
+    } else {
+      const existing = uniqueCart.find(i => i.id === item.id);
+      if (existing) existing.quantity += item.quantity || 1;
+    }
+  });
+  uniqueCart.forEach((item, index) => {
     const priceNum = Number(item.price) || 0;
     const qty = Number(item.quantity) || 0;
     const itemTotal = priceNum * qty;
     total += itemTotal;
-
     const cartItem = document.createElement("div");
     cartItem.className = "cart-item";
     cartItem.innerHTML = `
@@ -53,9 +61,7 @@ function displayCart() {
     `;
     cartItems.appendChild(cartItem);
   });
-
   cartTotalPrice.textContent = formatPrice(total);
-
   document.querySelectorAll(".decrease").forEach(btn =>
     btn.addEventListener("click", () => decreaseQuantity(parseInt(btn.dataset.index)))
   );
@@ -78,10 +84,8 @@ function formatPrice(price) {
 
 function parsePrice(priceText) {
   if (!priceText) return 0;
-
   const m = String(priceText).match(/(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d+)?)/);
   let candidate = m ? m[0] : (String(priceText).match(/\d+/) || [""])[0];
-
   candidate = candidate.replace(/[^\d]/g, "");
   return candidate ? parseInt(candidate, 10) : 0;
 }
@@ -91,7 +95,7 @@ function addToCart(productId, name, price, image) {
   const priceNum = Number(price) || 0;
   const existingItem = cart.find(item => String(item.id) === id);
   if (existingItem) {
-    existingItem.quantity = (Number(existingItem.quantity) || 0) + 1;
+    existingItem.quantity = (Number(existingItem.quantity) || 0) + 1; // Tăng quantity nếu trùng
   } else {
     cart.push({ id, name, price: priceNum, image, quantity: 1 });
   }
@@ -103,16 +107,18 @@ function addToCart(productId, name, price, image) {
 function decreaseQuantity(index) {
   if (!cart[index]) return;
   if (cart[index].quantity > 1) {
-    cart[index].quantity = Number(cart[index].quantity) - 1;
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartCount();
-    displayCart();
+    cart[index].quantity -= 1;
+  } else {
+    cart.splice(index, 1); // Xóa nếu quantity = 1
   }
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  displayCart();
 }
 
 function increaseQuantity(index) {
   if (!cart[index]) return;
-  cart[index].quantity = Number(cart[index].quantity) + 1;
+  cart[index].quantity += 1;
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
   displayCart();
@@ -140,30 +146,25 @@ function removeFromCart(index) {
 document.addEventListener("DOMContentLoaded", function () {
   updateCartCount();
   displayCart();
-
   cartIcon?.addEventListener("click", () => (cartModal.style.display = "flex"));
   closeModal?.addEventListener("click", () => (cartModal.style.display = "none"));
   continueShopping?.addEventListener("click", () => (cartModal.style.display = "none"));
   window.addEventListener("click", (e) => {
     if (e.target === cartModal) cartModal.style.display = "none";
   });
-
-checkoutBtn?.addEventListener("click", () => {
+  checkoutBtn?.addEventListener("click", () => {
     if (cart.length === 0) {
-        alert("Giỏ hàng của bạn đang trống!");
+      alert("Giỏ hàng của bạn đang trống!");
     } else {
-        // Lưu giỏ hàng vào localStorage và chuyển hướng
-        localStorage.setItem("cart", JSON.stringify(cart));
-        window.location.href = "thanhtoan.html";
+      localStorage.setItem("cart", JSON.stringify(cart));
+      window.location.href = "thanhtoan.html";
     }
-});
+  });
 
   const productCards = document.querySelectorAll(".product-card");
   productCards.forEach((card) => {
     const productId = card.getAttribute("data-id");
     const productName = card.querySelector(".product-name")?.textContent?.trim() || "Sản phẩm";
-
-
     const priceElement = card.querySelector(".product-price");
     let productPriceText = "0";
     if (priceElement) {
@@ -172,25 +173,19 @@ checkoutBtn?.addEventListener("click", () => {
       );
       productPriceText = firstTextNode ? firstTextNode.textContent.trim() : priceElement.textContent.trim();
     }
-
     const productPrice = parsePrice(productPriceText);
     const productImage = card.querySelector("img")?.src || "";
-
-    console.log("PRODUCT", productName, "raw:", productPriceText, "parsed:", productPrice);
-
     card.addEventListener("click", (e) => {
       if (!e.target.closest(".add-to-cart")) {
         window.location.href = `chitietsanpham.html?id=${encodeURIComponent(productId)}&name=${encodeURIComponent(productName)}&price=${productPrice}&image=${encodeURIComponent(productImage)}`;
       }
     });
-
     let productInfo = card.querySelector(".product-info");
     if (!productInfo) {
       productInfo = document.createElement("div");
       productInfo.className = "product-info";
       card.appendChild(productInfo);
     }
-
     if (!card.querySelector(".add-to-cart")) {
       const addToCartBtn = document.createElement("button");
       addToCartBtn.className = "add-to-cart btn btn-primary";
@@ -203,7 +198,6 @@ checkoutBtn?.addEventListener("click", () => {
       productInfo.appendChild(addToCartBtn);
     }
   });
-
 
   const searchInput = document.querySelector(".search-bar input");
   searchInput?.addEventListener("input", function () {
