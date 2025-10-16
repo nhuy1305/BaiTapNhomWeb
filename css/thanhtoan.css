@@ -171,6 +171,12 @@ nav {
   gap: 5px;
 }
 
+#address::placeholder {
+    color: #999;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
 .required {
   color: var(--error-color);
   font-size: 14px;
