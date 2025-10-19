@@ -684,7 +684,7 @@
         .add-to-cart:hover {
         transform: none !important;
         }
-        .content ul {
+        section ul {
         display: flex;
         gap: 20px;
         padding: 15px;
@@ -693,13 +693,13 @@
         justify-content: center;
         }
 
-        .content ul li a {
+        section ul li a {
         text-decoration: none;
         color: #2e7d32;
         font-weight: bold;
         }
 
-        .content ul li a:hover {
+        section ul li a:hover {
         color: #1b5e20;
         }
 
