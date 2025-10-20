@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết sản phẩm - Rau Sạch Online</title>
+    <title>Chi tiết đơn hàng - Rau Sạch Online</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="./css/chitietsanpham.css">
+    <link rel="stylesheet" href="./css/chitiethoadon.css">
 </head>
-
 <body>
     <div class="top-bar">
         <div class="top-bar-content">
@@ -28,6 +26,10 @@
             <div class="logo">
                 <i class="fas fa-leaf"></i>
                 Rau Sạch Online
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+                <button><i class="fas fa-search"></i></button>
             </div>
             <div class="cart-icon" id="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
@@ -59,7 +61,6 @@
                 <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
                 <li><a href="tintuc.html">TIN TỨC</a></li>
                 <li><a href="lienhe.html">LIÊN HỆ</a></li>
-
                 <li>
                     <a href="#">VỀ CHÚNG TÔI <i class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown">
@@ -73,39 +74,41 @@
 
     <div class="container">
         <div class="breadcrumb">
-            <a href="index.html">TRANG CHỦ</a> >
-            <a href="raucuqua.html">TẤT CẢ SẢN PHẨM</a> >
-            <span id="product-name-breadcrumb"></span>
+            <a href="index.html">TRANG CHỦ</a> > <span>Chi tiết đơn hàng</span>
         </div>
-
-        <div class="product-detail">
-            <div class="product-detail-image">
-                <img id="product-image" src="" alt="Product Image" />
+        <div class="order-detail-container">
+            <h1>Chi tiết đơn hàng</h1>
+            <div class="order-info">
+                <h2>Thông tin khách hàng</h2>
+                <p><strong>Số điện thoại:</strong> <span id="order-phone"></span></p>
+                <p><strong>Email:</strong> <span id="order-email"></span></p>
+                <p><strong>Địa chỉ:</strong> <span id="order-address"></span></p>
             </div>
-            <div class="product-detail-info">
-                <h1 id="product-name" class="product-detail-name"></h1>
-                <div id="product-price" class="product-detail-price"></div>
-                <p id="product-description" class="product-detail-description">
-                    Sản phẩm chất lượng cao, trồng tại vườn nhà. An toàn cho sức khỏe tuyệt đối, không sử dụng hóa chất.
-                    Thu hoạch khi đã đủ độ chín và kích thước phù hợp.
-                </p>
-
-                <div class="quantity-selector">
-                    <div class="quantity-label">Số lượng:</div>
-                    <button class="quantity-btn" id="decrease-quantity">-</button>
-                    <input type="number" class="quantity-input" id="product-quantity" value="1" min="1">
-                    <button class="quantity-btn" id="increase-quantity">+</button>
-                </div>
-
-                <div class="product-actions">
-                    <button class="btn btn-primary" id="add-to-cart">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
-                    </button>
-                    <button class="btn btn-secondary" id="buy-now">
-                        <i class="fas fa-bolt"></i> Mua ngay
-                    </button>
-                </div>
+            <div class="order-items">
+                <h2>Sản phẩm đã mua</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+                            <th>Tổng</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-item-list"></tbody>
+                </table>
             </div>
+            <div class="order-summary">
+                <p><strong>Tạm tính:</strong> <span id="subtotal">0đ</span></p>
+                <p><strong>Phí vận chuyển:</strong> <span id="shipping">0đ</span></p>
+                <p><strong>Tổng cộng:</strong> <span id="total">0đ</span></p>
+            </div>
+            <div class="order-status">
+                <h2>Trạng thái đơn hàng</h2>
+                <p><strong>Trạng thái:</strong> <span id="order-status">Đang xử lý</span></p>
+                <p><strong>Ngày đặt hàng:</strong> <span id="order-date"></span></p>
+            </div>
+            <a href="index.html" class="btn btn-primary">Quay lại trang chủ</a>
         </div>
     </div>
 
@@ -130,17 +133,17 @@
             <div class="footer-section">
                 <h3>DANH MỤC SẢN PHẨM</h3>
                 <ul>
-                    <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
-                    <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
-                    <li><a href="giavi.html">Rau gia vị </a></li>
-                    <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
-                    <li><a href="rausach.html">Rau sạch an toàn – giá hợp lý</a></li>
-                    <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
-                    <li><a href="hoaquathuong.html">Hoa quả thường – siêu tiết kiệm</a></li>
-                    <li><a href="sanphamgiamgia.html">Sản phẩm giảm giá cực hot</a></li>
-                    <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
-                    <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
-                </ul>
+                <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
+                <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
+                <li><a href="giavi.html">Rau gia vị </a></li>
+                <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
+                <li><a href="rausach.html">Rau sạch an toàn – giá hợp lý</a></li>
+                <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
+                <li><a href="hoaquathuong.html">Hoa quả thường – siêu tiết kiệm</a></li>
+                <li><a href="sanphamgiamgia.html">Sản phẩm giảm giá cực hot</a></li>
+                <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
+                <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
+            </ul>
             </div>
 
             <div class="footer-section">
@@ -164,14 +167,11 @@
         <div class="copyright">2025 Rau Sạch Online</div>
     </footer>
 
-
     <div class="modal" id="cart-modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2>Giỏ hàng của bạn</h2>
-            <div id="cart-items">
-
-            </div>
+            <div id="cart-items"></div>
             <div class="cart-total">
                 <span>Tổng cộng:</span>
                 <span id="cart-total-price">0đ</span>
@@ -183,8 +183,6 @@
         </div>
     </div>
 
-    <script src="./script/chitietsanpham.js"></script>
-
+    <script src="./script/chitiethoadon.js"></script>
 </body>
-
 </html>

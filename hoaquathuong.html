@@ -2,11 +2,11 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bán rau online</title>
+    <title>Hoa Quả Thường - Rau Sạch Online</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="./css/sanphamnoibat.css">
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 
 <body>
@@ -17,8 +17,8 @@
                 <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
             </div>
             <div class="auth-links">
-                <a href="dangnhap.html"><i class="fas fa-user"></i> Đăng nhập</a>
-                <a href="dangky.html"><i class="fas fa-user-plus"></i> Đăng ký</a>
+                <a href="dangnhap.html"><i class="fas fa-user"></i>Đăng nhập</a>
+                <a href="dangky.html"><i class="fas fa-user-plus"></i>Đăng ký</a>
             </div>
         </div>
     </div>
@@ -55,11 +55,12 @@
                 <li>
                     <a href="#">SẢN PHẨM <i class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown">
-                        <li><a href="index.html">Tất cả sản phẩm</a></li>
-                        <li><a href="#sanphamnoibat">Sản phẩm nổi bật</a></li>
+                        <li><a href="#tatcasanpham">Tất cả sản phẩm</a></li>
+                        <li><a href="sanphamnoibat.html">Sản phẩm nổi bật</a></li>
                         <li><a href="sanphammoi.html">Sản phẩm mới</a></li>
                     </ul>
                 </li>
+
                 <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
                 <li><a href="tintuc.html">TIN TỨC</a></li>
                 <li><a href="lienhe.html">LIÊN HỆ</a></li>
@@ -79,7 +80,7 @@
     <div class="container">
         <div class="sidebar">
             <h3>DANH MỤC</h3>
-           <ul class="category-list">
+            <ul class="category-list">
                 <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
                 <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
                 <li><a href="giavi.html">Rau gia vị </a></li>
@@ -95,15 +96,15 @@
 
         <div class="main-content">
             <div class="breadcrumb">
-                <a href="index.html">Trang chủ</a> > <a href="#">Sản phẩm</a> >
-                <span>Sản phẩm nổi bật</span>
+                <a href="index.html">TRANG CHỦ</a> >
+                <a href="hoaquathuong.html">HOA QUẢ THƯỜNG</a>
             </div>
 
-            <h1 class="page-title">SẢN PHẨM NỔI BẬT</h1>
+            <h1 class="page-title">HOA QUẢ THƯỜNG - SIÊU TIẾT KIỆM</h1>
 
-            <div class="sort-options" id="sanphamnoibat">
+            <div class="sort-options" id="tatcasanpham">
                 <div>
-                    Hiển thị tất cả sản phẩm
+                    Hiển thị tất cả hoa quả thường
                 </div>
                 <div>
                     <label for="sort">Sắp xếp: </label>
@@ -116,170 +117,232 @@
             </div>
 
             <div class="product-grid" id="product-grid">
-                <div class="product-card" data-id="1">
+                <div class="product-card" data-id="101">
                     <div class="product-image">
-                        <img src="./img/tuyetlienhoa.jpg" alt="Tuyết liên hoa" />
+                        <img src="./img/chuoi.jpg" alt="Chuối tiêu" />
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Tuyết liên hoa</div>
+                        <div class="product-name">Chuối tiêu - 1 nải</div>
                         <div class="product-price">
-                            300,000,000đ
-                            <span class="product-original-price">6,000,000đ</span>
-                            <span class="product-badge">Giảm 50%</span>
+                            25,000 đ
+                            <span class="product-original-price">35,000đ</span>
+                            <span class="product-badge">Giảm 29%</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card" data-id="2">
+                <div class="product-card" data-id="102">
                     <div class="product-image">
-                        <img src="./img/carot.jpg" alt="Cà rốt" />
+                        <img src="./img/cam.jpg" alt="Cam sành" />
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Cà rốt - 1 kg</div>
-                        <div class="product-price">
-                            60,000đ
-                            <span class="product-original-price">120,000đ</span>
-                            <span class="product-badge">Giảm 50%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-id="3">
-                    <div class="product-image">
-                        <img src="./img/khoaitay.jpg" alt="Khoai tây" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Khoai tây thái</div>
-                        <div class="product-price">
-                            108,000đ
-                            <span class="product-original-price">120,000đ</span>
-                            <span class="product-badge">Giảm 10%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-id="4">
-                    <div class="product-image">
-                        <img src="./img/khoailang.jpg" alt="Khoai lang" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Khoai lang nhật</div>
-                        <div class="product-price">
-                            10,000đ
-                            <span class="product-original-price">20,000đ</span>
-                            <span class="product-badge">Giảm 50%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-id="5">
-                    <div class="product-image">
-                        <img src="./img/namrom.jpg" alt="Nấm rơm" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Nấm rơm - 1kg</div>
-                        <div class="product-price">
-                            90,000đ
-                            <span class="product-original-price">100,000đ</span>
-                            <span class="product-badge">Giảm 10%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-id="6">
-                    <div class="product-image">
-                        <img src="./img/bongcai.jpg" alt="Bông cải" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Bông cải - 1 kg</div>
-                        <div class="product-price">
-                            45,000đ
-                            <span class="product-original-price">60,000đ</span>
-                            <span class="product-badge">Giảm 25%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-id="7">
-                    <div class="product-image">
-                        <img src="./img/mangtre.jpg" alt="Măng tre" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Măng tre</div>
+                        <div class="product-name">Cam sành - 1kg</div>
                         <div class="product-price">
                             30,000đ
+                            <span class="product-original-price">45,000đ</span>
+                            <span class="product-badge">Giảm 33%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="103">
+                    <div class="product-image">
+                        <img src="./img/xoai.jpg" alt="Xoài cát" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Xoài cát - 1kg</div>
+                        <div class="product-price">
+                            40,000đ
                             <span class="product-original-price">60,000đ</span>
-                            <span class="product-badge">Giảm 50%</span>
+                            <span class="product-badge">Giảm 33%</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card" data-id="8">
+                <div class="product-card" data-id="104">
                     <div class="product-image">
-                        <img src="./img/caibe.jpg" alt="Cải bẹ" />
+                        <img src="./img/man.jpg" alt="Mận hậu" />
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Cải bẹ - 1 bó</div>
+                        <div class="product-name">Mận hậu - 1kg</div>
                         <div class="product-price">
-                            45,000đ
+                            35,000đ
                             <span class="product-original-price">50,000đ</span>
-                            <span class="product-badge">Giảm 10%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-id="9">
-                    <div class="product-image">
-                        <img src="./img/cucaitrang.jpg" alt="Củ cải trắng" />
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Củ cải trắng - theo kg</div>
-                        <div class="product-price">
-                            45,500đ
-                            <span class="product-original-price">65,000đ</span>
                             <span class="product-badge">Giảm 30%</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card" data-id="10">
+                <div class="product-card" data-id="105">
                     <div class="product-image">
-                        <img src="./img/caixoan.jpg" alt="Cải xoăn" />
+                        <img src="./img/dudu.jpg" alt="Đu đủ" />
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Cải xoăn - 1 bó</div>
+                        <div class="product-name">Đu đủ - 1 quả</div>
                         <div class="product-price">
-                            49,000đ
-                            <span class="product-original-price">70,000đ</span>
-                            <span class="product-badge">Giảm 30%</span>
+                            15,000đ
+                            <span class="product-original-price">25,000đ</span>
+                            <span class="product-badge">Giảm 40%</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card" data-id="11">
+                <div class="product-card" data-id="106">
                     <div class="product-image">
-                        <img src="./img/cachua.jpg" alt="Cà chua" />
+                        <img src="./img/oi.jpg" alt="Ổi" />
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Cà chua - 1 kg</div>
+                        <div class="product-name">Ổi - 1kg</div>
                         <div class="product-price">
                             20,000đ
-                            <span class="product-original-price">40,000đ</span>
-                            <span class="product-badge">Giảm 50%</span>
+                            <span class="product-original-price">30,000đ</span>
+                            <span class="product-badge">Giảm 33%</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card" data-id="12">
+                <div class="product-card" data-id="107">
                     <div class="product-image">
-                        <img src="./img/nhadam.jpg" alt="Nha đam" />
+                        <img src="./img/buoi.jpg" alt="Bưởi" />
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Nha đam - 1kg</div>
+                        <div class="product-name">Bưởi da xanh - 1 quả</div>
                         <div class="product-price">
-                            72,000đ
+                            45,000đ
+                            <span class="product-original-price">65,000đ</span>
+                            <span class="product-badge">Giảm 31%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="108">
+                    <div class="product-image">
+                        <img src="./img/thanhlong.jpg" alt="Thanh long" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Thanh long - 1kg</div>
+                        <div class="product-price">
+                            25,000đ
+                            <span class="product-original-price">40,000đ</span>
+                            <span class="product-badge">Giảm 38%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="109">
+                    <div class="product-image">
+                        <img src="./img/mit.jpg" alt="Mít" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Mít thái - 1kg</div>
+                        <div class="product-price">
+                            50,000đ
+                            <span class="product-original-price">75,000đ</span>
+                            <span class="product-badge">Giảm 33%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="110">
+                    <div class="product-image">
+                        <img src="./img/dautay.jpg" alt="Dâu tây" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Dâu tây - 1 hộp</div>
+                        <div class="product-price">
+                            60,000đ
+                            <span class="product-original-price">90,000đ</span>
+                            <span class="product-badge">Giảm 33%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="111">
+                    <div class="product-image">
+                        <img src="./img/le.jpg" alt="Lê" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Lê - 1kg</div>
+                        <div class="product-price">
+                            55,000đ
                             <span class="product-original-price">80,000đ</span>
-                            <span class="product-badge">Giảm 10%</span>
+                            <span class="product-badge">Giảm 31%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="112">
+                    <div class="product-image">
+                        <img src="./img/tao.jpg" alt="Táo" />
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Táo - 1kg</div>
+                        <div class="product-price">
+                            48,000đ
+                            <span class="product-original-price">70,000đ</span>
+                            <span class="product-badge">Giảm 31%</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="featured-section">
+                <h2 class="section-title">COMBO HOA QUẢ TIẾT KIỆM</h2>
+                <div class="product-grid" id="featured-products">
+                    <div class="product-card" data-id="113">
+                        <div class="product-image">
+                            <img src="./img/traicay1.jpg" alt="Combo hoa quả gia đình" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Combo gia đình</div>
+                            <div class="product-price">
+                                150,000đ
+                                <span class="product-original-price">250,000đ</span>
+                                <span class="product-badge">Giảm 40%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="114">
+                        <div class="product-image">
+                            <img src="./img/traicay2.png" alt="Combo trái cây mix" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Combo trái cây mix</div>
+                            <div class="product-price">
+                                120,000đ
+                                <span class="product-original-price">180,000đ</span>
+                                <span class="product-badge">Giảm 33%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="115">
+                        <div class="product-image">
+                            <img src="./img/traicay3.jpg" alt="Combo hoa quả vườn" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Combo hoa quả vườn</div>
+                            <div class="product-price">
+                                200,000đ
+                                <span class="product-original-price">320,000đ</span>
+                                <span class="product-badge">Giảm 38%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="116">
+                        <div class="product-image">
+                            <img src="./img/traicay4.png" alt="Combo trái cây nhiệt đới" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Combo nhiệt đới</div>
+                            <div class="product-price">
+                                180,000đ
+                                <span class="product-original-price">280,000đ</span>
+                                <span class="product-badge">Giảm 36%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -307,7 +370,7 @@
 
             <div class="footer-section">
                 <h3>DANH MỤC SẢN PHẨM</h3>
-                <ul>
+               <ul>
                 <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
                 <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
                 <li><a href="giavi.html">Rau gia vị </a></li>
@@ -347,7 +410,6 @@
             <span class="close-modal">&times;</span>
             <h2>Giỏ hàng của bạn</h2>
             <div id="cart-items">
-
             </div>
             <div class="cart-total">
                 <span>Tổng cộng:</span>
@@ -360,8 +422,7 @@
         </div>
     </div>
 
-
-    <script src="./script/sanphamnoibat.js"></script>
+    <script src="./script/main.js"></script>
 </body>
 
 </html>
