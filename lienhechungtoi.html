@@ -4,28 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Liên Hệ Chung Toi - Rau Sạch Online</title>
+    <title>Liên Hệ - Rau Sạch Online</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="./css/main.css">
     <style>
+        .page-header {
+            padding: 3rem 2rem;
+            text-align: center;
+            color: rgb(0, 0, 0);
+            margin-bottom: 3rem;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
         .contact-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
         }
 
         .contact-info-section {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 10px;
-            border-left: 4px solid #4CAF50;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e8f5e8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
         }
 
         .contact-info-section h2 {
             color: #2c5530;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .contact-info-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 2px;
         }
 
         .contact-details {
@@ -37,55 +91,103 @@
         .contact-item {
             display: flex;
             align-items: flex-start;
-            gap: 1rem;
-            padding: 1rem;
+            gap: 1.5rem;
+            padding: 1.5rem;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
         }
 
         .contact-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.15);
+            border-color: #4CAF50;
         }
 
-        .contact-item i {
-            color: #4CAF50;
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
             font-size: 1.2rem;
-            margin-top: 0.2rem;
-            min-width: 20px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
         }
 
-        .contact-item strong {
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+
+        .contact-text strong {
             color: #2c5530;
             display: block;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
-        .contact-item p {
+        .contact-text p {
             color: #555;
             margin: 0;
-            line-height: 1.4;
+            line-height: 1.6;
+            font-size: 1rem;
         }
 
         .contact-form-section {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 10px;
-            border-left: 4px solid #2196F3;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e8f5e8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
         }
 
         .contact-form-section h2 {
             color: #1565C0;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .contact-form-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            border-radius: 2px;
         }
 
         .contact-form {
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
+            gap: 1.5rem;
         }
 
         .form-group {
@@ -96,19 +198,33 @@
         .form-group label {
             font-weight: 600;
             color: #333;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group label::after {
+            content: '*';
+            color: #e53935;
+            font-weight: bold;
+        }
+
+        .form-group label.optional::after {
+            content: '';
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
-            padding: 0.8rem 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            border: 2px solid #e8f5e8;
+            border-radius: 12px;
             font-size: 1rem;
             transition: all 0.3s ease;
             background: white;
+            font-family: inherit;
         }
 
         .form-group input:focus,
@@ -118,61 +234,210 @@
             border-color: #4CAF50;
             box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
             background: #f8fff8;
+            transform: translateY(-2px);
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
-            font-family: inherit;
+            min-height: 140px;
+            line-height: 1.5;
         }
 
-        .btn-primary {
+        .btn-submit {
             background: linear-gradient(135deg, #4CAF50, #45a049);
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 8px;
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 0.5rem;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-primary:hover {
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-submit:hover {
             background: linear-gradient(135deg, #45a049, #4CAF50);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-submit:hover::before {
+            left: 100%;
+        }
+
+        .btn-submit:active {
+            transform: translateY(-1px);
         }
 
         .map-section {
             grid-column: 1 / -1;
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 10px;
-            margin-top: 1rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-top: 2rem;
+            border: 1px solid #e8f5e8;
         }
 
         .map-section h2 {
             color: #2c5530;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .map-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 2px;
         }
 
         .map-container {
-            border-radius: 8px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 3px solid white;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e8f5e8;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.15);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            color: #2c5530;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
             .contact-content {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .contact-info-section,
+            .contact-form-section {
+                padding: 2rem;
+            }
+        }
 
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 2rem 1rem;
+            }
+            
+            .contact-content {
+                padding: 0 1rem;
+            }
+            
             .contact-item {
-                padding: 0.8rem;
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            .contact-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .contact-info-section,
+            .contact-form-section {
+                padding: 1.5rem;
+            }
+            
+            .btn-submit {
+                padding: 1rem 2rem;
+                font-size: 1rem;
             }
         }
     </style>
@@ -229,11 +494,9 @@
                         <li><a href="sanphammoi.html">Sản phẩm mới</a></li>
                     </ul>
                 </li>
-
                 <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
                 <li><a href="tintuc.html">TIN TỨC</a></li>
                 <li><a href="lienhe.html">LIÊN HỆ</a></li>
-
                 <li>
                     <a href="#">VỀ CHÚNG TÔI <i class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown">
@@ -241,117 +504,133 @@
                         <li><a href="lichsuhinhthanh.html">Lịch sử hình thành</a></li>
                     </ul>
                 </li>
-
             </ul>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="sidebar">
-            <h3>DANH MỤC</h3>
-            <ul class="category-list">
-                <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
-                <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
-                <li><a href="giavi.html">Rau gia vị </a></li>
-                <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
-                <li><a href="rausach.html">Rau sạch an toàn – giá hợp lý</a></li>
-                <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
-                <li><a href="hoaquathuong.html">Hoa quả thường – siêu tiết kiệm</a></li>
-                <li><a href="sanphamgiamgia.html">Sản phẩm giảm giá cực hot</a></li>
-                <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
-                <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
-            </ul>
+    <div class="page-header">
+        <h1 class="page-title">LIÊN HỆ VỚI CHÚNG TÔI</h1>
+        <p class="page-subtitle">Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn mọi lúc, mọi nơi</p>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-shipping-fast"></i>
+            </div>
+            <h3>Giao Hàng Nhanh</h3>
+            <p>Giao hàng tận nơi trong vòng 2 giờ với đơn hàng trong nội thành</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-seedling"></i>
+            </div>
+            <h3>Rau Sạch 100%</h3>
+            <p>Cam kết rau củ quả sạch, an toàn, có nguồn gốc rõ ràng</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <h3>Hỗ Trợ 24/7</h3>
+            <p>Đội ngũ tư vấn viên luôn sẵn sàng hỗ trợ bạn mọi lúc</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-undo-alt"></i>
+            </div>
+            <h3>Đổi Trả Dễ Dàng</h3>
+            <p>Chính sách đổi trả linh hoạt trong vòng 24 giờ</p>
+        </div>
+    </div>
+
+    <div class="contact-content">
+        <div class="contact-info-section">
+            <h2>THÔNG TIN LIÊN HỆ</h2>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <strong>Địa chỉ cửa hàng</strong>
+                        <p>154A Hà Huy Giáp, Phường An Phú Đông, Quận 12, TP. Hồ Chí Minh</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-text">
+                        <strong>Điện thoại</strong>
+                        <p>0393 058 500</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <strong>Email</strong>
+                        <p>Nhuy5201314@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        <strong>Giờ làm việc</strong>
+                        <p>Thứ 2 - Thứ 7: 6:30 - 17:00<br>Chủ nhật: 7:00 - 12:00</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="main-content">
-            <div class="breadcrumb">
-                <a href="index.html">TRANG CHỦ</a>
-                <a href="lienhechungtoi.html">LIÊN HỆ CHÚNG TÔI</a>
-            </div>
-
-            <h1 class="page-title">LIÊN HỆ VỚI CHÚNG TÔI</h1>
-
-            <div class="contact-content">
-                <div class="contact-info-section">
-                    <h2>THÔNG TIN LIÊN HỆ</h2>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <strong>Địa chỉ:</strong>
-                                <p>154A Hà Huy Giáp, Phường An Phú Đông, Quận 12, TP. Hồ Chí Minh</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <strong>Điện thoại:</strong>
-                                <p>0393 058 500</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <strong>Email:</strong>
-                                <p>Nhuy5201314@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <strong>Giờ làm việc:</strong>
-                                <p>Thứ 2 - Thứ 7: 6:30 - 17:00<br>Chủ nhật: 7:00 - 12:00</p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="contact-form-section">
+            <h2>GỬI TIN NHẮN CHO CHÚNG TÔI</h2>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Họ và tên</label>
+                    <input type="text" id="name" name="name" required placeholder="Nhập họ và tên của bạn">
                 </div>
-
-                <div class="contact-form-section">
-                    <h2>GỬI TIN NHẮN CHO CHÚNG TÔI</h2>
-                    <form class="contact-form" id="contactForm" action="guithanhcong.html" method="GET">
-                        <div class="form-group">
-                            <label for="name">Họ và tên *</label>
-                            <input type="text" id="name" name="name" required placeholder="Nhập họ và tên của bạn">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Số điện thoại *</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="Nhập số điện thoại">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Nhập email của bạn">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Chủ đề</label>
-                            <select id="subject" name="subject">
-                                <option value="">Chọn chủ đề</option>
-                                <option value="order">Đặt hàng</option>
-                                <option value="support">Hỗ trợ khách hàng</option>
-                                <option value="feedback">Góp ý</option>
-                                <option value="cooperation">Hợp tác</option>
-                                <option value="other">Khác</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Nội dung *</label>
-                            <textarea id="message" name="message" rows="5" required
-                                placeholder="Nhập nội dung tin nhắn của bạn..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i> GỬI TIN NHẮN
-                        </button>
-                    </form>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Nhập số điện thoại">
                 </div>
-
-                <div class="map-section">
-                    <h2>BẢN ĐỒ</h2>
-                    <div class="map-container">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.484731690625!2d106.769336!3d10.855576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175270ad28a38d1%3A0x8d0a8c5b0e5e3f0!2zMTU0QSBIw6AgSHV5IEdpw6FwLCBBbiBQaMO6IMSQw7RuZywgUXXhuq1uIDEyLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1620000000000!5m2!1svi!2s"
-                            width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy">
-                        </iframe>
-                    </div>
+                <div class="form-group">
+                    <label for="email" class="optional">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Nhập email của bạn">
                 </div>
+                <div class="form-group">
+                    <label for="subject" class="optional">Chủ đề</label>
+                    <select id="subject" name="subject">
+                        <option value="">Chọn chủ đề</option>
+                        <option value="order">Đặt hàng</option>
+                        <option value="support">Hỗ trợ khách hàng</option>
+                        <option value="feedback">Góp ý</option>
+                        <option value="cooperation">Hợp tác</option>
+                        <option value="other">Khác</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Nội dung tin nhắn</label>
+                    <textarea id="message" name="message" rows="5" required
+                        placeholder="Nhập nội dung tin nhắn của bạn..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> GỬI TIN NHẮN
+                </button>
+            </form>
+        </div>
+
+        <div class="map-section">
+            <h2>BẢN ĐỒ</h2>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.484731690625!2d106.769336!3d10.855576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175270ad28a38d1%3A0x8d0a8c5b0e5e3f0!2zMTU0QSBIw6AgSHV5IEdpw6FwLCBBbiBQaMO6IMSQw7RuZywgUXXhuq1uIDEyLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1620000000000!5m2!1svi!2s"
+                    width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
             </div>
         </div>
     </div>
@@ -379,7 +658,7 @@
                 <ul>
                     <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
                     <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
-                    <li><a href="giavi.html">Rau gia vị </a></li>
+                    <li><a href="giavi.html">Rau gia vị</a></li>
                     <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
                     <li><a href="rausach.html">Rau sạch an toàn – giá hợp lý</a></li>
                     <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
@@ -411,62 +690,75 @@
         <div class="copyright">2025 Rau Sạch Online</div>
     </footer>
 
-    <div class="modal" id="cart-modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Giỏ hàng của bạn</h2>
-            <div id="cart-items">
-            </div>
-            <div class="cart-total">
-                <span>Tổng cộng:</span>
-                <span id="cart-total-price">0đ</span>
-            </div>
-            <div class="cart-actions">
-                <button class="btn btn-secondary" id="continue-shopping">Tiếp tục mua hàng</button>
-                <button class="btn btn-primary" id="checkout">Thanh toán</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            // Có thể thêm validation ở đây nếu cần
-            console.log('Form submitted successfully');
-        });
-
-        // Lưu tin nhắn vào local storage khi gửi form
         document.getElementById('contactForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
             // Lấy dữ liệu từ form
             const formData = {
-                id: Date.now(), // ID duy nhất
+                id: Date.now(),
                 name: document.getElementById('name').value,
                 phone: document.getElementById('phone').value,
                 email: document.getElementById('email').value,
                 subject: document.getElementById('subject').value,
                 message: document.getElementById('message').value,
                 timestamp: new Date().toLocaleString('vi-VN'),
-                status: 'pending' // Trạng thái mặc định
+                status: 'pending'
             };
 
             // Lưu vào local storage
             saveMessage(formData);
 
-            // Chuyển hướng đến trang thành công
-            window.location.href = 'guithanhcong.html';
+            // Hiệu ứng loading
+            const submitBtn = document.querySelector('.btn-submit');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ĐANG GỬI...';
+            submitBtn.disabled = true;
+
+            // Giả lập gửi form
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> GỬI THÀNH CÔNG!';
+                submitBtn.style.background = 'linear-gradient(135deg, #66BB6A, #4CAF50)';
+                
+                setTimeout(() => {
+                    window.location.href = 'guithanhcong.html';
+                }, 1000);
+            }, 1500);
         });
 
         function saveMessage(message) {
-            // Lấy danh sách tin nhắn hiện có từ local storage
             let messages = JSON.parse(localStorage.getItem('sentMessages') || '[]');
-
-            // Thêm tin nhắn mới
-            messages.unshift(message); // Thêm vào đầu mảng
-
-            // Lưu lại vào local storage
+            messages.unshift(message);
             localStorage.setItem('sentMessages', JSON.stringify(messages));
         }
+
+        // Hiệu ứng khi scroll
+        window.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.contact-item, .feature-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (cardTop < windowHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Khởi tạo hiệu ứng
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.contact-item, .feature-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+            });
+            
+            // Kích hoạt hiệu ứng sau khi load
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+        });
     </script>
     <script src="./script/main.js"></script>
 </body>
