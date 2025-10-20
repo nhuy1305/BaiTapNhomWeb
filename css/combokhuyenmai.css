@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 :root {
   --primary: #009688;
   --secondary: #00796b;
@@ -203,3 +204,210 @@ footer .copyright {
   font-size: 14px;
   margin-top: 15px;
 }
+=======
+:root {
+  --primary: #009688;
+  --secondary: #00796b;
+  --accent: #4db6ac;
+  --light: #e0f2f1;
+  --dark: #263238;
+  --radius: 10px;
+  --transition: all 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: var(--light);
+  color: var(--dark);
+}
+
+/* Thanh trên */
+.top-bar {
+  background-color: var(--secondary);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px;
+  font-size: 14px;
+}
+
+.top-bar a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+/* Header */
+header {
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 26px;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.search-bar input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  width: 250px;
+}
+
+.search-bar button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+/* Menu */
+nav {
+  background-color: var(--primary);
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li a {
+  color: white;
+  padding: 15px 25px;
+  display: block;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.menu li a:hover,
+.menu li a.active {
+  background-color: var(--secondary);
+  border-bottom: 3px solid var(--accent);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.title {
+  color: var(--secondary);
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  padding: 0 20px;
+}
+
+.product-card {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  transition: var(--transition);
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.product-card h3 {
+  color: var(--dark);
+  margin: 12px 0 8px;
+}
+
+.price {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #888;
+  margin-left: 6px;
+}
+
+.add-btn {
+  background-color: var(--accent);
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 10px;
+}
+
+.add-btn:hover {
+  background-color: var(--secondary);
+}
+
+/* Footer */
+footer {
+  background-color: var(--secondary);
+  color: white;
+  padding: 30px 0;
+  margin-top: 40px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.footer-section h3 {
+  color: var(--accent);
+}
+
+.social-icons a {
+  color: white;
+  margin: 0 8px;
+  font-size: 20px;
+  transition: var(--transition);
+}
+
+.social-icons a:hover {
+  color: var(--accent);
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+footer .copyright {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+}
+>>>>>>> d7489afe35c11a07a6fb7ea04adef051ff3c2cc5
