@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gửi Thành Công - Rau Sạch Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./css/main.css">
+    <style>
+        .success-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #f8fff8 0%, #e8f5e8 50%, #d4edda 100%);
+            border-radius: 20px;
+            margin: 2rem 0;
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .success-icon {
+            font-size: 6rem;
+            color: #4CAF50;
+            margin-bottom: 2rem;
+            animation: successScale 1s ease-out;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .success-title {
+            color: #2c5530;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .success-message {
+            color: #4a6572;
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+        }
+
+        .success-highlight {
+            background: linear-gradient(120deg, #4CAF50 0%, #45a049 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .success-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            position: relative;
+            z-index: 2;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .success-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #2c5530;
+            font-size: 1.1rem;
+        }
+
+        .detail-value {
+            color: #4CAF50;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-success::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-success:hover::before {
+            left: 100%;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #4CAF50;
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            border: 3px solid #4CAF50;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-outline:hover {
+            background: #4CAF50;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .contact-info-mini {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,249,250,0.9) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            max-width: 450px;
+            border: 2px solid rgba(76, 175, 80, 0.3);
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-info-mini h4 {
+            color: #2c5530;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .contact-info-mini p {
+            margin: 1rem 0;
+            color: #4a6572;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .floating-leaves {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .leaf {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(76, 175, 80, 0.3);
+            animation: floatLeaf 8s linear infinite;
+        }
+
+        @keyframes successScale {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            70% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        @keyframes floatLeaf {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #4CAF50;
+            animation: confettiFall 5s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .success-title {
+                font-size: 2.2rem;
+            }
+            
+            .success-message {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                width: 100%;
+                gap: 1rem;
+            }
+            
+            .btn-success, .btn-outline {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 2rem;
+            }
+            
+            .success-card {
+                padding: 2rem 1.5rem;
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> Hotline: 0393058500</span>
+                <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
+            </div>
+            <div class="auth-links">
+                <a href="dangnhap.html"><i class="fas fa-user"></i>Đăng nhập</a>
+                <a href="dangky.html"><i class="fas fa-user-plus"></i>Đăng ký</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                Rau Sạch Online
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="cart-icon" id="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">TRANG CHỦ</a></li>
+                <li>
+                    <a href="khuyenmai.html">KHUYẾN MÃI <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="khuyenmai.html">Tất cả khuyến mãi</a></li>
+                        <li><a href="khuyenmai.html">Combo tiết kiệm</a></li>
+                        <li><a href="khuyenmai.html">Sản phẩm giảm giá</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">SẢN PHẨM <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="#tatcasanpham">Tất cả sản phẩm</a></li>
+                        <li><a href="sanphamnoibat.html">Sản phẩm nổi bật</a></li>
+                        <li><a href="sanphammoi.html">Sản phẩm mới</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
+                <li><a href="tintuc.html">TIN TỨC</a></li>
+                <li><a href="lienhe.html">LIÊN HỆ</a></li>
+
+                <li>
+                    <a href="#">VỀ CHÚNG TÔI <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="tamnhinvasumenh.html">Tầm nhìn và sứ mệnh</a></li>
+                        <li><a href="lichsuhinhthanh.html">Lịch sử hình thành</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="sidebar">
+            <h3>DANH MỤC</h3>
+            <ul class="category-list">
+                <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
+                <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
+                <li><a href="giavi.html">Rau gia vị </a></li>
+                <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
+                <li><a href="rausach.html">Rau sạch an toàn – giá hợp lý</a></li>
+                <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
+                <li><a href="hoaquathuong.html">Hoa quả thường – siêu tiết kiệm</a></li>
+                <li><a href="sanphamgiamgia.html">Sản phẩm giảm giá cực hot</a></li>
+                <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
+                <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html">TRANG CHỦ</a> >
+                <a href="lienhechungtoi.html">LIÊN HỆ</a> >
+                <span>GỬI THÀNH CÔNG</span>
+            </div>
+
+            <div class="success-container">
+                <!-- Floating leaves background -->
+                <div class="floating-leaves" id="floatingLeaves"></div>
+                
+                <!-- Confetti effect -->
+                <div id="confettiContainer"></div>
+
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                
+                <h1 class="success-title">THÀNH CÔNG!</h1>
+                
+                <p class="success-message">
+                    Cảm ơn bạn đã liên hệ với <span class="success-highlight">Rau Sạch Online</span>. 
+                    Tin nhắn của bạn đã được gửi thành công và chúng tôi sẽ phản hồi trong 
+                    <span class="success-highlight">thời gian sớm nhất</span>.
+                </p>
+
+                <div class="success-card">
+                    <div class="detail-item">
+                        <span class="detail-label">Thời gian gửi:</span>
+                        <span class="detail-value" id="current-time"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Trạng thái:</span>
+                        <span class="detail-value">Đã tiếp nhận ✓</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Phản hồi dự kiến:</span>
+                        <span class="detail-value">24-48 giờ</span>
+                    </div>
+                </div>
+
+                <div class="contact-info-mini">
+                    <h4><i class="fas fa-info-circle"></i> Cần hỗ trợ ngay?</h4>
+                    <p><i class="fas fa-phone"></i> Hotline: <strong>0393 058 500</strong></p>
+                    <p><i class="fas fa-envelope"></i> Email: <strong>Nhuy5201314@gmail.com</strong></p>
+                </div>
+
+                <!-- Action Buttons - ĐÃ ĐƯỢC CẬP NHẬT -->
+                <div class="action-buttons">
+                    <a href="index.html" class="btn-success">
+                        <i class="fas fa-home"></i> VỀ TRANG CHỦ
+                    </a>
+                    <a href="cactinnhandagui.html" class="btn-outline">
+                        <i class="fas fa-history"></i> XEM TIN NHẮN ĐÃ GỬI
+                    </a>
+                    <a href="lienhechungtoi.html" class="btn-outline">
+                        <i class="fas fa-paper-plane"></i> GỬI TIN NHẮN KHÁC
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CÔNG TY RAU SẠCH ONLINE</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 154A Hà Huy Giáp, P.An Phú Đông, Q.12, TP. HCM</p>
+                    <p><i class="fas fa-phone"></i> 0393058500</p>
+                    <p><i class="fas fa-clock"></i> Thứ 2 - Chủ nhật: 6:00 - 17:00</p>
+                    <p><i class="fas fa-envelope"></i> Nhuy5201314@gmail.com</p>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>DANH MỤC SẢN PHẨM</h3>
+               <ul>
+                <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
+                <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
+                <li><a href="giavi.html">Rau gia vị </a></li>
+                <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
+                <li><a href="rausach.html">Rau sạch an toàn – giá hợp lý</a></li>
+                <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
+                <li><a href="hoaquathuong.html">Hoa quả thường – siêu tiết kiệm</a></li>
+                <li><a href="sanphamgiamgia.html">Sản phẩm giảm giá cực hot</a></li>
+                <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
+                <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
+            </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+                <ul>
+                    <li><a href="cauhoi.html">Câu hỏi thường gặp</a></li>
+                    <li><a href="doitra.html">Chính sách đổi trả hàng</a></li>
+                    <li><a href="giaohang.html">Chính sách giao hàng</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>VỀ RAU SẠCH ONLINE</h3>
+                <ul>
+                    <li><a href="gioithieu.html">Giới thiệu</a></li>
+                    <li><a href="tamnhin.html">Tầm nhìn và Sứ mệnh</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">2025 Rau Sạch Online</div>
+    </footer>
+
+    <script>
+        // Hiển thị thời gian hiện tại
+        const now = new Date();
+        const formattedTime = now.toLocaleString('vi-VN', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        document.getElementById('current-time').textContent = formattedTime;
+
+        // Tạo hiệu ứng lá rơi
+        function createLeaves() {
+            const container = document.getElementById('floatingLeaves');
+            const leafIcons = ['🍃', '🌿', '🥬', '🥦', '🥒'];
+            
+            for (let i = 0; i < 15; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'leaf';
+                leaf.innerHTML = leafIcons[Math.floor(Math.random() * leafIcons.length)];
+                leaf.style.left = Math.random() * 100 + '%';
+                leaf.style.animationDelay = Math.random() * 8 + 's';
+                leaf.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
+                container.appendChild(leaf);
+            }
+        }
+
+        // Tạo hiệu ứng confetti
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#4CAF50', '#45a049', '#8BC34A', '#CDDC39', '#FFEB3B'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                container.appendChild(confetti);
+            }
+        }
+
+        // Khởi tạo hiệu ứng
+        createLeaves();
+        createConfetti();
+    </script>
+    <script src="./script/main.js"></script>
+</body>
+
+</html>

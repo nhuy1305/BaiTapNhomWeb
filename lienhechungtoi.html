@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liên Hệ Chung Toi - Rau Sạch Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./css/main.css">
+    <style>
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .contact-info-section h2 {
+            color: #2c5530;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-item i {
+            color: #4CAF50;
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+            min-width: 20px;
+        }
+
+        .contact-item strong {
+            color: #2c5530;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-item p {
+            color: #555;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .contact-form-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid #2196F3;
+        }
+
+        .contact-form-section h2 {
+            color: #1565C0;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.8rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+            background: #f8fff8;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .map-section {
+            grid-column: 1 / -1;
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .map-section h2 {
+            color: #2c5530;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .map-container {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-item {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> Hotline: 0393058500</span>
+                <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
+            </div>
+            <div class="auth-links">
+                <a href="dangnhap.html"><i class="fas fa-user"></i>Đăng nhập</a>
+                <a href="dangky.html"><i class="fas fa-user-plus"></i>Đăng ký</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                Rau Sạch Online
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="cart-icon" id="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">TRANG CHỦ</a></li>
+                <li>
+                    <a href="khuyenmai.html">KHUYẾN MÃI <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="khuyenmai.html">Tất cả khuyến mãi</a></li>
+                        <li><a href="khuyenmai.html">Combo tiết kiệm</a></li>
+                        <li><a href="khuyenmai.html">Sản phẩm giảm giá</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">SẢN PHẨM <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="#tatcasanpham">Tất cả sản phẩm</a></li>
+                        <li><a href="sanphamnoibat.html">Sản phẩm nổi bật</a></li>
+                        <li><a href="sanphammoi.html">Sản phẩm mới</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
+                <li><a href="tintuc.html">TIN TỨC</a></li>
+                <li><a href="lienhe.html">LIÊN HỆ</a></li>
+
+                <li>
+                    <a href="#">VỀ CHÚNG TÔI <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="tamnhinvasumenh.html">Tầm nhìn và sứ mệnh</a></li>
+                        <li><a href="lichsuhinhthanh.html">Lịch sử hình thành</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="sidebar">
+            <h3>DANH MỤC</h3>
+            <ul class="category-list">
+                <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
+                <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
+                <li><a href="giavi.html">Rau gia vị </a></li>
+                <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
+                <li><a href="rausach.html">Rau sạch an toàn – giá hợp lý</a></li>
+                <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
+                <li><a href="hoaquathuong.html">Hoa quả thường – siêu tiết kiệm</a></li>
+                <li><a href="sanphamgiamgia.html">Sản phẩm giảm giá cực hot</a></li>
+                <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
+                <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html">TRANG CHỦ</a>
+                <a href="lienhechungtoi.html">LIÊN HỆ CHÚNG TÔI</a>
+            </div>
+
+            <h1 class="page-title">LIÊN HỆ VỚI CHÚNG TÔI</h1>
+
+            <div class="contact-content">
+                <div class="contact-info-section">
+                    <h2>THÔNG TIN LIÊN HỆ</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Địa chỉ:</strong>
+                                <p>154A Hà Huy Giáp, Phường An Phú Đông, Quận 12, TP. Hồ Chí Minh</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Điện thoại:</strong>
+                                <p>0393 058 500</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email:</strong>
+                                <p>Nhuy5201314@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Giờ làm việc:</strong>
+                                <p>Thứ 2 - Thứ 7: 6:30 - 17:00<br>Chủ nhật: 7:00 - 12:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-section">
+                    <h2>GỬI TIN NHẮN CHO CHUNG TOI</h2>
+                    <form class="contact-form" id="contactForm" action="guithanhcong.html" method="GET">
+                        <div class="form-group">
+                            <label for="name">Họ và tên *</label>
+                            <input type="text" id="name" name="name" required placeholder="Nhập họ và tên của bạn">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="Nhập số điện thoại">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Nhập email của bạn">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Chủ đề</label>
+                            <select id="subject" name="subject">
+                                <option value="">Chọn chủ đề</option>
+                                <option value="order">Đặt hàng</option>
+                                <option value="support">Hỗ trợ khách hàng</option>
+                                <option value="feedback">Góp ý</option>
+                                <option value="cooperation">Hợp tác</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Nội dung *</label>
+                            <textarea id="message" name="message" rows="5" required
+                                placeholder="Nhập nội dung tin nhắn của bạn..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> GỬI TIN NHẮN
+                        </button>
+                    </form>
+                </div>
+
+                <div class="map-section">
+                    <h2>BẢN ĐỒ</h2>
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.484731690625!2d106.769336!3d10.855576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175270ad28a38d1%3A0x8d0a8c5b0e5e3f0!2zMTU0QSBIw6AgSHV5IEdpw6FwLCBBbiBQaMO6IMSQw7RuZywgUXXhuq1uIDEyLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1620000000000!5m2!1svi!2s"
+                            width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CÔNG TY RAU SẠCH ONLINE</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 154A Hà Huy Giáp, P.An Phú Đông, Q.12, TP. HCM</p>
+                    <p><i class="fas fa-phone"></i> 0393058500</p>
+                    <p><i class="fas fa-clock"></i> Thứ 2 - Chủ nhật: 6:00 - 17:00</p>
+                    <p><i class="fas fa-envelope"></i> Nhuy5201314@gmail.com</p>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>DANH MỤC SẢN PHẨM</h3>
+                <ul>
+                    <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
+                    <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
+                    <li><a href="giavi.html">Rau gia vị </a></li>
+                    <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
+                    <li><a href="rausach.html">Rau sạch an toàn – giá hợp lý</a></li>
+                    <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
+                    <li><a href="hoaquathuong.html">Hoa quả thường – siêu tiết kiệm</a></li>
+                    <li><a href="sanphamgiamgia.html">Sản phẩm giảm giá cực hot</a></li>
+                    <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
+                    <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+                <ul>
+                    <li><a href="cauhoi.html">Câu hỏi thường gặp</a></li>
+                    <li><a href="doitra.html">Chính sách đổi trả hàng</a></li>
+                    <li><a href="giaohang.html">Chính sách giao hàng</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>VỀ RAU SẠCH ONLINE</h3>
+                <ul>
+                    <li><a href="gioithieu.html">Giới thiệu</a></li>
+                    <li><a href="tamnhin.html">Tầm nhìn và Sứ mệnh</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">2025 Rau Sạch Online</div>
+    </footer>
+
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Giỏ hàng của bạn</h2>
+            <div id="cart-items">
+            </div>
+            <div class="cart-total">
+                <span>Tổng cộng:</span>
+                <span id="cart-total-price">0đ</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn btn-secondary" id="continue-shopping">Tiếp tục mua hàng</button>
+                <button class="btn btn-primary" id="checkout">Thanh toán</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            // Có thể thêm validation ở đây nếu cần
+            console.log('Form submitted successfully');
+        });
+
+        // Lưu tin nhắn vào local storage khi gửi form
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Lấy dữ liệu từ form
+            const formData = {
+                id: Date.now(), // ID duy nhất
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toLocaleString('vi-VN'),
+                status: 'pending' // Trạng thái mặc định
+            };
+
+            // Lưu vào local storage
+            saveMessage(formData);
+
+            // Chuyển hướng đến trang thành công
+            window.location.href = 'guithanhcong.html';
+        });
+
+        function saveMessage(message) {
+            // Lấy danh sách tin nhắn hiện có từ local storage
+            let messages = JSON.parse(localStorage.getItem('sentMessages') || '[]');
+
+            // Thêm tin nhắn mới
+            messages.unshift(message); // Thêm vào đầu mảng
+
+            // Lưu lại vào local storage
+            localStorage.setItem('sentMessages', JSON.stringify(messages));
+        }
+    </script>
+    <script src="./script/main.js"></script>
+</body>
+
+</html>
