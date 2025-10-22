@@ -226,7 +226,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Saved Total:', localStorage.getItem('orderTotal'));
                 
                 alert('Đơn hàng được tạo thành công!');
-                window.location.href = 'chitiethoadon.html';
+                // === Lưu thông tin đơn hàng vào localStorage để hiển thị bên donhang.html ===
+                let existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+                
+                const newOrder = {
+                  id: "#HD" + Math.floor(Math.random() * 10000),
+                  date: new Date().toLocaleDateString("vi-VN"),
+                  address: address,
+                  total: total,
+                  payment: "Thanh toán một phần",
+                  delivery: "Chưa giao hàng"
+                };
+                
+                existingOrders.push(newOrder);
+                localStorage.setItem("orders", JSON.stringify(existingOrders));
+                
+                // Lưu thêm tên khách hàng để hiển thị bên phải
+                localStorage.setItem("userFullname", fullname);
+                
+                // Hiện thông báo 1 lần
+                if (!sessionStorage.getItem("orderCreated")) {
+                  alert("Đặt hàng thành công!");
+                  sessionStorage.setItem("orderCreated", "true");
+                }
+                
+                // Chuyển sang chi tiết hóa đơn
+                window.location.href = "chitiethoadon.html";
             }
         });
     }
