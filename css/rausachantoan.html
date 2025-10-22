@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rau sạch an toàn – Giá hợp lý</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./css/rausachantoan.css">
+</head>
+
+<body>
+  <!-- Thanh thông tin trên cùng -->
+  <div class="top-bar">
+    <div class="top-bar-content">
+      <div class="contact-info">
+        <span><i class="fas fa-phone"></i> Hotline: 0393058500</span>
+        <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
+      </div>
+      <div class="auth-links">
+        <a href="dangnhap.html"><i class="fas fa-user"></i>Đăng nhập</a>
+        <a href="dangky.html"><i class="fas fa-user-plus"></i>Đăng ký</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-leaf"></i>
+        Rau Sạch Online
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Tìm kiếm sản phẩm...">
+        <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="cart-icon" id="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cart-count">0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Menu -->
+  <nav>
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a href="index.html">TRANG CHỦ</a></li>
+        <li>
+          <a href="khuyenmai.html">KHUYẾN MÃI <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="khuyenmai.html">Tất cả khuyến mãi</a></li>
+            <li><a href="khuyenmai.html">Combo tiết kiệm</a></li>
+            <li><a href="khuyenmai.html">Sản phẩm giảm giá</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">SẢN PHẨM <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="#tatcasanpham">Tất cả sản phẩm</a></li>
+            <li><a href="sanphamnoibat.html">Sản phẩm nổi bật</a></li>
+            <li><a href="sanphammoi.html">Sản phẩm mới</a></li>
+          </ul>
+        </li>
+        <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
+        <li><a href="tintuc.html">TIN TỨC</a></li>
+        <li><a href="lienhe.html">LIÊN HỆ</a></li>
+        <li>
+          <a href="#">VỀ CHÚNG TÔI <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="tamnhinvasumenh.html">Tầm nhìn và sứ mệnh</a></li>
+            <li><a href="lichsuhinhthanh.html">Lịch sử hình thành</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Nội dung -->
+  <div class="container">
+    <div class="sidebar">
+      <h3>DANH MỤC</h3>
+      <ul class="category-list">
+        <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
+        <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
+        <li><a href="giavi.html">Rau gia vị</a></li>
+        <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
+        <li><a href="rausachantoan.html">Rau sạch an toàn – giá hợp lý</a></li>
+        <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
+        <li><a href="hoaquathuong.html">Hoa quả thường – siêu tiết kiệm</a></li>
+        <li><a href="sanphamgiamgia.html">Sản phẩm giảm giá cực hot</a></li>
+        <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
+        <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="breadcrumb">
+        <a href="index.html">TRANG CHỦ</a> >
+        <a href="rausachantoan.html">RAU SẠCH AN TOÀN</a>
+      </div>
+
+      <h1 class="page-title">RAU SẠCH AN TOÀN - GIÁ HỢP LÝ</h1>
+
+      <div class="sort-options">
+        <div>Hiển thị tất cả rau sạch an toàn</div>
+        <div>
+          <label for="sort">Sắp xếp:</label>
+          <select id="sort">
+            <option value="default">Mặc định</option>
+            <option value="price-asc">Giá tăng dần</option>
+            <option value="price-desc">Giá giảm dần</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="product-grid">
+        <!-- 12 sản phẩm -->
+        <div class="product-card"><div class="product-image"><img src="./img/rauden.jpg" alt="Rau dền đỏ"></div><div class="product-info"><div class="product-name">Rau dền đỏ - 1 bó</div><div class="product-price">10,000đ <span class="product-original-price">15,000đ</span><span class="product-badge">Giảm 33%</span></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="./img/Raumuong1.jpg" alt="Rau muống"></div><div class="product-info"><div class="product-name">Rau muống - 1 bó</div><div class="product-price">8,000đ <span class="product-original-price">12,000đ</span><span class="product-badge">Giảm 33%</span></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="./img/caingot.jpg" alt="Cải ngọt"></div><div class="product-info"><div class="product-name">Cải ngọt - 100g</div><div class="product-price">5,000đ <span class="product-original-price">8,000đ</span><span class="product-badge">Giảm 37%</span></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="./img/Caithia.jpg" alt="Cải thìa"></div><div class="product-info"><div class="product-name">Cải thìa - 1 bó</div><div class="product-price">12,000đ <span class="product-original-price">18,000đ</span><span class="product-badge">Giảm 33%</span></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="./img/rauthom.jpg" alt="Rau thơm"></div><div class="product-info"><div class="product-name">Rau thơm - 100g</div><div class="product-price">6,000đ <span class="product-original-price">9,000đ</span><span class="product-badge">Giảm 33%</span></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="./img/bixanh.jpg" alt="Bí xanh"></div><div class="product-info"><div class="product-name">Bí xanh non - 1 trái</div><div class="product-price">7,000đ <span class="product-original-price">10,000đ</span><span class="product-badge">Giảm 30%</span></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="./img/caibe.jpg" alt="Cải bẹ"></div><div class="product-info"><div class="product-name">Cải bẹ - 1 bó</div><div class="product-price">9,000đ <span class="product-original-price">13,000đ</span><span class="product-badge">Giảm 31%</span></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="./img/cachua.jpg" alt="Cà chua"></div><div class="product-info"><div class="product-name">Cà chua - 1kg</div><div class="product-price">30,000đ <span class="product-original-price">40,000đ</span><span class="product-badge">Giảm 33%</span></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="./img/xalach.jpg" alt="Xà lách"></div><div class="product-info"><div class="product-name">Xà lách Đà Lạt - 1kg</div><div class="product-price">25,000đ <span class="product-original-price">35,000đ</span><span class="product-badge">Giảm 37%</span></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="./img/caitim.jpg" alt="Cải tím"></div><div class="product-info"><div class="product-name">Cải tím - 1 bó</div><div class="product-price">10,000đ <span class="product-original-price">15,000đ</span><span class="product-badge">Giảm 33%</span></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="./img/Mongtoi.jpg" alt="Rau mồng tơi"></div><div class="product-info"><div class="product-name">Rau mồng tơi - 1 bó</div><div class="product-price">10,000đ <span class="product-original-price">15,000đ</span><span class="product-badge">Giảm 33%</span></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="./img/caixoan.jpg" alt="Cải xoăn"></div><div class="product-info"><div class="product-name">Cải xoăn - 1 bó</div><div class="product-price">12,000đ <span class="product-original-price">17,000đ</span><span class="product-badge">Giảm 33%</span></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>CÔNG TY RAU SẠCH ONLINE</h3>
+        <div class="contact-info">
+          <p><i class="fas fa-map-marker-alt"></i> 154A Hà Huy Giáp, P.An Phú Đông, Q.12, TP. HCM</p>
+          <p><i class="fas fa-phone"></i> 0393058500</p>
+          <p><i class="fas fa-clock"></i> Thứ 2 - Chủ nhật: 6:00 - 17:00</p>
+          <p><i class="fas fa-envelope"></i> Nhuy5201314@gmail.com</p>
+        </div>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>DANH MỤC SẢN PHẨM</h3>
+        <ul>
+          <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
+          <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
+          <li><a href="giavi.html">Rau gia vị</a></li>
+          <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
+          <li><a href="rausachantoan.html">Rau sạch an toàn – giá hợp lý</a></li>
+          <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
+          <li><a href="hoaquathuong.html">Hoa quả thường – siêu tiết kiệm</a></li>
+          <li><a href="sanphamgiamgia.html">Sản phẩm giảm giá cực hot</a></li>
+          <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
+          <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+        <ul>
+          <li><a href="cauhoi.html">Câu hỏi thường gặp</a></li>
+          <li><a href="doitra.html">Chính sách đổi trả hàng</a></li>
+          <li><a href="giaohang.html">Chính sách giao hàng</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>VỀ RAU SẠCH ONLINE</h3>
+        <ul>
+          <li><a href="gioithieu.html">Giới thiệu</a></li>
+          <li><a href="tamnhin.html">Tầm nhìn và Sứ mệnh</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="copyright">2025 Rau Sạch Online</div>
+  </footer>
+
+  <div class="modal" id="cart-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Giỏ hàng của bạn</h2>
+      <div id="cart-items"></div>
+      <div class="cart-total">
+        <span>Tổng cộng:</span>
+        <span id="cart-total-price">0đ</span>
+      </div>
+      <div class="cart-actions">
+        <button class="btn btn-secondary" id="continue-shopping">Tiếp tục mua hàng</button>
+        <button class="btn btn-primary" id="checkout">Thanh toán</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script/main.js"></script>
+</body>
+</html>
