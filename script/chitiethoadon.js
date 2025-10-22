@@ -66,30 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.getElementById('order-date').textContent = orderDate;
     
-    // === Hiển thị thông tin giảm giá (nếu có) ===
-
-    try {
-      const discount = parseFloat(localStorage.getItem("orderDiscount")) || 0;
-      const discountEl = document.getElementById("discount");
-      if (discountEl) {
-        discountEl.textContent = discount.toLocaleString() + "đ";
-      }
-    } catch (e) {
-      // nếu có lỗi, không làm gián đoạn hiển thị các phần khác
-      console.warn('Không thể đọc orderDiscount từ localStorage:', e);
-    }
-
+    // Xóa giỏ hàng và thông tin giá sau khi hiển thị
     localStorage.removeItem('cart');
     localStorage.removeItem('orderSubtotal');
     localStorage.removeItem('orderShipping');
     localStorage.removeItem('orderTotal');
-
+    
+    // Cập nhật cart count nếu có element
     const cartCountElement = document.getElementById('cart-count');
     if (cartCountElement) {
         cartCountElement.textContent = '0';
     }
 });
 
+// Hàm merge duplicate items (tương tự thanhtoan.js)
 function mergeDuplicateItems(cart) {
     const merged = {};
     cart.forEach(item => {
