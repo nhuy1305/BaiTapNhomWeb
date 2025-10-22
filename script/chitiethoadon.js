@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let shipping = localStorage.getItem('orderShipping');
     let total = localStorage.getItem('orderTotal');
     
-    // Nếu không có trong localStorage, tính lại
     if (!subtotal || subtotal === 'null' || subtotal === '0') {
         subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     } else {
@@ -50,12 +49,16 @@ document.addEventListener('DOMContentLoaded', () => {
         total = parseInt(total);
     }
     
+    // ✅ Thêm phần giảm giá 
+    const discount = parseFloat(localStorage.getItem("orderDiscount")) || 0;
+    const discountEl = document.getElementById("discount");
+    if (discountEl) discountEl.textContent = discount.toLocaleString() + "đ";
+    
     // Hiển thị giá tiền
     document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
     document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
     document.getElementById('total').textContent = total.toLocaleString() + 'đ';
-    
-    // Thiết lập ngày đặt hàng
+ 
     const orderDate = new Date().toLocaleString('vi-VN', {
         day: '2-digit',
         month: '2-digit',
@@ -65,21 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
         hour12: false
     });
     document.getElementById('order-date').textContent = orderDate;
-    
-    // Xóa giỏ hàng và thông tin giá sau khi hiển thị
+ 
     localStorage.removeItem('cart');
     localStorage.removeItem('orderSubtotal');
     localStorage.removeItem('orderShipping');
     localStorage.removeItem('orderTotal');
     
-    // Cập nhật cart count nếu có element
     const cartCountElement = document.getElementById('cart-count');
     if (cartCountElement) {
         cartCountElement.textContent = '0';
     }
 });
 
-// Hàm merge duplicate items (tương tự thanhtoan.js)
 function mergeDuplicateItems(cart) {
     const merged = {};
     cart.forEach(item => {
@@ -91,3 +91,4 @@ function mergeDuplicateItems(cart) {
     });
     return Object.values(merged);
 }
+
