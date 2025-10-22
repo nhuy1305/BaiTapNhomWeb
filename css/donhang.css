@@ -1,10 +1,16 @@
+.container h2{
+  color: #2e7d32;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #2e7d32;
+  padding-bottom: 5px;
+}
+
 .order-table table {
   width: 100%;
   border-collapse: collapse;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  overflow: hidden;
-  font-size: 15px;
+  font-size: 14px;
+
   
 }
 
@@ -13,14 +19,17 @@
   color: #2e7d32;
   font-weight: bold;
   text-align: left;
-  padding: 12px 10px;
-  border-bottom: 2px solid #ddd;
-  
+  border: 2px solid #ccc;
+  padding: 8px 10px;
+  white-space: nowrap;
 }
 
 .order-table td {
-  padding: 12px 10px;
-  border-bottom: 1px solid #eee;
+  text-align: left;
+  border: 2px solid #ccc;
+  padding: 8px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
 }
 
 .customer-info {
