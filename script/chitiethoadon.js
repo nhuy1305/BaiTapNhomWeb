@@ -90,4 +90,8 @@ function mergeDuplicateItems(cart) {
         }
     });
     return Object.values(merged);
+
+    const discount = parseFloat(localStorage.getItem("orderDiscount")) || 0;
+    document.getElementById("discount").textContent = discount.toLocaleString() + "đ";
+
 }
