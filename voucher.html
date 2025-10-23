@@ -105,7 +105,7 @@
                 </div>
                 <div class="voucher-card" id="voucher-T5NUAGIA">
                     <h2>🛍️ T5NUAGIA - Thứ Năm nửa giá!</h2>
-                    <p>Giảm <strong>50%</strong> tối đa <strong>150.000đ</strong> khi đặt hàng vào **<strong>Thứ Năm</strong> với đơn hàng từ <strong>100.000đ</strong>**.</p>
+                    <p>Giảm <strong>50%</strong> tối đa <strong>150.000đ</strong> khi đặt hàng vào **<strong>Thứ Năm</strong> với đơn hàng từ <strong>100.000đ</strong> trở lên**.</p>
                     <p><strong>Mã giảm giá:</strong> T5NUAGIA</p>
                 </div>
                 <div class="voucher-card" id="voucher-SHIP0D">
@@ -192,52 +192,89 @@
 
     <script src="./script/main.js"></script>
     <script>
-        document.getElementById('checkVoucher').addEventListener('click', function() {
-            const code = document.getElementById('voucherInput').value.trim().toUpperCase();
-            const result = document.getElementById('voucherResult');
-            const orders = JSON.parse(localStorage.getItem('orders')) || [];
-            const today = new Date();
-            const day = today.getDay(); // 0=CN, 1=T2,...,4=T5,...
-            const todayDate = today.toLocaleDateString("vi-VN");
+document.addEventListener('DOMContentLoaded', function() {
+    const checkVoucherButton = document.getElementById('checkVoucher');
+    if (!checkVoucherButton) {
+        console.error('Không tìm thấy nút checkVoucher');
+        return;
+    }
 
-            if (!code) {
-                result.textContent = "❌ Vui lòng nhập mã voucher!";
-                result.style.color = "red";
-                return;
-            }
+    checkVoucherButton.addEventListener('click', function() {
+        const code = document.getElementById('voucherInput').value.trim().toUpperCase();
+        const result = document.getElementById('voucherResult');
+        const orders = JSON.parse(localStorage.getItem('orders')) || [];
+        const today = new Date();
+        const day = today.getDay(); // 0=CN, 1=T2,...,4=T5,...
+        const todayDate = today.toLocaleDateString("vi-VN");
 
-            if (code === "KHMOI") {
-                if (orders.length === 0) {
-                    result.textContent = "✅ Áp dụng thành công! Giảm 30% cho khách hàng mới.";
-                    result.style.color = "green";
-                } else {
-                    result.textContent = "❌ Voucher này chỉ áp dụng cho khách hàng mới.";
-                    result.style.color = "red";
-                }
-            } else if (code === "T5NUAGIA") {
-                if (day === 4) {
-                    if (cartTotal >= 100000) {
-                        result.textContent = "✅ Áp dụng thành công! Giảm 50% (tối đa 150.000đ) cho đơn từ 100.000đ.";
-                        result.style.color = "green";
-                    } else {
-                        result.textContent = "❌ Đơn hàng phải từ 100.000đ để áp dụng voucher này.";
-                        result.style.color = "red";
+        console.log('Mã nhập:', code);
+        console.log('Ngày hiện tại:', day);
+        console.log('Danh sách đơn hàng:', orders);
+
+        let cartTotal = 0;
+        try {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            console.log('Giỏ hàng:', cartItems);
+            if (cartItems.length > 0) {
+                cartTotal = cartItems.reduce((total, item) => {
+                    if (item && typeof item.price === 'number' && typeof item.quantity === 'number') {
+                        return total + (item.price * item.quantity);
                     }
-                }
-            } else if (code === "SHIP0Đ") {
-                const todayOrders = orders.filter(o => o.date === todayDate);
-                if (todayOrders.length >= 1) {
-                    result.textContent = "✅ Áp dụng thành công! Freeship cho đơn thứ 2 hôm nay.";
+                    return total;
+                }, 0);
+            } else {
+                console.log('Giỏ hàng trống');
+            }
+            console.log('Tổng giá trị giỏ hàng:', cartTotal);
+        } catch (e) {
+            console.error('Lỗi khi lấy giỏ hàng:', e);
+            result.textContent = "❌ Lỗi khi kiểm tra giỏ hàng. Vui lòng thử lại.";
+            result.style.color = "red";
+            return;
+        }
+
+        if (!code) {
+            result.textContent = "❌ Vui lòng nhập mã voucher!";
+            result.style.color = "red";
+            return;
+        }
+
+        if (code === "KHMOI") {
+            if (orders.length === 0) {
+                result.textContent = "✅ Áp dụng thành công! Giảm 30% cho khách hàng mới.";
+                result.style.color = "green";
+            } else {
+                result.textContent = "❌ Voucher này chỉ áp dụng cho khách hàng mới.";
+                result.style.color = "red";
+            }
+        } else if (code === "T5NUAGIA") {
+            if (day === 4) {
+                if (cartTotal >= 100000) {
+                    result.textContent = "✅ Áp dụng thành công! Giảm 50% (tối đa 150.000đ) cho đơn từ 100.000đ.";
                     result.style.color = "green";
                 } else {
-                    result.textContent = "❌ Voucher chỉ áp dụng khi bạn đã có 1 đơn trong hôm nay.";
+                    result.textContent = "❌ Đơn hàng phải từ 100.000đ để áp dụng voucher này. Tổng hiện tại: " + cartTotal.toLocaleString() + "đ";
                     result.style.color = "red";
                 }
             } else {
-                result.textContent = "❌ Mã voucher không tồn tại.";
+                result.textContent = "❌ Voucher này chỉ áp dụng vào Thứ Năm.";
                 result.style.color = "red";
             }
-        });
+        } else if (code === "SHIP0Đ") {
+            const todayOrders = orders.filter(o => o.date === todayDate);
+            if (todayOrders.length >= 1) {
+                result.textContent = "✅ Áp dụng thành công! Freeship cho đơn thứ 2 hôm nay.";
+                result.style.color = "green";
+            } else {
+                result.textContent = "❌ Voucher chỉ áp dụng khi bạn đã có 1 đơn trong hôm nay.";
+                result.style.color = "red";
+            }
+        } else {
+            result.textContent = "❌ Mã voucher không tồn tại.";
+            result.style.color = "red";
+        }
+    });
+});
     </script>
 </body>
 
