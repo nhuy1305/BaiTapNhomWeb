@@ -22,56 +22,57 @@
         </div>
     </div>
 
-    <header>
-        <div class="header-content">
-            <div class="logo">
-                <i class="fas fa-leaf"></i>
-                Rau Sạch Online
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Tìm kiếm sản phẩm..." />
-                <button><i class="fas fa-search"></i></button>
-            </div>
-            <div class="cart-icon" id="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count" id="cart-count">0</span>
-            </div>
-        </div>
-    </header>
+<header>
+  <div class="header-content">
+    <div class="logo">
+      <i class="fas fa-leaf"></i>
+      Rau Sạch Online
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+      <button><i class="fas fa-search"></i></button>
+    </div>
+    <div class="cart-icon" id="cart-icon">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-count" id="cart-count">0</span>
+    </div>
+  </div>
+</header>
 
-    <nav>
-        <div class="nav-container">
-            <ul class="nav-links">
-                <li><a href="index.html">TRANG CHỦ</a></li>
-                <li>
-                    <a href="khuyenmai.html">KHUYẾN MÃI <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown">
-                        <li><a href="khuyenmai.html">Tất cả khuyến mãi</a></li>
-                        <li><a href="khuyenmai.html">Combo tiết kiệm</a></li>
-                        <li><a href="khuyenmai.html">Sản phẩm giảm giá</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">SẢN PHẨM <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown">
-                        <li><a href="index.html">Tất cả sản phẩm</a></li>
-                        <li><a href="sanphamnoibat.html">Sản phẩm nổi bật</a></li>
-                        <li><a href="sanphammoi.html">Sản phẩm mới</a></li>
-                    </ul>
-                </li>
-                <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
-                <li><a href="tintuc.html">TIN TỨC</a></li>
-                <li><a href="lienhe.html">LIÊN HỆ</a></li>
-                <li>
-                    <a href="#">VỀ CHÚNG TÔI <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown">
-                        <li><a href="tamnhinvasumenh.html">Tầm nhìn và sứ mệnh</a></li>
-                        <li><a href="lichsuhinhthanh.html">Lịch sử hình thành</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<nav>
+  <div class="nav-container">
+    <ul class="nav-links">
+      <li><a href="index.html">TRANG CHỦ</a></li>
+      <li>
+        <a href="khuyenmai.html">KHUYẾN MÃI <i class="fas fa-chevron-down"></i></a>
+        <ul class="dropdown">
+          <li><a href="khuyenmai.html">Tất cả khuyến mãi</a></li>
+          <li><a href="khuyenmai.html">Combo tiết kiệm</a></li>
+          <li><a href="khuyenmai.html">Sản phẩm giảm giá</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">SẢN PHẨM <i class="fas fa-chevron-down"></i></a>
+        <ul class="dropdown">
+          <li><a href="tatcasanpham.html">Tất cả sản phẩm</a></li>
+          <li><a href="sanphamnoibat.html">Sản phẩm nổi bật</a></li>
+          <li><a href="sanphammoi.html">Sản phẩm mới</a></li>
+        </ul>
+      </li>
+      <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
+      <li><a href="tintuc.html">TIN TỨC</a></li>
+      <li><a href="lienhe.html">LIÊN HỆ</a></li>
+      <li>
+        <a href="#">VỀ CHÚNG TÔI <i class="fas fa-chevron-down"></i></a>
+        <ul class="dropdown">
+          <li><a href="tamnhinvasumenh.html">Tầm nhìn và sứ mệnh</a></li>
+          <li><a href="lichsuhinhthanh.html">Lịch sử hình thành</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 
     <div class="container">
         <div class="breadcrumb">
@@ -119,9 +120,14 @@
                 <h2>Đơn hàng</h2>
                 <div id="order-items" class="order-items"></div>
                 <div class="form-group">
-                    <label for="discount">Nhập mã giảm giá</label>
-                    <input type="text" id="discount" name="discount">
+                  <label for="voucher">Mã giảm giá</label>
+                  <div style="display:flex;gap:10px;">
+                    <input type="text" id="voucher" placeholder="Nhập mã voucher..." style="flex:1;">
+                    <button type="button" id="applyVoucher" class="btn btn-primary" style="width:auto;">Áp dụng</button>
+                  </div>
+                  <span id="voucher-message" style="color:#2e7d32;font-weight:bold;"></span>
                 </div>
+
                 <div class="order-summary">
                     <p>Tạm tính: <span id="subtotal">0đ</span></p>
                     <p>Phí vận chuyển: <span id="shipping">0đ</span></p>
@@ -154,6 +160,9 @@
                 <h3>DANH MỤC SẢN PHẨM</h3>
                 <ul>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 99c300991fa7dd002c17ed4da51ab2b3553a04c7
                 <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
                 <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
                 <li><a href="giavi.html">Rau gia vị </a></li>
@@ -165,6 +174,8 @@
                 <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
                 <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
             </ul>
+<<<<<<< HEAD
+=======
 =======
                     <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
                     <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
@@ -178,6 +189,7 @@
                     <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
                 </ul>
 >>>>>>> d7489afe35c11a07a6fb7ea04adef051ff3c2cc5
+>>>>>>> 99c300991fa7dd002c17ed4da51ab2b3553a04c7
             </div>
 
             <div class="footer-section">

@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 99c300991fa7dd002c17ed4da51ab2b3553a04c7
 // HÀM VIẾT HOA CHỮ CÁI ĐẦU
 function capitalizeWords(str) {
     return str.split(' ').map(word => {
@@ -74,6 +77,8 @@ document.getElementById("register-form").addEventListener("submit", function (e)
     alert("Đăng ký thành công! Bây giờ bạn có thể đăng nhập.");
     window.location.href = "dangnhap.html";
 });
+<<<<<<< HEAD
+=======
 =======
 // HÀM VIẾT HOA CHỮ CÁI ĐẦU
 function capitalizeWords(str) {
@@ -151,3 +156,4 @@ document.getElementById("register-form").addEventListener("submit", function (e)
     window.location.href = "dangnhap.html";
 });
 >>>>>>> d7489afe35c11a07a6fb7ea04adef051ff3c2cc5
+>>>>>>> 99c300991fa7dd002c17ed4da51ab2b3553a04c7

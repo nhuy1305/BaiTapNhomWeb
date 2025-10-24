@@ -1,0 +1,97 @@
+.container h2{
+  color: #2e7d32;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #2e7d32;
+  padding-bottom: 5px;
+}
+
+.order-table table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  font-size: 14px;
+
+  
+}
+
+.order-table th {
+  background-color: rgb(219, 216, 216);
+  color: #2e7d32;
+  font-weight: bold;
+  text-align: left;
+  border: 2px solid #ccc;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+
+.order-table td {
+  text-align: left;
+  border: 2px solid #ccc;
+  padding: 8px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.customer-info {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.customer-info h2 {
+  color: #2e7d32;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #2e7d32;
+  padding-bottom: 5px;
+}
+
+.customer-info p {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.customer-info strong {
+  color: #1b5e20;
+}
+
+.status-payment,
+.status-delivery {
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  text-align: center;
+  min-width: 120px;
+}
+
+.status-payment.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-payment.partial {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.status-payment.paid {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-delivery.waiting {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-delivery.shipping {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.status-delivery.done {
+  background-color: #d4edda;
+  color: #155724;
+}

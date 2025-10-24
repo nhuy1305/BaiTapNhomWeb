@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 99c300991fa7dd002c17ed4da51ab2b3553a04c7
 document.getElementById("login-form").addEventListener("submit", function (e) {
     e.preventDefault();
     const email = document.getElementById("email").value.trim();
@@ -44,6 +47,8 @@ document.getElementById("login-form").addEventListener("submit", function (e) {
         alert("Email hoặc mật khẩu không đúng, vui lòng thử lại!");
     }
 });
+<<<<<<< HEAD
+=======
 =======
 document.getElementById("login-form").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -91,3 +96,4 @@ document.getElementById("login-form").addEventListener("submit", function (e) {
     }
 });
 >>>>>>> d7489afe35c11a07a6fb7ea04adef051ff3c2cc5
+>>>>>>> 99c300991fa7dd002c17ed4da51ab2b3553a04c7

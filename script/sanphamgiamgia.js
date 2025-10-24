@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 99c300991fa7dd002c17ed4da51ab2b3553a04c7
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const cartIcon = document.getElementById("cart-icon");
@@ -218,6 +221,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+<<<<<<< HEAD
+=======
 =======
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -439,3 +444,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 >>>>>>> d7489afe35c11a07a6fb7ea04adef051ff3c2cc5
+>>>>>>> 99c300991fa7dd002c17ed4da51ab2b3553a04c7

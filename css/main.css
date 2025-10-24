@@ -198,6 +198,7 @@ nav ul li {
   box-shadow: var(--box-shadow);
   padding: 20px;
   align-self: flex-start;
+
 }
 
 .sidebar h3 {
@@ -676,7 +677,6 @@ footer {
   text-decoration: underline;
 }
 
-/* Chỉnh sửa nút Thêm vào giỏ */
 .add-to-cart {
   padding: 8px 15px !important;
   font-size: 14px !important;
@@ -685,7 +685,7 @@ footer {
   justify-content: center;
 }
 
-/* Đảm bảo nút không bị ảnh hưởng bởi hover của product-card */
 .add-to-cart:hover {
   transform: none !important;
 }
+

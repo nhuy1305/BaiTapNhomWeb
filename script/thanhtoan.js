@@ -226,7 +226,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Saved Total:', localStorage.getItem('orderTotal'));
                 
                 alert('Đơn hàng được tạo thành công!');
-                window.location.href = 'chitiethoadon.html';
+                // === Lưu thông tin đơn hàng vào localStorage để hiển thị bên donhang.html ===
+                let existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+                
+                const newOrder = {
+                  id: "#HD" + Math.floor(Math.random() * 10000),
+                  date: new Date().toLocaleDateString("vi-VN"),
+                  address: address,
+                  total: total,
+                  payment: "Thanh toán một phần",
+                  delivery: "Chưa giao hàng"
+                };
+                
+                existingOrders.push(newOrder);
+                localStorage.setItem("orders", JSON.stringify(existingOrders));
+                
+                // Lưu thêm tên khách hàng để hiển thị bên phải
+                localStorage.setItem("userFullname", fullname);
+                
+                // Hiện thông báo 1 lần
+                if (!sessionStorage.getItem("orderCreated")) {
+                  alert("Đặt hàng thành công!");
+                  sessionStorage.setItem("orderCreated", "true");
+                }
+                
+                // Chuyển sang chi tiết hóa đơn
+                window.location.href = "chitiethoadon.html";
             }
         });
     }
@@ -244,3 +269,62 @@ function mergeDuplicateItems(cart) {
     });
     return Object.values(merged);
 }
+
+// === Áp dụng mã giảm giá ===
+document.getElementById("applyVoucher")?.addEventListener("click", () => {
+  const code = document.getElementById("voucher").value.trim().toUpperCase();
+  const msg = document.getElementById("voucher-message");
+  const subtotal = parseFloat(localStorage.getItem("orderSubtotal")) || 0;
+  const shipping = parseFloat(localStorage.getItem("orderShipping")) || 0;
+  const orders = JSON.parse(localStorage.getItem("orders")) || [];
+  const today = new Date();
+  const day = today.getDay(); // 0=CN, 4=Thứ 5
+  const todayDate = today.toLocaleDateString("vi-VN");
+
+  let discount = 0;
+  let message = "";
+
+  if (!code) {
+    msg.textContent = "❌ Vui lòng nhập mã voucher.";
+    msg.style.color = "red";
+    return;
+  }
+
+  if (code === "KHMOI") {
+    if (orders.length === 0) {
+      discount = subtotal * 0.3;
+      message = "✅ Áp dụng KHMOI: giảm 30% cho khách hàng mới.";
+    } else {
+      message = "❌ Voucher chỉ dành cho khách hàng mới.";
+    }
+  } else if (code === "T5NUAGIA") {
+    if (day === 4) {
+      discount = Math.min(subtotal * 0.5, 150000);
+      message = "✅ Áp dụng T5NUAGIA: giảm 50% tối đa 150.000đ.";
+    } else {
+      message = "❌ Voucher chỉ áp dụng vào Thứ Năm.";
+    }
+  } else if (code === "SHIP0Đ") {
+    const todayOrders = orders.filter(o => o.date === todayDate);
+    if (todayOrders.length >= 1) {
+      discount = shipping; // miễn phí ship
+      message = "✅ Áp dụng SHIP0Đ: miễn phí vận chuyển.";
+    } else {
+      message = "❌ Voucher chỉ áp dụng khi bạn đã có 1 đơn trong hôm nay.";
+    }
+  } else {
+    message = "❌ Mã voucher không hợp lệ.";
+  }
+
+  // Nếu có giảm giá, cập nhật hiển thị
+  const finalTotal = subtotal + shipping - discount;
+  localStorage.setItem("orderDiscount", discount.toString());
+  localStorage.setItem("orderTotal", finalTotal.toString());
+
+  // Hiển thị lại tổng tiền trên giao diện
+  document.getElementById("total").textContent = finalTotal.toLocaleString() + "đ";
+
+  msg.textContent = message;
+  msg.style.color = discount > 0 ? "green" : "red";
+});
+

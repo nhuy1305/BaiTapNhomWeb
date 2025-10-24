@@ -107,46 +107,39 @@
         }
 
         .message-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
             background: #f8f9fa;
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1rem;
         }
 
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
+        /* Sửa lại phần này để mỗi thông tin xuống một hàng */
+        .detail-item {
+            display: block;
             padding: 0.5rem 0;
             border-bottom: 1px solid #e9ecef;
         }
 
-        .detail-row:last-child {
+        .detail-item:last-child {
             border-bottom: none;
         }
 
         .detail-label {
             font-weight: 600;
             color: #2c5530;
+            display: block;
+            margin-bottom: 0.3rem;
         }
 
         .detail-value {
             color: #4CAF50;
             font-weight: 500;
-            text-align: right;
-            max-width: 60%;
-        }
-
-        /* CSS mới cho email xuống dòng */
-        .detail-value.email {
-            word-break: break-all;
+            word-break: break-word;
             word-wrap: break-word;
             overflow-wrap: break-word;
             hyphens: auto;
-            max-width: 200px;
-            text-align: left;
+            display: block;
+            width: 100%;
         }
 
         .message-footer {
@@ -409,19 +402,6 @@
                 align-items: flex-start;
             }
             
-            .message-details {
-                grid-template-columns: 1fr;
-            }
-            
-            .detail-value {
-                max-width: 100%;
-                text-align: left;
-            }
-            
-            .detail-value.email {
-                max-width: 100%;
-            }
-            
             .message-footer {
                 flex-direction: column;
                 align-items: flex-start;
@@ -445,8 +425,72 @@
 </head>
 
 <body>
-    <!-- Phần header, nav, sidebar giữ nguyên như trước -->
-    <!-- ... -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> Hotline: 0393058500</span>
+                <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
+            </div>
+            <div class="auth-links">
+                <a href="dangnhap.html"><i class="fas fa-user"></i>Đăng nhập</a>
+                <a href="dangky.html"><i class="fas fa-user-plus"></i>Đăng ký</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                Rau Sạch Online
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="cart-icon" id="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">TRANG CHỦ</a></li>
+                <li>
+                    <a href="khuyenmai.html">KHUYẾN MÃI <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="khuyenmai.html">Tất cả khuyến mãi</a></li>
+                        <li><a href="khuyenmai.html">Combo tiết kiệm</a></li>
+                        <li><a href="khuyenmai.html">Sản phẩm giảm giá</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">SẢN PHẨM <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="#tatcasanpham">Tất cả sản phẩm</a></li>
+                        <li><a href="sanphamnoibat.html">Sản phẩm nổi bật</a></li>
+                        <li><a href="sanphammoi.html">Sản phẩm mới</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
+                <li><a href="tintuc.html">TIN TỨC</a></li>
+                <li><a href="lienhe.html">LIÊN HỆ</a></li>
+
+                <li>
+                    <a href="#">VỀ CHÚNG TÔI <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="tamnhinvasumenh.html">Tầm nhìn và sứ mệnh</a></li>
+                        <li><a href="lichsuhinhthanh.html">Lịch sử hình thành</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
 
     <div class="container">
         <div class="sidebar">
@@ -523,8 +567,60 @@
         </div>
     </div>
 
-    <!-- Footer giữ nguyên -->
-    <!-- ... -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CÔNG TY RAU SẠCH ONLINE</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 154A Hà Huy Giáp, P.An Phú Đông, Q.12, TP. HCM</p>
+                    <p><i class="fas fa-phone"></i> 0393058500</p>
+                    <p><i class="fas fa-clock"></i> Thứ 2 - Chủ nhật: 6:00 - 17:00</p>
+                    <p><i class="fas fa-envelope"></i> Nhuy5201314@gmail.com</p>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>DANH MỤC SẢN PHẨM</h3>
+               <ul>
+                <li><a href="rautuoi.html">Rau tươi sạch mỗi ngày</a></li>
+                <li><a href="cu.html">Các loại củ tươi ngon – giá tốt</a></li>
+                <li><a href="giavi.html">Rau gia vị </a></li>
+                <li><a href="rauvuon.html">Rau vườn – tươi ngon tự nhiên</a></li>
+                <li><a href="rausach.html">Rau sạch an toàn – giá hợp lý</a></li>
+                <li><a href="hoaquavuon.html">Hoa quả vườn – ngọt lành tươi</a></li>
+                <li><a href="hoaquathuong.html">Hoa quả thường – siêu tiết kiệm</a></li>
+                <li><a href="sanphamgiamgia.html">Sản phẩm giảm giá cực hot</a></li>
+                <li><a href="voucher.html">Nhận ngay voucher ưu đãi</a></li>
+                <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
+            </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+                <ul>
+                    <li><a href="cauhoi.html">Câu hỏi thường gặp</a></li>
+                    <li><a href="doitra.html">Chính sách đổi trả hàng</a></li>
+                    <li><a href="giaohang.html">Chính sách giao hàng</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>VỀ RAU SẠCH ONLINE</h3>
+                <ul>
+                    <li><a href="gioithieu.html">Giới thiệu</a></li>
+                    <li><a href="tamnhin.html">Tầm nhìn và Sứ mệnh</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">2025 Rau Sạch Online</div>
+    </footer>
 
     <script>
         let currentDeleteId = null;
@@ -570,21 +666,21 @@
                 <div class="message-content">
                     <div class="message-text">${message.message}</div>
                     <div class="message-details">
-                        <div class="detail-row">
+                        <div class="detail-item">
                             <span class="detail-label">Họ tên:</span>
                             <span class="detail-value">${message.name}</span>
                         </div>
-                        <div class="detail-row">
+                        <div class="detail-item">
                             <span class="detail-label">SĐT:</span>
                             <span class="detail-value">${message.phone}</span>
                         </div>
                         ${message.email ? `
-                        <div class="detail-row">
+                        <div class="detail-item">
                             <span class="detail-label">Email:</span>
-                            <span class="detail-value email">${message.email}</span>
+                            <span class="detail-value">${message.email}</span>
                         </div>
                         ` : ''}
-                        <div class="detail-row">
+                        <div class="detail-item">
                             <span class="detail-label">Chủ đề:</span>
                             <span class="detail-value">${subjectText}</span>
                         </div>
