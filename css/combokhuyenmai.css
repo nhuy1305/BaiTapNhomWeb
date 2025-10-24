@@ -16,7 +16,11 @@ body {
   color: var(--dark);
 }
 
-/* Thanh trên */
+nav ul li {
+  list-style: none;
+}
+
+
 .top-bar {
   background-color: var(--secondary);
   color: white;

@@ -42,6 +42,10 @@ body {
   margin-right: 20px;
 }
 
+nav ul li {
+  list-style: none;
+}
+
 .auth-links a {
   color: white;
   text-decoration: none;
