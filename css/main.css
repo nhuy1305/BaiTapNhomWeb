@@ -766,4 +766,18 @@ footer {
   #btn-logout:hover {
     background-color: #1b5e20;
   }
-  
+.user-name {
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s, font-weight 0.2s;
+}
+.user-name:hover {
+  color: #2e7d32; 
+  font-weight: 600; 
+  text-decoration: underline;
+}
+.user-name:active {
+  color: #1b5e20; 
+  font-weight: 700;
+}
