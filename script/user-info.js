@@ -25,17 +25,19 @@ function renderUserArea() {
       return;
     }
   
+    // Lấy thông tin người dùng từ LocalStorage
     document.getElementById('p-fullname').textContent = localStorage.getItem('userFullname') || '';
     document.getElementById('p-email').textContent = localStorage.getItem('userEmail') || '';
     document.getElementById('p-phone').textContent = localStorage.getItem('userPhone') || '';
     document.getElementById('p-address').textContent = localStorage.getItem('userAddress') || '';
   
-    modal.style.display = 'flex';
+    // Hiển thị modal
+    modal.classList.add('show');
   }
   
   function closeProfile() {
     const modal = document.getElementById('profile-modal');
-    if (modal) modal.style.display = 'none';
+    if (modal) modal.classList.remove('show');
   }
   
   function logout() {
