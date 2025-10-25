@@ -228,3 +228,44 @@ footer {
   margin-top: 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
+.user-name {
+  cursor: pointer;
+  background: rgba(76,175,80,0.1);
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: #2e7d32;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.user-name:hover {
+  background: rgba(76,175,80,0.2);
+}
+
+.profile-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+.profile-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 320px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  right: 10px;
+  top: 6px;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
