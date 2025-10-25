@@ -1,4 +1,3 @@
-// ==================== HIỂN THỊ KHU VỰC NGƯỜI DÙNG ====================
 function renderUserArea() {
     const userArea = document.getElementById('user-area');
     if (!userArea) return;
@@ -10,12 +9,8 @@ function renderUserArea() {
       userArea.innerHTML = `
         <div class="user-name" id="user-name">Xin chào, ${fullname}</div>
       `;
-  
-      // Khi nhấn vào tên => mở modal thông tin
-      const userName = document.getElementById('user-name');
-      if (userName) userName.addEventListener('click', openProfile);
+      document.getElementById('user-name').addEventListener('click', openProfile);
     } else {
-      // Nếu chưa đăng nhập => hiện liên kết đăng nhập, đăng ký
       userArea.innerHTML = `
         <a href="dangnhap.html"><i class="fas fa-user"></i> Đăng nhập</a>
         <a href="dangky.html"><i class="fas fa-user-plus"></i> Đăng ký</a>
@@ -23,28 +18,26 @@ function renderUserArea() {
     }
   }
   
-  // ==================== MỞ MODAL THÔNG TIN NGƯỜI DÙNG ====================
   function openProfile() {
     const modal = document.getElementById('profile-modal');
-    if (!modal) return;
+    if (!modal) {
+      console.error("Không tìm thấy #profile-modal");
+      return;
+    }
   
-    // Gán dữ liệu người dùng
     document.getElementById('p-fullname').textContent = localStorage.getItem('userFullname') || '';
     document.getElementById('p-email').textContent = localStorage.getItem('userEmail') || '';
     document.getElementById('p-phone').textContent = localStorage.getItem('userPhone') || '';
     document.getElementById('p-address').textContent = localStorage.getItem('userAddress') || '';
   
-    // Hiện modal
-    modal.classList.add('active');
+    modal.style.display = 'flex';
   }
   
-  // ==================== ĐÓNG MODAL ====================
   function closeProfile() {
     const modal = document.getElementById('profile-modal');
-    if (modal) modal.classList.remove('active');
+    if (modal) modal.style.display = 'none';
   }
   
-  // ==================== ĐĂNG XUẤT ====================
   function logout() {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('userFullname');
@@ -54,7 +47,6 @@ function renderUserArea() {
     window.location.href = 'index.html';
   }
   
-  // ==================== SỰ KIỆN KHI TRANG LOAD ====================
   document.addEventListener('DOMContentLoaded', () => {
     renderUserArea();
   
