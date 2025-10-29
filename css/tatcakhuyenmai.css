@@ -17,6 +17,10 @@
   --transition: all 0.3s ease;
 }
 
+nav ul li{
+  list-style-type: none;
+}
+
 body {
   background-color: var(--light-color);
   color: var(--text-color);
