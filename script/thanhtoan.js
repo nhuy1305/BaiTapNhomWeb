@@ -20,32 +20,42 @@ document.addEventListener('DOMContentLoaded', () => {
     cart.forEach(item => {
         if (!seenIds.has(item.id)) {
             seenIds.add(item.id);
-            uniqueCart.push(item);
+            uniqueCart.push({ ...item, quantity: item.quantity || 1 });
         } else {
             // Nếu đã tồn tại, tăng quantity cho item đã có
             const existing = uniqueCart.find(i => i.id === item.id);
-            if (existing) existing.quantity += item.quantity || 1;
+            if (existing) existing.quantity += (item.quantity || 1);
         }
     });
 
     // Hiển thị sản phẩm (chỉ 1 lần cho mỗi id)
     orderItems.innerHTML = ''; // Xóa nội dung cũ
     let subtotal = 0;
+    
     uniqueCart.forEach(item => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'order-item';
+        const itemTotal = item.price * (item.quantity || 1);
         itemDiv.innerHTML = `
             <img src="${item.image || 'https://via.placeholder.com/50'}" alt="${item.name}">
             <span>${item.name} x${item.quantity || 1}</span>
-            <span>${(item.price * (item.quantity || 1)).toLocaleString()}đ</span>
+            <span>${itemTotal.toLocaleString()}đ</span>
         `;
         orderItems.appendChild(itemDiv);
-        subtotal += item.price * (item.quantity || 1);
+        subtotal += itemTotal;
     });
 
     // Nếu cart rỗng, thêm 1 sản phẩm mẫu
     if (uniqueCart.length === 0) {
-        const defaultItem = { name: "Cải kale (Xanh) Organic 300gr", price: 35000, quantity: 1, image: "https://via.placeholder.com/50" };
+        const defaultItem = { 
+            id: 'default-1',
+            name: "Cải kale (Xanh) Organic 300gr", 
+            price: 35000, 
+            quantity: 1, 
+            image: "https://via.placeholder.com/50" 
+        };
+        uniqueCart.push(defaultItem);
+        
         const itemDiv = document.createElement('div');
         itemDiv.className = 'order-item';
         itemDiv.innerHTML = `
@@ -57,20 +67,46 @@ document.addEventListener('DOMContentLoaded', () => {
         subtotal = defaultItem.price * defaultItem.quantity;
     }
 
-    // Tính phí vận chuyển
-    const shipping = 0; // Có thể thay đổi logic phí ship tùy theo yêu cầu
+    // HÀM TÍNH PHÍ VẬN CHUYỂN
+    function calculateShipping(address) {
+        const addressUpper = address.toUpperCase();
+        if (addressUpper.includes('HCM') || addressUpper.includes('TPHCM')) {
+            return 0;
+        }
+        return 30000;
+    }
+
+    // HÀM VIẾT HOA CHỮ CÁI ĐẦU
+    function capitalizeAddress(address) {
+        return address.split(',').map(part => {
+            return part.trim().split(' ').map(word => {
+                if (word.length === 0) return word;
+                return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+            }).join(' ');
+        }).join(', ');
+    }
+
+    // Tính phí vận chuyển ban đầu
+    let shipping = 0;
+    const total = subtotal + shipping;
     
-    // Cập nhật tổng tiền
+    // Cập nhật hiển thị tổng tiền
     document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
     document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
     document.getElementById('total').textContent = (subtotal + shipping).toLocaleString() + 'đ';
 
-    // LƯU THÔNG TIN GIÁ VÀO LOCALSTORAGE ĐỂ ĐỒNG BỘ VỚI CHITIETHOADON
-    localStorage.setItem('orderSubtotal', subtotal);
-    localStorage.setItem('orderShipping', shipping);
-    localStorage.setItem('orderTotal', subtotal + shipping);
+    // CẬP NHẬT PHÍ VẬN CHUYỂN KHI NGƯỜI DÙNG NHẬP ĐỊA CHỈ
+    const addressInput = document.getElementById('address');
+    addressInput.addEventListener('input', function() {
+        const address = this.value.trim();
+        if (address) {
+            shipping = calculateShipping(address);
+            document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
+            document.getElementById('total').textContent = (subtotal + shipping).toLocaleString() + 'đ';
+        }
+    });
 
-    // Validation (giữ nguyên logic cũ)
+    // Validation (giữ nguyên logic cũ + thêm validation địa chỉ)
     const inputs = {
         fullname: document.getElementById('fullname'),
         name: document.getElementById('name'),
@@ -107,14 +143,25 @@ document.addEventListener('DOMContentLoaded', () => {
             errors.name.style.visibility = 'hidden';
         }
 
-        if (!inputs.address.value.trim()) {
+        // VALIDATION ĐỊA CHỈ
+        const address = inputs.address.value.trim();
+        if (!address) {
             inputs.address.classList.add('error-border');
             errors.address.textContent = 'Vui lòng nhập địa chỉ';
             errors.address.style.visibility = 'visible';
             isValid = false;
         } else {
-            inputs.address.classList.remove('error-border');
-            errors.address.style.visibility = 'hidden';
+            // Kiểm tra định dạng địa chỉ: phải có ít nhất 4 phần cách nhau bởi dấu phẩy
+            const addressParts = address.split(',').map(part => part.trim()).filter(part => part.length > 0);
+            if (addressParts.length < 4) {
+                inputs.address.classList.add('error-border');
+                errors.address.textContent = 'Địa chỉ phải bao gồm: Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố';
+                errors.address.style.visibility = 'visible';
+                isValid = false;
+            } else {
+                inputs.address.classList.remove('error-border');
+                errors.address.style.visibility = 'hidden';
+            }
         }
 
         return isValid;
@@ -145,13 +192,38 @@ document.addEventListener('DOMContentLoaded', () => {
             if (validateInputs()) {
                 const fullname = document.getElementById('fullname').value;
                 const name = document.getElementById('name').value;
-                const address = document.getElementById('address').value;
+                let address = document.getElementById('address').value.trim();
+                
+                // VIẾT HOA CHỮ CÁI ĐẦU CỦA ĐỊA CHỈ
+                address = capitalizeAddress(address);
+                
+                // Tính lại phí vận chuyển cuối cùng
+                shipping = calculateShipping(address);
+                const finalTotal = subtotal + shipping;
+                
+                // Lưu thông tin khách hàng
                 localStorage.setItem('userFullname', fullname);
                 localStorage.setItem('userPhone', name);
                 localStorage.setItem('userAddress', address);
                 
+                // MERGE CART MỘT LẦN NỮA ĐỂ ĐẢM BẢO KHÔNG CÒN DUPLICATE
+                const finalCart = mergeDuplicateItems(uniqueCart);
+                
                 // LƯU CART ĐÃ MERGE VÀO LOCALSTORAGE
-                localStorage.setItem('cart', JSON.stringify(uniqueCart));
+                localStorage.setItem('cart', JSON.stringify(finalCart));
+                
+                // LƯU THÔNG TIN GIÁ VÀO LOCALSTORAGE
+                localStorage.setItem('orderSubtotal', subtotal.toString());
+                localStorage.setItem('orderShipping', shipping.toString());
+                localStorage.setItem('orderTotal', finalTotal.toString());
+                
+                // DEBUG: Log trước khi chuyển trang
+                console.log('=== BEFORE REDIRECT ===');
+                console.log('Final Cart:', finalCart);
+                console.log('Address (capitalized):', address);
+                console.log('Saved Subtotal:', localStorage.getItem('orderSubtotal'));
+                console.log('Saved Shipping:', localStorage.getItem('orderShipping'));
+                console.log('Saved Total:', localStorage.getItem('orderTotal'));
                 
                 alert('Đơn hàng được tạo thành công!');
                 window.location.href = 'chitiethoadon.html';
@@ -159,3 +231,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Hàm merge duplicate items
+function mergeDuplicateItems(cart) {
+    const merged = {};
+    cart.forEach(item => {
+        if (merged[item.id]) {
+            merged[item.id].quantity += parseInt(item.quantity) || 1;
+        } else {
+            merged[item.id] = { ...item, quantity: parseInt(item.quantity) || 1 };
+        }
+    });
+    return Object.values(merged);
+}
