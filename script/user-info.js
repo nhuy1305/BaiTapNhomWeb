@@ -57,6 +57,13 @@ function renderUserArea() {
   
     const btnLogout = document.getElementById('btn-logout');
     if (btnLogout) btnLogout.addEventListener('click', logout);
+
+    const btnMyOrders = document.getElementById('btn-my-orders');
+    if (btnMyOrders) {
+        btnMyOrders.addEventListener('click', () => {
+            window.location.href = 'donhang.html';
+        });
+    }
   
     const modal = document.getElementById('profile-modal');
     if (modal) {
@@ -65,4 +72,5 @@ function renderUserArea() {
       });
     }
   });
+
   
