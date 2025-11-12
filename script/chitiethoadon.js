@@ -1,19 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Lấy thông tin từ localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    console.log('=== CHITIETHOADON.JS START ===');
+    
+    // Lấy thông tin giá từ localStorage NGAY LẬP TỨC
+    const orderSubtotal = localStorage.getItem('orderSubtotal');
+    const orderShipping = localStorage.getItem('orderShipping');
+    const orderDiscount = localStorage.getItem('orderDiscount'); // ✅ Lấy discount
+    const orderTotal = localStorage.getItem('orderTotal');
+    
+    console.log('Raw Subtotal:', orderSubtotal);
+    console.log('Raw Shipping:', orderShipping);
+    console.log('Raw Discount:', orderDiscount); // ✅ Log discount
+    console.log('Raw Total:', orderTotal);
+    
     const orderPhone = localStorage.getItem('userPhone') || 'Chưa có thông tin';
     const orderEmail = localStorage.getItem('userEmail') || 'Chưa có thông tin';
     const orderAddress = localStorage.getItem('userAddress') || 'Chưa có thông tin';
     
-    // Merge duplicate items trước khi hiển thị
-    cart = mergeDuplicateItems(cart);
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    console.log('Cart from localStorage:', cart);
+    console.log('Cart length:', cart.length);
     
-    // Hiển thị thông tin khách hàng
+    console.log('Cart to display:', cart);
+    
     document.getElementById('order-phone').textContent = orderPhone;
     document.getElementById('order-email').textContent = orderEmail;
     document.getElementById('order-address').textContent = orderAddress;
     
-    // Hiển thị danh sách sản phẩm
     const orderItemList = document.getElementById('order-item-list');
     cart.forEach(item => {
         const row = document.createElement('tr');
@@ -26,39 +38,72 @@ document.addEventListener('DOMContentLoaded', () => {
         orderItemList.appendChild(row);
     });
     
-    // LẤY GIÁ TỪ LOCALSTORAGE - SỬA ĐỂ ĐẢM BẢO LẤY ĐÚNG GIÁ TRỊ
-    let subtotal = localStorage.getItem('orderSubtotal');
-    let shipping = localStorage.getItem('orderShipping');
-    let total = localStorage.getItem('orderTotal');
+    // XỬ LÝ GIÁ TIỀN
+    let subtotal = 0;
+    let shipping = 0;
+    let discount = 0; // ✅ Thêm discount
+    let total = 0;
     
-    if (!subtotal || subtotal === 'null' || subtotal === '0') {
+    if (orderSubtotal && orderSubtotal !== 'null' && orderSubtotal !== 'undefined') {
+        subtotal = parseInt(orderSubtotal);
+        console.log('Subtotal parsed:', subtotal);
+    } else {
         subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    } else {
-        subtotal = parseInt(subtotal);
+        console.log('Subtotal calculated:', subtotal);
     }
     
-    if (!shipping || shipping === 'null') {
+    if (orderShipping && orderShipping !== 'null' && orderShipping !== 'undefined') {
+        shipping = parseInt(orderShipping);
+        console.log('Shipping parsed:', shipping);
+    } else {
         shipping = 0;
-    } else {
-        shipping = parseInt(shipping);
+        console.log('Shipping default:', shipping);
     }
     
-    if (!total || total === 'null' || total === '0') {
-        total = subtotal + shipping;
+    // ✅ XỬ LÝ DISCOUNT
+    if (orderDiscount && orderDiscount !== 'null' && orderDiscount !== 'undefined') {
+        discount = parseInt(orderDiscount);
+        console.log('Discount parsed:', discount);
     } else {
-        total = parseInt(total);
+        discount = 0;
+        console.log('Discount default:', discount);
     }
     
-    // ✅ Thêm phần giảm giá 
-    const discount = parseFloat(localStorage.getItem("orderDiscount")) || 0;
-    const discountEl = document.getElementById("discount");
-    if (discountEl) discountEl.textContent = discount.toLocaleString() + "đ";
+    if (orderTotal && orderTotal !== 'null' && orderTotal !== 'undefined') {
+        total = parseInt(orderTotal);
+        console.log('Total parsed:', total);
+    } else {
+        total = subtotal + shipping - discount; // ✅ Tính có discount
+        console.log('Total calculated:', total);
+    }
     
     // Hiển thị giá tiền
-    document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
-    document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
-    document.getElementById('total').textContent = total.toLocaleString() + 'đ';
- 
+    const subtotalElement = document.getElementById('subtotal');
+    const shippingElement = document.getElementById('shipping');
+    const discountElement = document.getElementById('discount'); // ✅ Element discount
+    const totalElement = document.getElementById('total');
+    
+    if (subtotalElement) {
+        subtotalElement.textContent = subtotal.toLocaleString() + 'đ';
+        console.log('Displayed Subtotal:', subtotalElement.textContent);
+    }
+    
+    if (shippingElement) {
+        shippingElement.textContent = shipping.toLocaleString() + 'đ';
+        console.log('Displayed Shipping:', shippingElement.textContent);
+    }
+    
+    // ✅ HIỂN THỊ DISCOUNT
+    if (discountElement) {
+        discountElement.textContent = discount.toLocaleString() + 'đ';
+        console.log('Displayed Discount:', discountElement.textContent);
+    }
+    
+    if (totalElement) {
+        totalElement.textContent = total.toLocaleString() + 'đ';
+        console.log('Displayed Total:', totalElement.textContent);
+    }
+    
     const orderDate = new Date().toLocaleString('vi-VN', {
         day: '2-digit',
         month: '2-digit',
@@ -68,16 +113,23 @@ document.addEventListener('DOMContentLoaded', () => {
         hour12: false
     });
     document.getElementById('order-date').textContent = orderDate;
- 
-    localStorage.removeItem('cart');
-    localStorage.removeItem('orderSubtotal');
-    localStorage.removeItem('orderShipping');
-    localStorage.removeItem('orderTotal');
     
-    const cartCountElement = document.getElementById('cart-count');
-    if (cartCountElement) {
-        cartCountElement.textContent = '0';
-    }
+    console.log('=== CHITIETHOADON.JS END ===');
+    
+    // XÓA SAU KHI ĐÃ HIỂN THỊ XONG
+    setTimeout(() => {
+        localStorage.removeItem('cart');
+        localStorage.removeItem('orderSubtotal');
+        localStorage.removeItem('orderShipping');
+        localStorage.removeItem('orderDiscount'); // ✅ Xóa discount
+        localStorage.removeItem('orderTotal');
+        console.log('LocalStorage cleared');
+        
+        const cartCountElement = document.getElementById('cart-count');
+        if (cartCountElement) {
+            cartCountElement.textContent = '0';
+        }
+    }, 500);
 });
 
 function mergeDuplicateItems(cart) {
