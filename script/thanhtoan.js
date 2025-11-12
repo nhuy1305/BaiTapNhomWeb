@@ -1,20 +1,47 @@
 document.addEventListener('DOMContentLoaded', () => {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const loginLink = document.getElementById('loginLink');
+    
     if (!isLoggedIn) {
         loginLink.style.display = 'block';
+        loginLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            sessionStorage.setItem('returnUrl', 'thanhtoan.html');
+            window.location.href = 'dangnhap.html';
+        });
     } else {
         loginLink.style.display = 'none';
-        document.getElementById('fullname').value = localStorage.getItem('userFullname') || '';
-        document.getElementById('name').value = localStorage.getItem('userPhone') || '';
-        document.getElementById('address').value = localStorage.getItem('userAddress') || '';
+        const fullnameInput = document.getElementById('fullname');
+        const phoneInput = document.getElementById('name');
+        const addressInput = document.getElementById('address');
+        
+        fullnameInput.value = localStorage.getItem('userFullname') || '';
+        phoneInput.value = localStorage.getItem('userPhone') || '';
+        addressInput.value = localStorage.getItem('userAddress') || '';
+        
+        if (addressInput.value) {
+            const address = addressInput.value.trim();
+            const shipping = calculateShipping(address);
+            document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
+            
+            const subtotalText = document.getElementById('subtotal').textContent;
+            const subtotal = parseInt(subtotalText.replace(/[.,đ]/g, '')) || 0;
+            document.getElementById('total').textContent = (subtotal + shipping).toLocaleString() + 'đ';
+        }
+    }
+    
+    function calculateShipping(address) {
+        const addressUpper = address.toUpperCase();
+        if (addressUpper.includes('HCM') || addressUpper.includes('TPHCM')) {
+            return 0;
+        }
+        return 30000;
     }
 
     // Load cart từ localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const orderItems = document.getElementById('order-items');
 
-    // Xử lý duplication: Gộp các sản phẩm có cùng id
     const uniqueCart = [];
     const seenIds = new Set();
     cart.forEach(item => {
@@ -22,14 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
             seenIds.add(item.id);
             uniqueCart.push({ ...item, quantity: item.quantity || 1 });
         } else {
-            // Nếu đã tồn tại, tăng quantity cho item đã có
             const existing = uniqueCart.find(i => i.id === item.id);
             if (existing) existing.quantity += (item.quantity || 1);
         }
     });
 
-    // Hiển thị sản phẩm (chỉ 1 lần cho mỗi id)
-    orderItems.innerHTML = ''; // Xóa nội dung cũ
+    orderItems.innerHTML = '';
     let subtotal = 0;
     
     uniqueCart.forEach(item => {
@@ -45,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
         subtotal += itemTotal;
     });
 
-    // Nếu cart rỗng, thêm 1 sản phẩm mẫu
     if (uniqueCart.length === 0) {
         const defaultItem = { 
             id: 'default-1',
@@ -67,16 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
         subtotal = defaultItem.price * defaultItem.quantity;
     }
 
-    // HÀM TÍNH PHÍ VẬN CHUYỂN
-    function calculateShipping(address) {
-        const addressUpper = address.toUpperCase();
-        if (addressUpper.includes('HCM') || addressUpper.includes('TPHCM')) {
-            return 0;
-        }
-        return 30000;
-    }
-
-    // HÀM VIẾT HOA CHỮ CÁI ĐẦU
     function capitalizeAddress(address) {
         return address.split(',').map(part => {
             return part.trim().split(' ').map(word => {
@@ -86,27 +100,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join(', ');
     }
 
-    // Tính phí vận chuyển ban đầu
+    // 🔧 KHAI BÁO BIẾN SHIPPING VÀ DISCOUNT Ở NGOÀI
     let shipping = 0;
-    const total = subtotal + shipping;
+    let discount = 0; // ✅ Thêm biến discount
     
-    // Cập nhật hiển thị tổng tiền
     document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
     document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
     document.getElementById('total').textContent = (subtotal + shipping).toLocaleString() + 'đ';
 
-    // CẬP NHẬT PHÍ VẬN CHUYỂN KHI NGƯỜI DÙNG NHẬP ĐỊA CHỈ
     const addressInput = document.getElementById('address');
     addressInput.addEventListener('input', function() {
         const address = this.value.trim();
         if (address) {
             shipping = calculateShipping(address);
             document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
-            document.getElementById('total').textContent = (subtotal + shipping).toLocaleString() + 'đ';
+            // ✅ Tính lại total có bao gồm discount
+            const finalTotal = subtotal + shipping - discount;
+            document.getElementById('total').textContent = finalTotal.toLocaleString() + 'đ';
         }
     });
 
-    // Validation (giữ nguyên logic cũ + thêm validation địa chỉ)
     const inputs = {
         fullname: document.getElementById('fullname'),
         name: document.getElementById('name'),
@@ -143,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
             errors.name.style.visibility = 'hidden';
         }
 
-        // VALIDATION ĐỊA CHỈ
         const address = inputs.address.value.trim();
         if (!address) {
             inputs.address.classList.add('error-border');
@@ -151,7 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
             errors.address.style.visibility = 'visible';
             isValid = false;
         } else {
-            // Kiểm tra định dạng địa chỉ: phải có ít nhất 4 phần cách nhau bởi dấu phẩy
             const addressParts = address.split(',').map(part => part.trim()).filter(part => part.length > 0);
             if (addressParts.length < 4) {
                 inputs.address.classList.add('error-border');
@@ -194,45 +205,51 @@ document.addEventListener('DOMContentLoaded', () => {
                 const name = document.getElementById('name').value;
                 let address = document.getElementById('address').value.trim();
                 
-                // VIẾT HOA CHỮ CÁI ĐẦU CỦA ĐỊA CHỈ
                 address = capitalizeAddress(address);
-                
-                // Tính lại phí vận chuyển cuối cùng
                 shipping = calculateShipping(address);
-                const finalTotal = subtotal + shipping;
                 
-                // Lưu thông tin khách hàng
+                // ✅ TÍNH FINAL TOTAL SAU KHI ÁP DỤNG DISCOUNT
+                const finalTotal = subtotal + shipping - discount;
+                
                 localStorage.setItem('userFullname', fullname);
                 localStorage.setItem('userPhone', name);
                 localStorage.setItem('userAddress', address);
                 
-                // MERGE CART MỘT LẦN NỮA ĐỂ ĐẢM BẢO KHÔNG CÒN DUPLICATE
                 const finalCart = mergeDuplicateItems(uniqueCart);
-                
-                // LƯU CART ĐÃ MERGE VÀO LOCALSTORAGE
                 localStorage.setItem('cart', JSON.stringify(finalCart));
                 
-                // LƯU THÔNG TIN GIÁ VÀO LOCALSTORAGE
                 localStorage.setItem('orderSubtotal', subtotal.toString());
                 localStorage.setItem('orderShipping', shipping.toString());
-                localStorage.setItem('orderTotal', finalTotal.toString());
+                localStorage.setItem('orderDiscount', discount.toString()); // ✅ Lưu discount
+                localStorage.setItem('orderTotal', finalTotal.toString()); // ✅ Dùng finalTotal
                 
-                // DEBUG: Log trước khi chuyển trang
-                console.log('=== BEFORE REDIRECT ===');
-                console.log('Final Cart:', finalCart);
-                console.log('Address (capitalized):', address);
-                console.log('Saved Subtotal:', localStorage.getItem('orderSubtotal'));
-                console.log('Saved Shipping:', localStorage.getItem('orderShipping'));
-                console.log('Saved Total:', localStorage.getItem('orderTotal'));
+                // ✅ KIỂM TRA PHƯƠNG THỨC THANH TOÁN
+                const selectedPayment = document.querySelector('input[name="payment"]:checked').value;
+                const paymentStatus = selectedPayment === 'bank' ? 'Đã thanh toán' : 'Thanh toán một phần';
                 
-                alert('Đơn hàng được tạo thành công!');
-                window.location.href = 'chitiethoadon.html';
+                // Lưu đơn hàng
+                let existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+                
+                const newOrder = {
+                    id: "#HD" + Math.floor(Math.random() * 10000),
+                    date: new Date().toLocaleDateString("vi-VN"),
+                    address: address,
+                    total: finalTotal, // ✅ Dùng finalTotal
+                    payment: paymentStatus, // ✅ Động
+                    delivery: "Chưa giao hàng"
+                };
+                
+                existingOrders.push(newOrder);
+                localStorage.setItem("orders", JSON.stringify(existingOrders));
+                localStorage.setItem("userFullname", fullname);
+                
+                alert("Đơn hàng được tạo thành công!");
+                window.location.href = "chitiethoadon.html";
             }
         });
     }
 });
 
-// Hàm merge duplicate items
 function mergeDuplicateItems(cart) {
     const merged = {};
     cart.forEach(item => {
@@ -243,4 +260,72 @@ function mergeDuplicateItems(cart) {
         }
     });
     return Object.values(merged);
+}
+
+// ✅ XỬ LÝ VOUCHER
+document.getElementById("discount")?.addEventListener("click", applyVoucher);
+
+function applyVoucher() {
+    const code = document.getElementById("discount").value.trim().toUpperCase();
+    const msg = document.getElementById("voucher-message");
+    
+    // ✅ LẤY GIÁ TỪ ELEMENT THAY VÌ LOCALSTORAGE
+    const subtotalText = document.getElementById('subtotal').textContent;
+    const shippingText = document.getElementById('shipping').textContent;
+    const subtotal = parseInt(subtotalText.replace(/[.,đ]/g, '')) || 0;
+    const shipping = parseInt(shippingText.replace(/[.,đ]/g, '')) || 0;
+    
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+    const today = new Date();
+    const day = today.getDay();
+    const todayDate = today.toLocaleDateString("vi-VN");
+
+    let discount = 0;
+    let message = "";
+
+    if (!code) {
+        msg.textContent = "❌ Vui lòng nhập mã voucher.";
+        msg.style.color = "red";
+        return;
+    }
+
+    if (code === "KHMOI") {
+        if (orders.length === 0) {
+            discount = subtotal * 0.3;
+            message = "✅ Áp dụng KHMOI: giảm 30% cho khách hàng mới.";
+        } else {
+            message = "❌ Voucher chỉ dành cho khách hàng mới.";
+        }
+    } else if (code === "T5NUAGIA") {
+        if (day === 4) {
+            discount = Math.min(subtotal * 0.5, 150000);
+            message = "✅ Áp dụng T5NUAGIA: giảm 50% tối đa 150.000đ.";
+        } else {
+            message = "❌ Voucher chỉ áp dụng vào Thứ Năm.";
+        }
+    } else if (code === "SHIP0Đ") {
+        const todayOrders = orders.filter(o => o.date === todayDate);
+        if (todayOrders.length >= 1) {
+            discount = shipping;
+            message = "✅ Áp dụng SHIP0Đ: miễn phí vận chuyển.";
+        } else {
+            message = "❌ Voucher chỉ áp dụng khi bạn đã có 1 đơn trong hôm nay.";
+        }
+    } else {
+        message = "❌ Mã voucher không hợp lệ.";
+    }
+
+    // ✅ CHỈ CẬP NHẬT NẾU CÓ DISCOUNT > 0
+    if (discount > 0) {
+        // Cập nhật biến discount toàn cục
+        window.discount = discount;
+        
+        const finalTotal = subtotal + shipping - discount;
+        document.getElementById("total").textContent = finalTotal.toLocaleString() + "đ";
+        msg.style.color = "green";
+    } else {
+        msg.style.color = "red";
+    }
+
+    msg.textContent = message;
 }
