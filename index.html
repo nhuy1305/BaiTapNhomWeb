@@ -475,7 +475,13 @@
             <p><strong>Email:</strong> <span id="p-email"></span></p>
             <p><strong>Số điện thoại:</strong> <span id="p-phone"></span></p>
             <p><strong>Địa chỉ:</strong> <span id="p-address"></span></p>
-            <button id="btn-logout" class="btn btn-primary" style="margin-top:10px;">Đăng xuất</button>
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <button id="btn-my-orders" class="btn btn-primary" style="flex: 1;">
+                    <i class="fas fa-shopping-bag"></i> Đơn hàng của tôi
+                </button>
+                <button id="btn-logout" class="btn btn-secondary" style="flex: 1;">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </button>
         </div>
       </div>
 
@@ -483,4 +489,5 @@
     <script src="./script/user-info.js"></script>
 </body>
 </html>
+
 
