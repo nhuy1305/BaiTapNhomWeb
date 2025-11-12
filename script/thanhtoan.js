@@ -101,12 +101,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join(', ');
     }
 
+    // ✅ TÍNH PHÍ VẬN CHUYỂN BAN ĐẦU (nếu đã có địa chỉ)
     let shipping = 0;
+    const currentAddress = document.getElementById('address').value.trim();
+    if (currentAddress) {
+        shipping = calculateShipping(currentAddress);
+        console.log('Initial shipping calculated:', shipping, 'for address:', currentAddress);
+    }
     let discount = 0;
     
+    // ✅ CẬP NHẬT HIỂN THỊ GIÁ TIỀN (bao gồm shipping đã tính)
     document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
     document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
     document.getElementById('total').textContent = (subtotal + shipping).toLocaleString() + 'đ';
+
+    console.log('Initial prices:', {
+        subtotal,
+        shipping,
+        total: subtotal + shipping
+    });
 
     const addressInput = document.getElementById('address');
     addressInput.addEventListener('input', function() {
