@@ -126,6 +126,10 @@
   nav {
     background-color: var(--primary-color);
   }
+
+  nav ul li {
+    list-style: none;
+  }
   
   .nav-container {
     max-width: 1200px;
@@ -683,4 +687,5 @@
   /* Đảm bảo nút không bị ảnh hưởng bởi hover của product-card */
   .add-to-cart:hover {
     transform: none !important;
+
   }
