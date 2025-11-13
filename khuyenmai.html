@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bán rau online</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="./css/tatcakhuyenmai.css">
-    <script src="./script/main.js"></script>
+    <link rel="stylesheet" href="./css/khuyenmai.css">
 </head>
 
 <body>
@@ -266,7 +265,7 @@
 
                 <div class="product-card" data-id="12">
                     <div class="product-image">
-                        <img src="./img/caihoa.jpg" alt="" />
+                        <img src="./img/caihoa.jpg" alt="Cải hoa" />
                     </div>
                     <div class="product-info">
                         <div class="product-name">Cải hoa - 1 kg</div>
@@ -584,5 +583,25 @@
             </div>
         </div>
     </div>
+
+    <div id="profile-modal" class="profile-modal" style="display:none;">
+        <div class="profile-card">
+            <button id="close-profile" class="close-btn">&times;</button>
+            <h3>Thông tin tài khoản</h3>
+            <p><strong>Họ và tên:</strong> <span id="p-fullname"></span></p>
+            <p><strong>Email:</strong> <span id="p-email"></span></p>
+            <p><strong>Số điện thoại:</strong> <span id="p-phone"></span></p>
+            <p><strong>Địa chỉ:</strong> <span id="p-address"></span></p>
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <button id="btn-my-orders" class="btn btn-primary" style="flex: 1;">
+                    <i class="fas fa-shopping-bag"></i> Đơn hàng của tôi
+                </button>
+                <button id="btn-logout" class="btn btn-secondary" style="flex: 1;">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="./script/khuyenmai.js"></script>
 </body>
 </html>
