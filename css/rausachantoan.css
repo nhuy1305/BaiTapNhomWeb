@@ -671,7 +671,6 @@
     text-decoration: underline;
   }
   
-  /* Chỉnh sửa nút Thêm vào giỏ */
   .add-to-cart {
     padding: 8px 15px !important;
     font-size: 14px !important;
@@ -680,91 +679,119 @@
     justify-content: center;
   }
   
-  /* Đảm bảo nút không bị ảnh hưởng bởi hover của product-card */
   .add-to-cart:hover {
     transform: none !important;
   }
-  .modal.show {
+  
+  #profile-modal {
+      display: none; 
+      position: fixed; 
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6); 
+      z-index: 2000; 
+      justify-content: center;
+      align-items: center;
+    }
+  
+  #profile-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+  }
+  
+  #profile-modal.show {
     display: flex !important;
-}
-#profile-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* làm mờ giống ảnh */
-  justify-content: center;
-  align-items: center;
-  z-index: 3000;
-}
-
-#profile-modal.show {
-  display: flex !important;
-}
-
-/* CARD popup */
-.profile-card {
-  background-color: #fff;
-  padding: 40px 45px; /* tăng padding */
-  border-radius: 20px; /* giống ảnh 1 */
-  width: 550px; /* giống ảnh */
-  max-width: 95%;
-  position: relative;
-
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); /* shadow rõ hơn */
-  animation: showProfile 0.25s ease;
-}
-
-/* Animation */
-@keyframes showProfile {
-  from { transform: translateY(-15px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-/* Nút đóng */
-.close-btn {
-  position: absolute;
-  top: 18px;
-  right: 20px;
-  font-size: 28px; /* lớn giống ảnh */
-  font-weight: bold;
-  border: none;
-  background: transparent;
-  color: var(--dark-color);
-  cursor: pointer;
-}
-
-/* Tiêu đề */
-.profile-card h3 {
-  color: var(--primary-color);
-  font-size: 28px;     /* lớn giống ảnh */
-  text-align: center;  /* căn giữa */
-  margin-bottom: 25px;
-}
-
-/* Thông tin tài khoản */
-.profile-card p {
-  font-size: 18px;
-  margin: 10px 0;
-}
-
-/* Nút đăng xuất */
-#btn-logout {
-  width: 100%;
-  margin-top: 25px;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 14px 0;
-  border-radius: 12px; /* bo cong giống ảnh */
-  font-size: 18px;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-#btn-logout:hover {
-  background-color: var(--secondary-color);
-}
+  }
+  
+  .profile-card {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    text-align: left;
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+    animation: showProfile 0.25s ease;
+    z-index: 4000;
+  }
+  
+  @keyframes showProfile {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    border: none;
+    background: transparent;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    color: #2e7d32;
+  }  
+  
+  .profile-card h3 {
+      color: #2e7d32;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+  .profile-card p {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+    
+  #btn-logout {
+      width: 100%;
+      margin-top: 20px;
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+  #btn-logout:hover {
+      background-color: #1b5e20;
+    }
+  .user-name {
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.2s, font-weight 0.2s;
+  }
+  .user-name:hover {
+    color: #2e7d32; 
+    font-weight: 600; 
+    text-decoration: underline;
+  }
+  .user-name:active {
+    color: #1b5e20; 
+    font-weight: 700;
+  }
+  
   
