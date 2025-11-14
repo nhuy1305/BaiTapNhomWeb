@@ -57,7 +57,7 @@
         <li>
           <a href="#">SẢN PHẨM <i class="fas fa-chevron-down"></i></a>
           <ul class="dropdown">
-            <li><a href="index.html">Tất cả sản phẩm</a></li>
+            <li><a href="#tatcasanpham">Tất cả sản phẩm</a></li>
             <li><a href="sanphamnoibat.html">Sản phẩm nổi bật</a></li>
             <li><a href="sanphammoi.html">Sản phẩm mới</a></li>
           </ul>
@@ -102,21 +102,32 @@
 
       <h1 class="page-title">RAU SẠCH AN TOÀN - GIÁ HỢP LÝ</h1>
 
+      <div class="sort-options">
+        <div>Hiển thị tất cả rau sạch an toàn</div>
+        <div>
+          <label for="sort">Sắp xếp:</label>
+          <select id="sort">
+            <option value="default">Mặc định</option>
+            <option value="price-asc">Giá tăng dần</option>
+            <option value="price-desc">Giá giảm dần</option>
+          </select>
+        </div>
+      </div>
 
       <div class="product-grid">
-        <div class="product-card">
+        <div class="product-card" data-id="rsat01">
           <div class="product-image"><img src="./img/rauden.jpg" alt="Rau dền đỏ"></div>
           <div class="product-info"><div class="product-name">Rau dền đỏ - 1 bó</div>
           <div class="product-price">10,000đ <span class="product-original-price">15,000đ</span>
             <span class="product-badge">Giảm 33%</span></div></div></div>
 
-        <div class="product-card">
+            <div class="product-card" data-id="rsat02">
           <div class="product-image"><img src="./img/raunhut.jpg" alt="Rau nhút"></div>
           <div class="product-info"><div class="product-name">Rau nhút - 1 bó</div>
           <div class="product-price">8,000đ <span class="product-original-price">12,000đ</span>
             <span class="product-badge">Giảm 33%</span></div></div></div>
 
-            <div class="product-card">
+            <div class="product-card" data-id="rsat03">
               <div class="product-image"><img src="./img/raucangcua.jpg" alt="Rau càng cua"></div>
               <div class="product-info">
                 <div class="product-name">Rau càng cua - 1 bó</div>
@@ -126,7 +137,7 @@
               </div>
             </div>
 
-            <div class="product-card">
+            <div class="product-card" data-id="rsat04">
               <div class="product-image"><img src="./img/thila.jpg" alt="Rau thì là"></div>
               <div class="product-info">
                 <div class="product-name">Rau thì là - 100g</div>
@@ -136,19 +147,19 @@
               </div>
             </div>
 
-        <div class="product-card">
+            <div class="product-card" data-id="rsat05">
           <div class="product-image"><img src="./img/rauthom.jpg" alt="Rau thơm"></div>
           <div class="product-info"><div class="product-name">Rau thơm - 100g</div>
           <div class="product-price">6,000đ <span class="product-original-price">9,000đ</span>
             <span class="product-badge">Giảm 33%</span></div></div></div>
 
-        <div class="product-card">
+            <div class="product-card" data-id="rsat06">
           <div class="product-image"><img src="./img/bixanh.jpg" alt="Bí xanh"></div>
           <div class="product-info"><div class="product-name">Bí xanh non - 1 trái</div>
           <div class="product-price">7,000đ <span class="product-original-price">10,000đ</span>
             <span class="product-badge">Giảm 30%</span></div></div></div>
 
-            <div class="product-card">
+            <div class="product-card" data-id="rsat07">
               <div class="product-image"><img src="./img/diepca.jpg" alt="Rau diếp cá"></div>
               <div class="product-info">
                 <div class="product-name">Rau diếp cá - 1 bó</div>
@@ -158,7 +169,7 @@
               </div>
             </div>
 
-            <div class="product-card">
+            <div class="product-card" data-id="rsat08">
               <div class="product-image"><img src="./img/rauchanvit.jpg" alt="Rau chân vịt"></div>
               <div class="product-info">
                 <div class="product-name">Rau chân vịt - 1 bó</div>
@@ -168,7 +179,7 @@
               </div>
             </div>
 
-            <div class="product-card">
+            <div class="product-card" data-id="rsat09">
               <div class="product-image"><img src="./img/raubacha.jpg" alt="Rau bạc hà"></div>
               <div class="product-info">
                 <div class="product-name">Rau bạc hà - 100g</div>
@@ -178,7 +189,7 @@
               </div>
             </div>
             
-            <div class="product-card">
+            <div class="product-card" data-id="rsat10">
               <div class="product-image"><img src="./img/raucantay.jpg" alt="Rau cần tây"></div>
               <div class="product-info">
                 <div class="product-name">Rau cần tây - 1 bó</div>
@@ -188,7 +199,7 @@
               </div>
             </div>
 
-            <div class="product-card">
+            <div class="product-card" data-id="rsat11">
               <div class="product-image"><img src="./img/rautiato.jpg" alt="Rau tía tô"></div>
               <div class="product-info">
                 <div class="product-name">Rau tía tô - 1 bó</div>
@@ -198,7 +209,7 @@
               </div>
             </div>
 
-            <div class="product-card">
+            <div class="product-card" data-id="rsat12">
               <div class="product-image"><img src="./img/rauhungque.jpg" alt="Rau húng quế"></div>
               <div class="product-info">
                 <div class="product-name">Rau húng quế - 100g</div>
@@ -286,4 +297,3 @@
   <script src="./script/main.js"></script>
 </body>
 </html>
-
