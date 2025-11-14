@@ -684,60 +684,70 @@
     }
     .modal.show {
       display: flex !important;
-  }
-    #profile-modal {
-        display: none; 
-        position: fixed; 
+    }
+      #profile-modal {
+        display: none;
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.6); 
-        z-index: 2000; 
+        background-color: rgba(0,0,0,0.6);
+        z-index: 3000;
         justify-content: center;
         align-items: center;
-      }
-    
-    #profile-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 3000;
     }
     
     #profile-modal.show {
-      display: flex !important;
+        display: flex !important;
+    }
+
+    #profile-modal .modal-content {
+        background: #fff;
+        padding: 30px 40px;
+        border-radius: 12px;
+        width: 400px;
+        max-width: 95%;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        position: relative;
+        animation: showProfile 0.25s ease;
+    }
+
+    #close-profile {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 22px;
+        cursor: pointer;
+        color: #333;
+        transition: .2s;
+    }
+    #close-profile:hover {
+        color: #2e7d32;
     }
     
-    .profile-card {
-      background-color: #fff;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-      text-align: left;
-      width: 400px;
-      max-width: 90%;
-      position: relative;
-      animation: showProfile 0.25s ease;
-      z-index: 4000;
+
+    #btn-logout {
+        width: 100%;
+        margin-top: 20px;
+        background-color: #2e7d32;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    #btn-logout:hover {
+        background-color: #1b5e20;
     }
     
+  
     @keyframes showProfile {
-      from {
-        transform: translateY(-20px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+        from { transform: translateY(-20px); opacity: 0; }
+        to   { transform: translateY(0);   opacity: 1; }
     }
+    
     
     .close-btn {
       position: absolute;
