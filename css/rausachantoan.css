@@ -126,17 +126,6 @@
   nav {
     background-color: var(--primary-color);
   }
-
-  nav ul li {
-    list-style: none;
-  }
-
-  .nav-links li a::before,
-  .nav-links > li > a::before,
-  nav .nav-links li a::before {
-    content: none !important;
-    display: none !important;
-  }
   
   .nav-container {
     max-width: 1200px;
@@ -690,9 +679,11 @@
     width: 100%;
     justify-content: center;
   }
-
+  
+  /* Đảm bảo nút không bị ảnh hưởng bởi hover của product-card */
   .add-to-cart:hover {
     transform: none !important;
-
   }
-
+  .modal.show {
+    display: flex !important;
+}
