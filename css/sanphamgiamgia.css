@@ -475,8 +475,8 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Cart Modal */
-.modal {
+ /* Cart Modal */
+ .modal {
   display: none;
   position: fixed;
   top: 0;
@@ -674,45 +674,142 @@ footer {
 
 .form-link:hover {
   text-decoration: underline;
+} 
+  
+  .add-to-cart {
+    padding: 8px 15px !important;
+    font-size: 14px !important;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .add-to-cart:hover {
+    transform: none !important;
+  }
+  .modal.show {
+    display: flex !important;
 }
-
-/* Chỉnh sửa nút Thêm vào giỏ */
-.add-to-cart {
-  padding: 8px 15px !important;
-  font-size: 14px !important;
-  margin-top: 10px;
+#profile-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 3000;
   justify-content: center;
+  align-items: center;
 }
 
-/* Đảm bảo nút không bị ảnh hưởng bởi hover của product-card */
-.add-to-cart:hover {
-  transform: none !important;
+/* Khi JS thêm class show → modal hiện */
+#profile-modal.show {
+  display: flex !important;
 }
-/* Nút Th - Thêm vào giỏ */
-.add-to-cart-btn {
-  margin-top: 12px;
+
+/* Nội dung modal */
+#profile-modal .modal-content {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 95%;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  position: relative;
+  animation: showProfile 0.25s ease;
+}
+
+/* Nút đóng */
+#close-profile {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #333;
+  transition: .2s;
+}
+#close-profile:hover {
+  color: #2e7d32;
+}
+
+/* Nút logout */
+#btn-logout {
   width: 100%;
-  padding: 10px 0;
+  margin-top: 20px;
   background-color: #2e7d32;
   color: white;
   border: none;
+  padding: 10px;
   border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-}
-
-.add-to-cart-btn:hover {
-  background-color: #1b5e20;
-  transform: translateY(-1px);
-}
-
-.add-to-cart-btn i {
   font-size: 16px;
 }
+#btn-logout:hover {
+  background-color: #1b5e20;
+}
+
+/* Animation */
+@keyframes showProfile {
+  from { transform: translateY(-20px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    border: none;
+    background: transparent;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    color: #2e7d32;
+  }  
+  
+  .profile-card h3 {
+      color: #2e7d32;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+  .profile-card p {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+    
+  #btn-logout {
+      width: 100%;
+      margin-top: 20px;
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+  #btn-logout:hover {
+      background-color: #1b5e20;
+    }
+  .user-name {
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.2s, font-weight 0.2s;
+  }
+  .user-name:hover {
+    color: #2e7d32; 
+    font-weight: 600; 
+    text-decoration: underline;
+  }
+  .user-name:active {
+    color: #1b5e20; 
+    font-weight: 700;
+  }
