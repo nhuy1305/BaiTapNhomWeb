@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hoa Quả Thường - Rau Sạch Online</title>
+    <title>Rau Tươi Mỗi  - Rau Sạch Online</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/gioithieu.css">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
                 <span><i class="fas fa-phone"></i> Hotline: 0393058500</span>
                 <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
             </div>
-            <div class="auth-links" id="user-area">
+            <div class="auth-links" id="user-area"></div>
         </div>
     </div>
 
@@ -90,6 +90,8 @@
                 <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
             </ul>
         </div>
+
+        
 
         <div class="main-content">
             <div class="breadcrumb">
@@ -296,6 +298,68 @@
 
             </div>
         </div>
+
+            <div class="featured-section">
+                <h2 class="section-title">COMBO HOA QUẢ TIẾT KIỆM</h2>
+                <div class="product-grid" id="featured-products">
+                    <div class="product-card" data-id="113">
+                        <div class="product-image">
+                            <img src="./img/traicay1.jpg" alt="Combo hoa quả gia đình" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Combo gia đình</div>
+                            <div class="product-price">
+                                150,000đ
+                                <span class="product-original-price">250,000đ</span>
+                                <span class="product-badge">Giảm 40%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="114">
+                        <div class="product-image">
+                            <img src="./img/traicay2.png" alt="Combo trái cây mix" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Combo trái cây mix</div>
+                            <div class="product-price">
+                                120,000đ
+                                <span class="product-original-price">180,000đ</span>
+                                <span class="product-badge">Giảm 33%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="115">
+                        <div class="product-image">
+                            <img src="./img/traicay3.jpg" alt="Combo hoa quả vườn" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Combo hoa quả vườn</div>
+                            <div class="product-price">
+                                200,000đ
+                                <span class="product-original-price">320,000đ</span>
+                                <span class="product-badge">Giảm 38%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="116">
+                        <div class="product-image">
+                            <img src="./img/traicay4.png" alt="Combo trái cây nhiệt đới" />
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Combo nhiệt đới</div>
+                            <div class="product-price">
+                                180,000đ
+                                <span class="product-original-price">280,000đ</span>
+                                <span class="product-badge">Giảm 36%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer>
@@ -371,19 +435,22 @@
     </div>
 
     <div id="profile-modal" class="modal">
-        <div class="modal-content">
-            <span id="close-profile" class="close">&times;</span>
-            <h2>Thông tin tài khoản</h2>
+  <div class="modal-content">
+      <span id="close-profile" class="close">&times;</span>
+      <h2>Thông tin tài khoản</h2>
 
-            <p><strong>Họ và tên:</strong> <span id="p-fullname"></span></p>
-            <p><strong>Email:</strong> <span id="p-email"></span></p>
-            <p><strong>Số điện thoại:</strong> <span id="p-phone"></span></p>
-            <p><strong>Địa chỉ:</strong> <span id="p-address"></span></p>
+      <p><strong>Họ và tên:</strong> <span id="p-fullname"></span></p>
+      <p><strong>Email:</strong> <span id="p-email"></span></p>
+      <p><strong>Số điện thoại:</strong> <span id="p-phone"></span></p>
+      <p><strong>Địa chỉ:</strong> <span id="p-address"></span></p>
 
-            <button id="btn-logout" class="btn-logout">Đăng xuất</button>
-        </div>
-    </div>
+      <button id="btn-logout" class="btn-logout">Đăng xuất</button>
+  </div>
+</div>
+
+    <script src="./script/user-info.js"></script>
+
     <script src="./script/main.js"></script>
-    <script src="./script/user-info.js"></script></body>
+</body>
 
 </html>
