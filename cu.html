@@ -7,6 +7,346 @@
     <title>Hoa Quả Thường - Rau Sạch Online</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="./css/main.css">
+    <style>
+    /* Cart Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .modal-content {
+        background-color: white;
+        border-radius: var(--border-radius);
+        width: 90%;
+        max-width: 800px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 30px;
+        position: relative;
+    }
+    
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--dark-color);
+    }
+    
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .cart-item-info {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+    
+    .cart-item-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-right: 15px;
+    }
+    
+    .cart-item-details {
+        flex: 1;
+    }
+    
+    .cart-item-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    
+    .cart-item-price {
+        color: var(--accent-color);
+        font-weight: bold;
+    }
+    
+    .cart-item-quantity {
+        display: flex;
+        align-items: center;
+        margin: 0 15px;
+    }
+    
+    .quantity-btn {
+        width: 30px;
+        height: 30px;
+        background-color: var(--light-color);
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    
+    .quantity-input {
+        width: 40px;
+        height: 30px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin: 0 5px;
+    }
+    
+    .cart-item-remove {
+        color: #f44336;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    
+    .cart-total {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 0;
+        font-size: 18px;
+        font-weight: bold;
+        border-top: 2px solid #eee;
+        margin-top: 10px;
+    }
+    
+    .cart-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    
+    .btn {
+        padding: 12px 25px;
+        border-radius: var(--border-radius);
+        font-size: 16px;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .btn-secondary {
+        background-color: #f5f5f5;
+        color: var(--dark-color);
+        border: 1px solid #ddd;
+    }
+    
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+    }
+    
+    .btn-primary:hover {
+        background-color: var(--secondary-color);
+    }
+    
+    /* Login/Register Form */
+    .auth-form {
+        max-width: 400px;
+        margin: 50px auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+    }
+    
+    .auth-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+    
+    .form-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: var(--border-radius);
+        font-size: 16px;
+    }
+    
+    .form-group input:focus {
+        border-color: var(--primary-color);
+        outline: none;
+    }
+    
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 25px;
+    }
+    
+    .form-link {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+    
+    .form-link:hover {
+        text-decoration: underline;
+    } 
+    
+    .add-to-cart {
+      padding: 8px 15px !important;
+      font-size: 14px !important;
+      margin-top: 10px;
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .add-to-cart:hover {
+      transform: none !important;
+    }
+    .modal.show {
+      display: flex !important;
+    }
+  #profile-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+  }
+
+    /* Khi JS thêm class show → modal hiện */
+    #profile-modal.show {
+        display: flex !important;
+    }
+
+    /* Nội dung modal */
+    #profile-modal .modal-content {
+        background: #fff;
+        padding: 30px 40px;
+        border-radius: 12px;
+        width: 400px;
+        max-width: 95%;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        position: relative;
+        animation: showProfile 0.25s ease;
+    }
+
+    /* Nút đóng */
+    #close-profile {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 22px;
+        cursor: pointer;
+        color: #333;
+        transition: .2s;
+    }
+    #close-profile:hover {
+        color: #2e7d32;
+    }
+
+    /* Nút logout */
+    #btn-logout {
+        width: 100%;
+        margin-top: 20px;
+        background-color: #2e7d32;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    #btn-logout:hover {
+        background-color: #1b5e20;
+    }
+
+    /* Animation */
+    @keyframes showProfile {
+        from { transform: translateY(-20px); opacity: 0; }
+        to   { transform: translateY(0);   opacity: 1; }
+    }
+
+    
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 22px;
+      border: none;
+      background: transparent;
+      color: #333;
+      cursor: pointer;
+    }
+    
+    .close-btn:hover {
+      color: #2e7d32;
+    }  
+    
+    .profile-card h3 {
+        color: #2e7d32;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+      
+    .profile-card p {
+        margin: 8px 0;
+        font-size: 16px;
+      }
+      
+    #btn-logout {
+        width: 100%;
+        margin-top: 20px;
+        background-color: #2e7d32;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+      
+    #btn-logout:hover {
+        background-color: #1b5e20;
+      }
+    .user-name {
+      font-weight: 500;
+      color: #333;
+      cursor: pointer;
+      transition: color 0.2s, font-weight 0.2s;
+    }
+    .user-name:hover {
+      color: #2e7d32; 
+      font-weight: 600; 
+      text-decoration: underline;
+    }
+    .user-name:active {
+      color: #1b5e20; 
+      font-weight: 700;
+    }
+    </style>
 </head>
 
 <body>
@@ -16,10 +356,7 @@
                 <span><i class="fas fa-phone"></i> Hotline: 0393058500</span>
                 <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
             </div>
-            <div class="auth-links">
-                <a href="dangnhap.html"><i class="fas fa-user"></i>Đăng nhập</a>
-                <a href="dangky.html"><i class="fas fa-user-plus"></i>Đăng ký</a>
-            </div>
+            <div class="auth-links" id="user-area"></div>
         </div>
     </div>
 
@@ -291,8 +628,21 @@
             </div>
         </div>
     </div>
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-profile" class="close">&times;</span>
+            <h2>Thông tin tài khoản</h2>
 
+            <p><strong>Họ và tên:</strong> <span id="p-fullname"></span></p>
+            <p><strong>Email:</strong> <span id="p-email"></span></p>
+            <p><strong>Số điện thoại:</strong> <span id="p-phone"></span></p>
+            <p><strong>Địa chỉ:</strong> <span id="p-address"></span></p>
+
+            <button id="btn-logout" class="btn-logout">Đăng xuất</button>
+        </div>
+    </div>
     <script src="./script/main.js"></script>
+    <script src="./script/user-info.js"></script>
 </body>
 
 </html>
