@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const paymentStatus = (selectedPayment && selectedPayment.value === 'bank') 
                     ? 'Đã thanh toán' 
-                    : 'Thanh toán một phần';
+                    : 'Chưa thanh toán';
                 
                 console.log('Payment status:', paymentStatus);
                 
