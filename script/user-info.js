@@ -58,17 +58,10 @@ function renderUserArea() {
     const btnLogout = document.getElementById('btn-logout');
     if (btnLogout) btnLogout.addEventListener('click', logout);
     
-    // THÊM XỬ LÝ NÚT "ĐƠN HÀNG CỦA TÔI"
     const btnMyOrders = document.getElementById('btn-my-orders');
     if (btnMyOrders) {
         btnMyOrders.addEventListener('click', () => {
-            window.location.href = 'donhang.html';
-        });
-    }
-
-    const btnMyOrders = document.getElementById('btn-my-orders');
-    if (btnMyOrders) {
-        btnMyOrders.addEventListener('click', () => {
+            closeProfile(); // Đóng modal trước khi chuyển trang
             window.location.href = 'donhang.html';
         });
     }
@@ -89,5 +82,6 @@ function renderUserArea() {
   });
 
   
+
 
 
