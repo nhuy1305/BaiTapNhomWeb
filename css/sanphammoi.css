@@ -1059,3 +1059,8 @@ footer {
     text-decoration: none;
 }
 
+.breadcrumb {
+    text-transform: uppercase;
+}
+
+
