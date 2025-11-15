@@ -1042,3 +1042,20 @@ footer {
       color: #1b5e20; 
       font-weight: 700;
     }
+
+.breadcrumb {
+    display: flex !important;
+    gap: 8px !important;
+    font-size: 16px;
+    color: #5fa746;
+}
+
+.breadcrumb a,
+.breadcrumb span {
+    color: #5fa746;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+}
+
