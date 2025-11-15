@@ -13,42 +13,34 @@ document.getElementById("login-form").addEventListener("submit", function (e) {
         return;
     }
     
-    if (email === storedUser.email && password === storedUser.password) {
-        // LƯU TRẠNG THÁI ĐĂNG NHẬP
-        localStorage.setItem('isLoggedIn', 'true');
-        
-        // GHÉP HỌ VÀ TÊN THÀNH FULLNAME
-        const fullname = `${storedUser.firstName} ${storedUser.lastName}`;
+    // === SỬA ĐOẠN NÀY TRONG dangnhap.js ===
+if (email === storedUser.email && password === storedUser.password) {
+    // Tạo userId duy nhất
+    const userId = storedUser.email; // Dùng email làm ID
 
-        // LƯU THÔNG TIN NGƯỜI DÙNG ĐỂ TỰ ĐỘNG ĐIỀN
-        localStorage.setItem('userFullname', fullname);
-        localStorage.setItem('userPhone', storedUser.phone);
-        localStorage.setItem('userEmail', storedUser.email);
-        localStorage.setItem('userAddress', storedUser.address);
+    // Lưu currentUser đầy đủ
+    localStorage.setItem('currentUser', JSON.stringify({
+        id: userId,
+        fullname: `${storedUser.firstName} ${storedUser.lastName}`,
+        email: storedUser.email,
+        phone: storedUser.phone,
+        address: storedUser.address
+    }));
 
-        console.log('=== ĐĂNG NHẬP THÀNH CÔNG ===');
-        console.log('Fullname:', fullname);
-        console.log('Phone:', storedUser.phone);
-        console.log('Address:', storedUser.address);
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userFullname', `${storedUser.firstName} ${storedUser.lastName}`);
+    localStorage.setItem('userEmail', storedUser.email);
+    localStorage.setItem('userPhone', storedUser.phone);
+    localStorage.setItem('userAddress', storedUser.address);
 
-        alert("Đăng nhập thành công!");
-
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userFullname', fullname);
-        localStorage.setItem('userEmail', storedUser.email);
-        localStorage.setItem('userPhone', storedUser.phone);
-        localStorage.setItem('userAddress', storedUser.address);
-        window.location.href = "index.html"; // quay về trang chủ
-
-        // Kiểm tra xem có đang từ trang thanhtoan không
-        const returnUrl = sessionStorage.getItem('returnUrl');
-        if (returnUrl) {
-            sessionStorage.removeItem('returnUrl');
-            window.location.href = returnUrl;
-        } else {
-            window.location.href = "index.html"; // chuyển về trang chủ
-        }
-
+    alert("Đăng nhập thành công!");
+    const returnUrl = sessionStorage.getItem('returnUrl');
+    if (returnUrl) {
+        sessionStorage.removeItem('returnUrl');
+        window.location.href = returnUrl;
+    } else {
+        window.location.href = "index.html";
+    }
     } else {
         alert("Email hoặc mật khẩu không đúng, vui lòng thử lại!");
     }
