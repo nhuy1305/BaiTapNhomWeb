@@ -71,6 +71,14 @@ function renderUserArea() {
         if (e.target === modal) closeProfile();
       });
     }
+
+    document.getElementById('btn-logout')?.addEventListener('click', () => {
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('isLoggedIn');
+    alert("Đã đăng xuất!");
+    window.location.href = "index.html";
+});
   });
 
   
+
