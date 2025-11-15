@@ -216,7 +216,14 @@
           <p><strong>Số điện thoại:</strong> <span id="p-phone"></span></p>
           <p><strong>Địa chỉ:</strong> <span id="p-address"></span></p>
     
-          <button id="btn-logout" class="btn-logout">Đăng xuất</button>
+          <div style="display: flex; gap: 10px; justify-content: center;">
+            <button class="btn btn-primary" id="myOrdersBtn">
+                <i class="fas fa-shopping-bag"></i> Đơn hàng của tôi
+            </button>
+            <button class="btn btn-secondary" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+          </div>
       </div>
     </div>
     <script src="./script/user-info.js"></script>
