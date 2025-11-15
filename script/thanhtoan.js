@@ -257,7 +257,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 console.log('Payment status:', paymentStatus);
                 
-                let existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+                                // === BƯỚC 1: KIỂM TRA ĐĂNG NHẬP ===
+                const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+                if (!currentUser) {
+                    alert("Vui lòng đăng nhập để đặt hàng!");
+                    window.location.href = "dangnhap.html";
+                    return;
+                }
+                
+                // === BƯỚC 2: LẤY ĐƠN HÀNG CỦA USER HIỆN TẠI ===
+                const userOrdersKey = `orders_${currentUser.id}`;
+                let existingOrders = JSON.parse(localStorage.getItem(userOrdersKey)) || [];
+                
+                // === BƯỚC 3: TẠO ĐƠN HÀNG MỚI ===
+                const finalCart = mergeDuplicateItems(uniqueCart); // Đảm bảo có dòng này trước
                 
                 const newOrder = {
                     id: "#HD" + Math.floor(Math.random() * 10000),
@@ -265,26 +278,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     address: address,
                     total: finalTotal,
                     payment: paymentStatus,
-                    delivery: "Chưa giao hàng"
-                    , items: finalCart
+                    delivery: "Chưa giao hàng",
+                    items: finalCart
                 };
                 
                 console.log('New order:', newOrder);
                 
                 existingOrders.push(newOrder);
-                localStorage.setItem("orders", JSON.stringify(existingOrders));
-                localStorage.setItem("userFullname", fullname);
+                localStorage.setItem(userOrdersKey, JSON.stringify(existingOrders));
                 
-                console.log('Order saved to localStorage');
+                // === BƯỚC 4: CẬP NHẬT THÔNG TIN USER ===
+                localStorage.setItem("userFullname", fullname);
+                localStorage.setItem("userPhone", name);
+                localStorage.setItem("userAddress", address);
+                
+                console.log('Order saved to localStorage with key:', userOrdersKey);
                 
                 alert("Đơn hàng được tạo thành công!");
                 
                 console.log('Redirecting to chitiethoadon.html...');
                 window.location.href = "chitiethoadon.html";
-            } else {
-                console.log('Validation FAILED');
-            }
-        });
     } else {
         console.error('❌ Không tìm thấy nút "Đặt hàng" (placeOrder)');
     }
