@@ -5,7 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const cusEmail = document.getElementById("cusEmail");
   const cusAddress = document.getElementById("cusAddress");
 
-  const orders = JSON.parse(localStorage.getItem("orders")) || [];
+  // ĐƠN HÀNG CỦA USER HIỆN TẠI
+  const userEmail = localStorage.getItem('userEmail') || 'guest';
+  const ordersKey = `orders_${userEmail}`;
+  const orders = JSON.parse(localStorage.getItem(ordersKey)) || [];
+
+  console.log('Current user email:', userEmail);
+  console.log('Orders key:', ordersKey);
+  console.log('Orders:', orders);
 
   // Hiển thị thông tin khách hàng
   cusName.textContent = localStorage.getItem("userFullname") || "Khách hàng";
@@ -37,4 +44,5 @@ document.addEventListener("DOMContentLoaded", () => {
     )
     .join("");
 });
+
 
