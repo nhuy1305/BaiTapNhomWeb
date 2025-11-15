@@ -1043,22 +1043,6 @@ footer {
       font-weight: 700;
     }
 
-.breadcrumb {
-    display: flex !important;
-    gap: 8px !important;
-    
-    color: #5fa746;
-    text-transform: uppercase;
-}
-
-.breadcrumb a,
-.breadcrumb span {
-    color: #5fa746;
-}
-
-.breadcrumb a {
-    text-decoration: none;
-}
 
 
 
