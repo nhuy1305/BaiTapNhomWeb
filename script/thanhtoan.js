@@ -330,13 +330,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     message = "❌ Voucher chỉ áp dụng vào Thứ Năm.";
                 }
+            
             } else if (code === "SHIP0Đ") {
-                const todayOrders = orders.filter(o => o.date === todayDate);
-                if (todayOrders.length >= 1) {
-                    voucherDiscount = shipping;
-                    message = "✅ Áp dụng SHIP0Đ: miễn phí vận chuyển.";
+                const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+                if (!currentUser) {
+                    message = "Vui lòng đăng nhập!";
                 } else {
-                    message = "❌ Voucher chỉ áp dụng khi bạn đã có 1 đơn trong hôm nay.";
+                    const userOrders = JSON.parse(localStorage.getItem(`orders_${currentUser.id}`)) || [];
+                    const todayDate = new Date().toLocaleDateString("vi-VN");
+                    const todayOrders = userOrders.filter(o => o.date === todayDate);
+                    if (todayOrders.length >= 1) {
+                        voucherDiscount = shipping;
+                        message = "Áp dụng SHIP0Đ: Miễn phí vận chuyển!";
+                    } else {
+                        message = "Cần có ít nhất 1 đơn hôm nay để dùng voucher này.";
+                    }
                 }
             } else {
                 message = "❌ Mã voucher không hợp lệ.";
