@@ -266,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     total: finalTotal,
                     payment: paymentStatus,
                     delivery: "Chưa giao hàng"
+                    , items: finalCart
                 };
                 
                 console.log('New order:', newOrder);
