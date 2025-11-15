@@ -82,13 +82,27 @@ function capitalizeWords(str) {
     }
   
     // ====== LƯU NGƯỜI DÙNG MỚI ======
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
-  
-    console.log("=== ĐĂNG KÝ THÀNH CÔNG ===");
-    console.log("User data:", newUser);
-  
-    alert("Đăng ký thành công! Bây giờ bạn có thể đăng nhập.");
-    window.location.href = "dangnhap.html";
+    // === SAU KHI ĐĂNG KÝ THÀNH CÔNG ===
+users.push(newUser);
+localStorage.setItem("users", JSON.stringify(users));
+
+// TỰ ĐỘNG ĐĂNG NHẬP SAU KHI ĐĂNG KÝ
+const userId = newUser.email;
+localStorage.setItem('currentUser', JSON.stringify({
+    id: userId,
+    fullname: `${newUser.firstName} ${newUser.lastName}`,
+    email: newUser.email,
+    phone: newUser.phone,
+    address: newUser.address
+}));
+
+localStorage.setItem('isLoggedIn', 'true');
+localStorage.setItem('userFullname', `${newUser.firstName} ${newUser.lastName}`);
+localStorage.setItem('userEmail', newUser.email);
+localStorage.setItem('userPhone', newUser.phone);
+localStorage.setItem('userAddress', newUser.address);
+
+alert("Đăng ký thành công! Đã tự động đăng nhập.");
+window.location.href = "index.html"; // Hoặc trang bạn muốn
   });
   
