@@ -7,39 +7,43 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="./css/chitiethoadon.css">
   <link rel="stylesheet" href="./css/donhang.css">
- 
+  
   <script src="./script/donhang.js" defer></script>
 </head>
 <body>
     <div class="top-bar">
         <div class="top-bar-content">
             <div class="contact-info">
-                <span>Hotline: 0393058500</span>
-                <span>Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
+                <span><i class="fas fa-phone"></i> Hotline: 0393058500</span>
+                <span><i class="fas fa-clock"></i> Giờ làm việc: T2 - T7 từ 6h30 đến 17h00</span>
             </div>
             <div class="auth-links" id="user-area"></div>
         </div>
     </div>
+
     <header>
         <div class="header-content">
             <div class="logo">
+                <i class="fas fa-leaf"></i>
                 Rau Sạch Online
             </div>
             <div class="search-bar">
                 <input type="text" placeholder="Tìm kiếm sản phẩm..." />
-                <button>Search</button>
+                <button><i class="fas fa-search"></i></button>
             </div>
             <div class="cart-icon" id="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
                 <span class="cart-count" id="cart-count">0</span>
             </div>
         </div>
     </header>
+
     <nav>
         <div class="nav-container">
             <ul class="nav-links">
                 <li><a href="/BaiTapNhomWeb/index.html">TRANG CHỦ</a></li>
                 <li>
-                    <a href="/BaiTapNhomWeb/khuyenmai.html">KHUYẾN MÃI</a>
+                    <a href="/BaiTapNhomWeb/khuyenmai.html">KHUYẾN MÃI <i class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown">
                         <li><a href="/BaiTapNhomWeb/khuyenmai.html">Tất cả khuyến mãi</a></li>
                         <li><a href="/BaiTapNhomWeb/khuyenmai.html">Combo tiết kiệm</a></li>
@@ -47,7 +51,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">SẢN PHẨM</a>
+                    <a href="#">SẢN PHẨM <i class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown">
                         <li><a href="/BaiTapNhomWeb/tatcasanpham.html">Tất cả sản phẩm</a></li>
                         <li><a href="/BaiTapNhomWeb/sanphamnoibat.html">Sản phẩm nổi bật</a></li>
@@ -58,7 +62,7 @@
                 <li><a href="/BaiTapNhomWeb/tintuc.html">TIN TỨC</a></li>
                 <li><a href="/BaiTapNhomWeb/lienhe.html">LIÊN HỆ</a></li>
                 <li>
-                    <a href="#">VỀ CHÚNG TÔI</a>
+                    <a href="#">VỀ CHÚNG TÔI <i class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown">
                         <li><a href="/BaiTapNhomWeb/tamnhinvasumenh.html">Tầm nhìn và sứ mệnh</a></li>
                         <li><a href="/BaiTapNhomWeb/lichsuhinhthanh.html">Lịch sử hình thành</a></li>
@@ -67,6 +71,7 @@
             </ul>
         </div>
     </nav>
+
     <div class="container" style="display:flex; gap:30px; margin-top:30px;">
         <!-- Cột trái: Thông tin đơn hàng -->
         <div class="order-table" style="flex:2;">
@@ -85,6 +90,7 @@
             <tbody id="orderList"></tbody>
         </table>
         </div>
+
         <!-- Cột phải: Thông tin khách hàng -->
         <div class="customer-info" style="flex:1; background:#f9f9f9; padding:20px; border-radius:10px;">
         <h2>TÀI KHOẢN CỦA TÔI</h2>
@@ -97,23 +103,25 @@
     </div>
     </body>
     </html>
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>CÔNG TY RAU SẠCH ONLINE</h3>
                 <div class="contact-info">
-                    <p>154A Hà Huy Giáp, P.An Phú Đông, Q.12, TP. HCM</p>
-                    <p>0393058500</p>
-                    <p>Thứ 2 - Chủ nhật: 6:00 - 17:00</p>
-                    <p>Nhuy5201314@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 154A Hà Huy Giáp, P.An Phú Đông, Q.12, TP. HCM</p>
+                    <p><i class="fas fa-phone"></i> 0393058500</p>
+                    <p><i class="fas fa-clock"></i> Thứ 2 - Chủ nhật: 6:00 - 17:00</p>
+                    <p><i class="fas fa-envelope"></i> Nhuy5201314@gmail.com</p>
                 </div>
                 <div class="social-icons">
-                    <a href="#">FB</a>
-                    <a href="#">IG</a>
-                    <a href="#">YT</a>
-                    <a href="#">TT</a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
+
             <div class="footer-section">
                 <h3>DANH MỤC SẢN PHẨM</h3>
                <ul>
@@ -129,6 +137,7 @@
                 <li><a href="lienhechungtoi.html">Liên hệ với chúng tôi</a></li>
             </ul>
             </div>
+
             <div class="footer-section">
                 <h3>HỖ TRỢ KHÁCH HÀNG</h3>
                 <ul>
@@ -137,6 +146,7 @@
                     <li><a href="giaohang.html">Chính sách giao hàng</a></li>
                 </ul>
             </div>
+
             <div class="footer-section">
                 <h3>VỀ RAU SẠCH ONLINE</h3>
                 <ul>
@@ -145,8 +155,10 @@
                 </ul>
             </div>
         </div>
+
         <div class="copyright">2025 Rau Sạch Online</div>
     </footer>
+
     <div class="modal" id="cart-modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -163,20 +175,23 @@
             </div>
         </div>
     </div>
+
   <div id="profile-modal" class="modal">
     <div class="modal-content">
         <span id="close-profile" class="close">&times;</span>
         <h2>Thông tin tài khoản</h2>
- 
+  
         <p><strong>Họ và tên:</strong> <span id="p-fullname"></span></p>
         <p><strong>Email:</strong> <span id="p-email"></span></p>
         <p><strong>Số điện thoại:</strong> <span id="p-phone"></span></p>
         <p><strong>Địa chỉ:</strong> <span id="p-address"></span></p>
- 
+  
         <button id="btn-logout" class="btn-logout">Đăng xuất</button>
     </div>
   </div>
     <script src="./script/user-info.js"></script>
     <script src="./script/main.js"></script>
 </body>
+
 </html>
+
