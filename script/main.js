@@ -208,3 +208,124 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+function renderUserArea() {
+    const userArea = document.getElementById('user-area');
+    if (!userArea) return;
+  
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  
+    if (isLoggedIn) {
+        const fullname = localStorage.getItem('userFullname') || 'Người dùng';
+        userArea.innerHTML = `
+            <div class="user-name" id="user-name" style="cursor: pointer;">
+                <i class="fas fa-user-circle"></i> Xin chào, ${fullname}
+            </div>
+        `;
+        
+        // Thêm event listener sau khi tạo element
+        const userName = document.getElementById('user-name');
+        if (userName) {
+            userName.addEventListener('click', openProfile);
+        }
+    } else {
+        userArea.innerHTML = `
+            <a href="dangnhap.html"><i class="fas fa-user"></i> Đăng nhập</a>
+            <a href="dangky.html"><i class="fas fa-user-plus"></i> Đăng ký</a>
+        `;
+    }
+}
+  
+function openProfile() {
+    const modal = document.getElementById('profile-modal');
+    if (!modal) {
+        console.error("Không tìm thấy #profile-modal");
+        return;
+    }
+  
+    // Lấy thông tin từ localStorage
+    const fullname = localStorage.getItem('userFullname') || 'Chưa cập nhật';
+    const email = localStorage.getItem('userEmail') || 'Chưa cập nhật';
+    const phone = localStorage.getItem('userPhone') || 'Chưa cập nhật';
+    const address = localStorage.getItem('userAddress') || 'Chưa cập nhật';
+    
+    // Cập nhật nội dung
+    const pFullname = document.getElementById('p-fullname');
+    const pEmail = document.getElementById('p-email');
+    const pPhone = document.getElementById('p-phone');
+    const pAddress = document.getElementById('p-address');
+    
+    if (pFullname) pFullname.textContent = fullname;
+    if (pEmail) pEmail.textContent = email;
+    if (pPhone) pPhone.textContent = phone;
+    if (pAddress) pAddress.textContent = address;
+  
+    // Hiển thị modal
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 10);
+}
+  
+function closeProfile() {
+    const modal = document.getElementById('profile-modal');
+    if (modal) {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+    }
+}
+  
+function logout() {
+    if (confirm('Bạn có chắc muốn đăng xuất?')) {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userFullname');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userPhone');
+        localStorage.removeItem('userAddress');
+        alert('Đã đăng xuất thành công!');
+        window.location.href = 'index.html';
+    }
+}
+
+// ===== KHỞI TẠO KHI TRANG LOAD =====
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('=== COMMON.JS LOADED ===');
+    
+    // Render user area
+    renderUserArea();
+  
+    // Xử lý nút đóng popup
+    const closeBtn = document.getElementById('close-profile');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeProfile);
+    }
+  
+    // Xử lý nút đăng xuất
+    const btnLogout = document.getElementById('btn-logout');
+    if (btnLogout) {
+        btnLogout.addEventListener('click', logout);
+    }
+  
+    // Xử lý nút "Đơn hàng của tôi"
+    const btnMyOrders = document.getElementById('btn-my-orders');
+    if (btnMyOrders) {
+        btnMyOrders.addEventListener('click', () => {
+            closeProfile();
+            window.location.href = 'donhang.html';
+        });
+    }
+  
+    // Click bên ngoài popup để đóng
+    const modal = document.getElementById('profile-modal');
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeProfile();
+            }
+        });
+    }
+    
+    console.log('User area initialized');
+});
