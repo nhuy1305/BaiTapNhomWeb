@@ -4,12 +4,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const cusPhone = document.getElementById("cusPhone");
   const cusEmail = document.getElementById("cusEmail");
   const cusAddress = document.getElementById("cusAddress");
+
   const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
   // Hiển thị thông tin khách hàng
   cusName.textContent = localStorage.getItem("userFullname") || "Khách hàng";
   cusPhone.textContent = localStorage.getItem("userPhone") || "Không có";
   cusEmail.textContent = localStorage.getItem("userEmail") || "Không có";
   cusAddress.textContent = localStorage.getItem("userAddress") || "Không có";
+
   // Nếu không có đơn hàng
   if (orders.length === 0) {
     orderList.innerHTML = `
@@ -17,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     return;
   }
+
   // Hiển thị đơn hàng
   orderList.innerHTML = orders
     .map(
@@ -33,3 +37,4 @@ document.addEventListener("DOMContentLoaded", () => {
     )
     .join("");
 });
+
