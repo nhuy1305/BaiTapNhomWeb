@@ -220,7 +220,9 @@ document.addEventListener('DOMContentLoaded', function() {
     checkVoucherButton.addEventListener('click', function() {
         const code = document.getElementById('voucherInput').value.trim().toUpperCase();
         const result = document.getElementById('voucherResult');
-        const orders = JSON.parse(localStorage.getItem('orders')) || [];
+        const userEmail = localStorage.getItem('userEmail') || 'guest';
+        const ordersKey = `orders_${userEmail}`;
+        const orders = JSON.parse(localStorage.getItem(ordersKey)) || [];
         const today = new Date();
         const day = today.getDay(); // 0=CN, 1=T2,...,4=T5,...
         const todayDate = today.toLocaleDateString("vi-VN");
