@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('=== THANHTOAN.JS LOADED ===');
-    
+   
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const loginLink = document.getElementById('loginLink');
-    
+   
     if (!isLoggedIn) {
         loginLink.style.display = 'block';
         loginLink.addEventListener('click', function(e) {
@@ -16,22 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const fullnameInput = document.getElementById('fullname');
         const phoneInput = document.getElementById('name');
         const addressInput = document.getElementById('address');
-        
+       
         fullnameInput.value = localStorage.getItem('userFullname') || '';
         phoneInput.value = localStorage.getItem('userPhone') || '';
         addressInput.value = localStorage.getItem('userAddress') || '';
-        
+       
         if (addressInput.value) {
             const address = addressInput.value.trim();
             const shipping = calculateShipping(address);
             document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
-            
+           
             const subtotalText = document.getElementById('subtotal').textContent;
             const subtotal = parseInt(subtotalText.replace(/[.,đ]/g, '')) || 0;
             document.getElementById('total').textContent = (subtotal + shipping).toLocaleString() + 'đ';
         }
     }
-    
+   
     function calculateShipping(address) {
         const addressUpper = address.toUpperCase();
         if (addressUpper.includes('HCM') || addressUpper.includes('TPHCM')) {
@@ -39,10 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return 30000;
     }
-
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const orderItems = document.getElementById('order-items');
-
     const uniqueCart = [];
     const seenIds = new Set();
     cart.forEach(item => {
@@ -54,10 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (existing) existing.quantity += (item.quantity || 1);
         }
     });
-
     orderItems.innerHTML = '';
     let subtotal = 0;
-    
+   
     uniqueCart.forEach(item => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'order-item';
@@ -70,17 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
         orderItems.appendChild(itemDiv);
         subtotal += itemTotal;
     });
-
     if (uniqueCart.length === 0) {
-        const defaultItem = { 
+        const defaultItem = {
             id: 'default-1',
-            name: "Cải kale (Xanh) Organic 300gr", 
-            price: 35000, 
-            quantity: 1, 
-            image: "https://via.placeholder.com/50" 
+            name: "Cải kale (Xanh) Organic 300gr",
+            price: 35000,
+            quantity: 1,
+            image: "https://via.placeholder.com/50"
         };
         uniqueCart.push(defaultItem);
-        
+       
         const itemDiv = document.createElement('div');
         itemDiv.className = 'order-item';
         itemDiv.innerHTML = `
@@ -91,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
         orderItems.appendChild(itemDiv);
         subtotal = defaultItem.price * defaultItem.quantity;
     }
-
     function capitalizeAddress(address) {
         return address.split(',').map(part => {
             return part.trim().split(' ').map(word => {
@@ -100,8 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }).join(' ');
         }).join(', ');
     }
-
-    // ✅ TÍNH PHÍ VẬN CHUYỂN BAN ĐẦU (nếu đã có địa chỉ)
+    // TÍNH PHÍ VẬN CHUYỂN BAN ĐẦU (nếu đã có địa chỉ)
     let shipping = 0;
     const currentAddress = document.getElementById('address').value.trim();
     if (currentAddress) {
@@ -109,18 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Initial shipping calculated:', shipping, 'for address:', currentAddress);
     }
     let discount = 0;
-    
-    // ✅ CẬP NHẬT HIỂN THỊ GIÁ TIỀN (bao gồm shipping đã tính)
+   
+    // CẬP NHẬT HIỂN THỊ GIÁ TIỀN (bao gồm shipping đã tính)
     document.getElementById('subtotal').textContent = subtotal.toLocaleString() + 'đ';
     document.getElementById('shipping').textContent = shipping.toLocaleString() + 'đ';
     document.getElementById('total').textContent = (subtotal + shipping).toLocaleString() + 'đ';
-
     console.log('Initial prices:', {
         subtotal,
         shipping,
         total: subtotal + shipping
     });
-
     const addressInput = document.getElementById('address');
     addressInput.addEventListener('input', function() {
         const address = this.value.trim();
@@ -131,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('total').textContent = finalTotal.toLocaleString() + 'đ';
         }
     });
-
     const inputs = {
         fullname: document.getElementById('fullname'),
         name: document.getElementById('name'),
@@ -142,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
         name: document.getElementById('name-error'),
         address: document.getElementById('address-error')
     };
-
     function validateInputs() {
         let isValid = true;
         const fullname = inputs.fullname.value.trim();
@@ -155,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
             inputs.fullname.classList.remove('error-border');
             errors.fullname.style.visibility = 'hidden';
         }
-
         const phone = inputs.name.value.trim();
         const phoneRegex = /^0\d{9}$/;
         if (!phone || !phoneRegex.test(phone)) {
@@ -167,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
             inputs.name.classList.remove('error-border');
             errors.name.style.visibility = 'hidden';
         }
-
         const address = inputs.address.value.trim();
         if (!address) {
             inputs.address.classList.add('error-border');
@@ -186,14 +174,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 errors.address.style.visibility = 'hidden';
             }
         }
-
         return isValid;
     }
-
     Object.values(inputs).forEach(input => {
         input.addEventListener('input', validateInputs);
     });
-
     const bankRadio = document.getElementById('bank');
     const generateQRButton = document.getElementById('generateQR');
     const qrSection = document.getElementById('qrSection');
@@ -208,185 +193,155 @@ document.addEventListener('DOMContentLoaded', () => {
             qrSection.style.display = 'block';
         });
     }
-
     const placeOrderButton = document.getElementById('placeOrder');
     if (placeOrderButton) {
         placeOrderButton.addEventListener('click', function() {
             console.log('=== PLACE ORDER CLICKED ===');
-            
+           
             if (validateInputs()) {
                 console.log('Validation passed');
-                
+               
                 const fullname = document.getElementById('fullname').value;
                 const name = document.getElementById('name').value;
                 let address = document.getElementById('address').value.trim();
-                
+               
                 address = capitalizeAddress(address);
                 shipping = calculateShipping(address);
                 const finalTotal = subtotal + shipping - discount;
-                
+               
                 console.log('Final calculation:', {
                     subtotal,
                     shipping,
                     discount,
                     finalTotal
                 });
-                
+               
                 localStorage.setItem('userFullname', fullname);
                 localStorage.setItem('userPhone', name);
                 localStorage.setItem('userAddress', address);
-                
+               
                 const finalCart = mergeDuplicateItems(uniqueCart);
                 localStorage.setItem('cart', JSON.stringify(finalCart));
-                
+               
                 localStorage.setItem('orderSubtotal', subtotal.toString());
                 localStorage.setItem('orderShipping', shipping.toString());
                 localStorage.setItem('orderDiscount', discount.toString());
                 localStorage.setItem('orderTotal', finalTotal.toString());
-                
+               
                 // Kiểm tra phương thức thanh toán
                 const paymentRadios = document.querySelectorAll('input[name="payment"]');
                 console.log('Payment radios found:', paymentRadios.length);
-                
+               
                 const selectedPayment = document.querySelector('input[name="payment"]:checked');
                 console.log('Selected payment:', selectedPayment ? selectedPayment.value : 'NONE');
-                
-                const paymentStatus = (selectedPayment && selectedPayment.value === 'bank') 
-                    ? 'Đã thanh toán' 
+               
+                const paymentStatus = (selectedPayment && selectedPayment.value === 'bank')
+                    ? 'Đã thanh toán'
                     : 'Chưa thanh toán';
-                
+               
                 console.log('Payment status:', paymentStatus);
-                
-                                // === BƯỚC 1: KIỂM TRA ĐĂNG NHẬP ===
-                const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-                if (!currentUser) {
-                    alert("Vui lòng đăng nhập để đặt hàng!");
-                    window.location.href = "dangnhap.html";
-                    return;
-                }
-                
-                // === BƯỚC 2: LẤY ĐƠN HÀNG CỦA USER HIỆN TẠI ===
-                const userOrdersKey = `orders_${currentUser.id}`;
-                let existingOrders = JSON.parse(localStorage.getItem(userOrdersKey)) || [];
-                
-                // === BƯỚC 3: TẠO ĐƠN HÀNG MỚI ===
-                const finalCart = mergeDuplicateItems(uniqueCart); // Đảm bảo có dòng này trước
-                
+               
+                let existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+               
                 const newOrder = {
                     id: "#HD" + Math.floor(Math.random() * 10000),
                     date: new Date().toLocaleDateString("vi-VN"),
                     address: address,
                     total: finalTotal,
                     payment: paymentStatus,
-                    delivery: "Chưa giao hàng",
-                    items: finalCart
+                    delivery: "Chưa giao hàng"
                 };
-                
+               
                 console.log('New order:', newOrder);
-                
+               
                 existingOrders.push(newOrder);
-                localStorage.setItem(userOrdersKey, JSON.stringify(existingOrders));
-                
-                // === BƯỚC 4: CẬP NHẬT THÔNG TIN USER ===
+                localStorage.setItem("orders", JSON.stringify(existingOrders));
                 localStorage.setItem("userFullname", fullname);
-                localStorage.setItem("userPhone", name);
-                localStorage.setItem("userAddress", address);
-                
-                console.log('Order saved to localStorage with key:', userOrdersKey);
-                
+               
+                console.log('Order saved to localStorage');
+               
                 alert("Đơn hàng được tạo thành công!");
-                
+               
                 console.log('Redirecting to chitiethoadon.html...');
                 window.location.href = "chitiethoadon.html";
+            } else {
+                console.log('Validation FAILED');
+            }
+        });
     } else {
-        console.error('❌ Không tìm thấy nút "Đặt hàng" (placeOrder)');
+        console.error('Không tìm thấy nút "Đặt hàng" (placeOrder)');
     }
-
     // XỬ LÝ VOUCHER - SỬA LẠI
     const applyVoucherBtn = document.getElementById("applyVoucher");
-    
+   
     if (applyVoucherBtn) {
-        console.log('✅ Found applyVoucher button');
+        console.log('Found applyVoucher button');
         applyVoucherBtn.addEventListener('click', function() {
             console.log('Apply voucher clicked');
-            
+           
             const voucherInput = document.getElementById("discount") || document.getElementById("voucher");
             const code = voucherInput ? voucherInput.value.trim().toUpperCase() : '';
             const msg = document.getElementById("voucher-message");
-            
+           
             const orders = JSON.parse(localStorage.getItem("orders")) || [];
             const today = new Date();
             const day = today.getDay();
             const todayDate = today.toLocaleDateString("vi-VN");
-
             let voucherDiscount = 0;
             let message = "";
-
             if (!code) {
                 if (msg) {
-                    msg.textContent = "❌ Vui lòng nhập mã voucher.";
+                    msg.textContent = "Vui lòng nhập mã voucher.";
                     msg.style.color = "red";
                 }
                 return;
             }
-
             if (code === "KHMOI") {
                 if (orders.length === 0) {
                     voucherDiscount = subtotal * 0.3;
-                    message = "✅ Áp dụng KHMOI: giảm 30% cho khách hàng mới.";
+                    message = "Áp dụng KHMOI: giảm 30% cho khách hàng mới.";
                 } else {
-                    message = "❌ Voucher chỉ dành cho khách hàng mới.";
+                    message = "Voucher chỉ dành cho khách hàng mới.";
                 }
             } else if (code === "T5NUAGIA") {
                 if (day === 4) {
                     voucherDiscount = Math.min(subtotal * 0.5, 150000);
-                    message = "✅ Áp dụng T5NUAGIA: giảm 50% tối đa 150.000đ.";
+                    message = "Áp dụng T5NUAGIA: giảm 50% tối đa 150.000đ.";
                 } else {
-                    message = "❌ Voucher chỉ áp dụng vào Thứ Năm.";
+                    message = "Voucher chỉ áp dụng vào Thứ Năm.";
                 }
-            
             } else if (code === "SHIP0Đ") {
-                const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-                if (!currentUser) {
-                    message = "Vui lòng đăng nhập!";
+                const todayOrders = orders.filter(o => o.date === todayDate);
+                if (todayOrders.length >= 1) {
+                    voucherDiscount = shipping;
+                    message = "Áp dụng SHIP0Đ: miễn phí vận chuyển.";
                 } else {
-                    const userOrders = JSON.parse(localStorage.getItem(`orders_${currentUser.id}`)) || [];
-                    const todayDate = new Date().toLocaleDateString("vi-VN");
-                    const todayOrders = userOrders.filter(o => o.date === todayDate);
-                    if (todayOrders.length >= 1) {
-                        voucherDiscount = shipping;
-                        message = "Áp dụng SHIP0Đ: Miễn phí vận chuyển!";
-                    } else {
-                        message = "Cần có ít nhất 1 đơn hôm nay để dùng voucher này.";
-                    }
+                    message = "Voucher chỉ áp dụng khi bạn đã có 1 đơn trong hôm nay.";
                 }
             } else {
-                message = "❌ Mã voucher không hợp lệ.";
+                message = "Mã voucher không hợp lệ.";
             }
-
             if (voucherDiscount > 0) {
                 discount = voucherDiscount;
                 const finalTotal = subtotal + shipping - discount;
                 document.getElementById("total").textContent = finalTotal.toLocaleString() + "đ";
-                
+               
                 console.log('Voucher applied:', {
                     code,
                     discount,
                     finalTotal
                 });
-                
+               
                 if (msg) msg.style.color = "green";
             } else {
                 if (msg) msg.style.color = "red";
             }
-
             if (msg) msg.textContent = message;
         });
     } else {
-        console.warn('⚠️ Không tìm thấy nút "applyVoucher"');
+        console.warn('Không tìm thấy nút "applyVoucher"');
     }
 });
-
 function mergeDuplicateItems(cart) {
     const merged = {};
     cart.forEach(item => {
