@@ -1046,8 +1046,9 @@ footer {
 .breadcrumb {
     display: flex !important;
     gap: 8px !important;
-    font-size: 16px;
+    
     color: #5fa746;
+    text-transform: uppercase;
 }
 
 .breadcrumb a,
@@ -1059,8 +1060,6 @@ footer {
     text-decoration: none;
 }
 
-.breadcrumb {
-    text-transform: uppercase;
-}
+
 
 
